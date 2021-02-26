@@ -1,14 +1,3 @@
-// import { Component } from '@angular/core';
-
-// @Component({
-//   selector: 'app-root',
-//   templateUrl: './app.component.html',
-//   styleUrls: ['./app.component.css'],
-// })
-// export class AppComponent {
-//   title = 'forms-builder';
-// }
-
 import { Component } from '@angular/core';
 
 class Item {
@@ -22,15 +11,32 @@ class Item {
     this.done = false;
   }
 }
+interface IUser {
+  id: number;
+  name: string;
+}
 
 @Component({
   selector: 'app-root',
-  templateUrl: './app.component2.html',
+  templateUrl: './app.component.html',
+  styleUrls: ['./app.component.css'],
 })
 export class AppComponent {
-  // text: string = ''; ////////////
-  text: any;
-  // text: string;
+  lists: IUser = { id: 1, name: 'qwe' };
+
+  userTestStatus: { id: number; name: string }[] = [
+    { id: 0, name: 'Available' },
+    { id: 1, name: 'Ready' },
+    { id: 2, name: 'Started' },
+  ];
+
+  person: { name: string; age?: number } = {
+    name: 'Tom',
+    age: 7,
+  };
+
+  text2: string = '';
+
   price: number = 0;
 
   items: Item[] = [
@@ -40,8 +46,36 @@ export class AppComponent {
     { purchase: 'Accumulator', done: false, price: 310 },
   ];
 
+  count: number = 0;
+
+  isRed: boolean = true;
+
+  clicks: number = 0;
+  onChanged(increased: any): void {
+    increased === true ? this.clicks++ : this.clicks--;
+  }
+
+  increase(): void {
+    this.count++;
+  }
+
+  addIemSuper(e: object): void {
+    console.log(e);
+  }
+
   addItem(text: string, price: number): void {
-    if (text == null || text.trim() == '' || price == null) return;
+    const arr: { name: string }[] = this.userTestStatus.map((el) => ({
+      name: el.name,
+    }));
+    console.log(arr);
+    // this.person = { name: 'Tom', age: 24 };
+    // let obj: {[key: string]: any} = {};
+    // this.person.qwe = null;
+    // console.log(this.person);
+
+    if (text === null || text.trim() === '' || price === null) {
+      return;
+    }
     this.items.push(new Item(text, price));
   }
 }
