@@ -1,70 +1,12 @@
-<hr />
-<app-card (onChanged)="onChanged($event)"
-  ><a href="#">{{ clicks }}</a></app-card
->
+<app-cdk-portal></app-cdk-portal>
 
-<!-- <app-card></app-card> -->
-
+<p>------------------------------------</p>
+<p [ngStyle]="{ color: 'red' }">{{ countFn }} --- {{ nameA }}</p>
+<app-card
+  [(anyName)]="nameA"
+  (oneSide)="anyFnArrow($event)"
+  (togVal)="nameAFn($event)"
+></app-card>
+<!-- <app-card2></app-card2> -->
+<!-- <app-cdk></app-cdk> -->
 <hr />
-<div>Test: id: {{ lists.id }}</div>
-<div>TestArray: Arr: {{ userTestStatus[0].id }}</div>
-<input type="text" [value]="userTestStatus[0].name" />
-<input type="checkbox" [(ngModel)]="items[0].done" />
-<button (click)="addIemSuper($event)">Super</button>
-<hr />
-<p>{{ count }}</p>
-<button (click)="increase()">Increase</button>
-<hr />
-<div [class.isredbox]="isRed">classStyle</div>
-<div [class.isredbox]="!isRed">classStyle</div>
-<input type="checkbox" [(ngModel)]="isRed" />
-<hr />
-<div class="page-header">
-  <h4 class="title cont">Shopping list</h4>
-</div>
-<div class="panel">
-  <div class="form-inline">
-    <div class="form-group">
-      <div class="col-md-8">
-        <input
-          class="form-control"
-          [(ngModel)]="text2"
-          placeholder="Название"
-        />
-      </div>
-    </div>
-    <div class="form-group">
-      <div class="col-md-6">
-        <input
-          type="number"
-          class="form-control"
-          [(ngModel)]="price"
-          placeholder="Цена"
-        />
-      </div>
-    </div>
-    <div class="form-group">
-      <div class="col-md-offset-2 col-md-8">
-        <button class="btn btn-default" (click)="addItem(text2, price)">
-          Add
-        </button>
-      </div>
-    </div>
-  </div>
-  <table class="table table-striped">
-    <thead>
-      <tr>
-        <th>Item</th>
-        <th>Price</th>
-        <th>Purchased</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let item of items">
-        <td>{{ item.purchase }}</td>
-        <td>{{ item.price }}</td>
-        <td><input type="checkbox" [(ngModel)]="item.done" /></td>
-      </tr>
-    </tbody>
-  </table>
-</div>

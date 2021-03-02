@@ -4,10 +4,23 @@ import { FormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { CardComponent } from './card/card.component';
+import { Card2Component } from './card2/card2.component';
+import { NoopAnimationsModule } from '@angular/platform-browser/animations';
+import { MatSliderModule } from '@angular/material/slider';
+import { CdkComponent } from './cdk/cdk.component';
+import { PortalModule } from '@angular/cdk/portal';
+import { CdkPortalComponent } from './cdk-portal/cdk-portal.component';
 
 @NgModule({
-  declarations: [AppComponent, CardComponent],
-  imports: [BrowserModule, AppRoutingModule, FormsModule],
+  declarations: [AppComponent, CardComponent, Card2Component, CdkComponent, CdkPortalComponent],
+  imports: [
+    BrowserModule,
+    AppRoutingModule,
+    FormsModule,
+    NoopAnimationsModule,
+    MatSliderModule,
+    PortalModule,
+  ],
   providers: [],
   bootstrap: [AppComponent],
 })

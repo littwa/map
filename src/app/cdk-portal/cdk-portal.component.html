@@ -1,0 +1,8 @@
+<p>cdk-portal works!</p>
+<h2>CDK Portal: Basic loading components</h2>
+<button (click)="portalOpenCard()">Open card</button>
+<button (click)="portalCloseCard()" class="margin-left-8">Close card</button>
+
+<div class="portals-outlet">
+  <ng-container #virtualContainer cdkPortalOutlet> </ng-container>
+</div>

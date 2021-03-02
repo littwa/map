@@ -1,17 +1,33 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import {
+  Component,
+  EventEmitter,
+  Input,
+  Output,
+  OnChanges,
+  OnInit,
+  DoCheck,
+  OnDestroy,
+} from '@angular/core';
+
+// implements OnInit, DoCheck, OnChanges
 
 @Component({
   selector: 'app-card',
-  template: `<ng-content></ng-content>
-    <div>CardComponent {{ name }}</div>
-    <button (click)="change(true)">+</button>
-    <button (click)="change(false)">-</button>`,
+  template: `<h4 (click)="onChegeOneSide(2)">CardComponent + onChegeOneSide</h4>
+    <p>P_CardComponent {{ anyName }}</p>
+    <input [ngModel]="anyName" (ngModelChange)="onChengeAnyName($event)" />`,
 })
 export class CardComponent {
-  name: string = 'Ben';
+  @Input() anyName: any;
+  @Output() togVal = new EventEmitter<string>();
+  @Output() oneSide = new EventEmitter();
 
-  @Output() onChanged = new EventEmitter<boolean>();
-  change(increased: any): void {
-    this.onChanged.emit(increased);
+  onChengeAnyName(v: string): void {
+    this.togVal.emit(v);
+    this.anyName = v;
+    console.log(this.anyName);
+  }
+  onChegeOneSide(v: number): void {
+    this.oneSide.emit(v);
   }
 }
