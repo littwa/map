@@ -1,12 +1,19 @@
-<app-cdk-portal></app-cdk-portal>
+<!-- <app-cdk-portal></app-cdk-portal> -->
+<input [(ngModel)]="serch" />
+<p *ngFor="let p of posts | anypipe: serch">{{ p.title }}=={{ p.text }}</p>
+<p>------------------------------------</p>
+
+<!-- <p>AnyPipe {{ 5 | anypipe: 8 }}</p>
+<p>AnyPipe {{ 5 | anypipe }}</p> -->
+
+<p>Pipe date: {{ newDate | date: "medium" }}</p>
+<pre>Pipe json: {{ obj | json }}</pre>
+<!-- <input [(ngModel)]="titleS" /> -->
 
 <p>------------------------------------</p>
-<p [ngStyle]="{ color: 'red' }">{{ countFn }} --- {{ nameA }}</p>
-<app-card
-  [(anyName)]="nameA"
-  (oneSide)="anyFnArrow($event)"
-  (togVal)="nameAFn($event)"
-></app-card>
+
+<p>AppComponent--name: {{ name }}</p>
+<app-card [(userName)]="name"></app-card>
 <!-- <app-card2></app-card2> -->
 <!-- <app-cdk></app-cdk> -->
 <hr />

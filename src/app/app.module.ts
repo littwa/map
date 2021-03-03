@@ -10,9 +10,17 @@ import { MatSliderModule } from '@angular/material/slider';
 import { CdkComponent } from './cdk/cdk.component';
 import { PortalModule } from '@angular/cdk/portal';
 import { CdkPortalComponent } from './cdk-portal/cdk-portal.component';
+import { AnyPippe } from './pipe/any-pipe';
 
 @NgModule({
-  declarations: [AppComponent, CardComponent, Card2Component, CdkComponent, CdkPortalComponent],
+  declarations: [
+    AppComponent,
+    CardComponent,
+    Card2Component,
+    CdkComponent,
+    CdkPortalComponent,
+    AnyPippe,
+  ],
   imports: [
     BrowserModule,
     AppRoutingModule,

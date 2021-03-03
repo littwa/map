@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ElementRef, ViewChild } from '@angular/core';
 
 @Component({
   selector: 'app-root',
@@ -6,29 +6,22 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css'],
 })
 export class AppComponent {
-  constructor() {
-    this.anyFn = this.anyFn.bind(this);
-  }
+  // constructor() {
+  //   const f = 'title';
 
-  name: string = 'Tom';
-
-  countFn: number = 0;
-  // tog: boolean = false;
-  nameA: any = 'A';
-
-  nameAFn(e: string): void {
-    this.nameA = e;
-  }
-
-  anyFnArrow = (v: number) => {
-    this.countFn = this.countFn + v;
-  };
-
-  anyFn(): void {
-    this.countFn++;
-  }
-
-  parentFn(): void {
-    console.log('parentFn!!s', this.name);
-  }
+  //   console.log(this.posts[0][f]);
+  // }
+  name: any = 'qwe';
+  newDate: any = Date.now();
+  obj: object = { q: 1, w: { d: 3, t: { f: 4 } } };
+  serch: string = '';
+  posts: { title: string; text: string }[] = [
+    { title: 'benz', text: 'anytext' },
+    { title: 'oil', text: 'anyqwe' },
+    { title: 'diesel', text: 'wertext' },
+  ];
+  // fnAn() {
+  //   const f = 'title';
+  //   this.posts[0][f];
+  // }
 }

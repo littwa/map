@@ -1,4 +1,6 @@
 import {
+  ViewChild,
+  ElementRef,
   Component,
   EventEmitter,
   Input,
@@ -7,27 +9,22 @@ import {
   OnInit,
   DoCheck,
   OnDestroy,
+  ContentChild,
 } from '@angular/core';
 
 // implements OnInit, DoCheck, OnChanges
 
 @Component({
   selector: 'app-card',
-  template: `<h4 (click)="onChegeOneSide(2)">CardComponent + onChegeOneSide</h4>
-    <p>P_CardComponent {{ anyName }}</p>
-    <input [ngModel]="anyName" (ngModelChange)="onChengeAnyName($event)" />`,
+  template: `<h4>CardComponent</h4>
+    <input [ngModel]="userName" (ngModelChange)="onNameChange($event)" />
+    <p>{{ userName }}</p>`,
 })
 export class CardComponent {
-  @Input() anyName: any;
-  @Output() togVal = new EventEmitter<string>();
-  @Output() oneSide = new EventEmitter();
-
-  onChengeAnyName(v: string): void {
-    this.togVal.emit(v);
-    this.anyName = v;
-    console.log(this.anyName);
-  }
-  onChegeOneSide(v: number): void {
-    this.oneSide.emit(v);
+  @Input() userName: any;
+  @Output() userNameChange = new EventEmitter();
+  onNameChange(model: string): void {
+    // this.userName = model;
+    this.userNameChange.emit(model);
   }
 }
