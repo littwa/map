@@ -1,9 +1,9 @@
 import { Pipe, PipeTransform } from '@angular/core';
 // import {};
-interface IkeyIt {
-  title: string;
-  text: string;
-}
+// interface IkeyIt {
+//   title: string;
+//   text: string;
+// }
 
 // field: keyof IkeyIt = 'text'
 // field: string = 'text'
@@ -13,7 +13,7 @@ export class AnyPippe implements PipeTransform {
   transform(
     posts: { title: string; text: string }[],
     filt: string,
-    field: keyof IkeyIt = 'text'
+    field: string = 'title'
   ): { title: string; text: string }[] {
     if (!filt.trim()) {
       return posts;

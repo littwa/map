@@ -1,4 +1,4 @@
-import { Component, ElementRef, ViewChild } from '@angular/core';
+import { Component, DoCheck, ElementRef, ViewChild } from '@angular/core';
 
 @Component({
   selector: 'app-root',
@@ -15,13 +15,10 @@ export class AppComponent {
   newDate: any = Date.now();
   obj: object = { q: 1, w: { d: 3, t: { f: 4 } } };
   serch: string = '';
+  field: string = 'text';
   posts: { title: string; text: string }[] = [
     { title: 'benz', text: 'anytext' },
     { title: 'oil', text: 'anyqwe' },
     { title: 'diesel', text: 'wertext' },
   ];
-  // fnAn() {
-  //   const f = 'title';
-  //   this.posts[0][f];
-  // }
 }
