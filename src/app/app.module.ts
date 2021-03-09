@@ -14,6 +14,8 @@ import { AnyPippe } from './pipe/any-pipe';
 import { DragComponent } from './drag/drag.component';
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import { FormComponent } from './form/form.component';
+import { HttClientComponent } from './http-client/http-client.component';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -25,6 +27,7 @@ import { FormComponent } from './form/form.component';
     AnyPippe,
     DragComponent,
     FormComponent,
+    HttClientComponent,
   ],
   imports: [
     BrowserModule,
@@ -35,6 +38,7 @@ import { FormComponent } from './form/form.component';
     MatSliderModule,
     PortalModule,
     DragDropModule,
+    HttpClientModule,
   ],
   providers: [],
   bootstrap: [AppComponent],
