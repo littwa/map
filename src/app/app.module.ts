@@ -1,10 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-<<<<<<< HEAD
-import { FormsModule } from '@angular/forms';
-=======
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
->>>>>>> 904e9fe5fcdb5cea1416cf3fef045ee23a7754f4
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { CardComponent } from './card/card.component';
@@ -20,12 +16,17 @@ import { DragDropModule } from '@angular/cdk/drag-drop';
 import { FormComponent } from './form/form.component';
 import { HttClientComponent } from './http-client/http-client.component';
 import { HttpClientModule } from '@angular/common/http';
+import { StoreModule } from '@ngrx/store';
+import { ReactiveComponentModule } from '@ngrx/component';
+import { reducers } from './core/store/index'; //metaReducers
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+import { environment } from '../environments/environment';
+import { EffectsModule } from '@ngrx/effects';
+import { Effects } from './core/store/effects';
+
+//console.log(1, metaReducers); ///////////
 
 @NgModule({
-<<<<<<< HEAD
-  declarations: [AppComponent],
-  imports: [BrowserModule, AppRoutingModule, FormsModule],
-=======
   declarations: [
     AppComponent,
     CardComponent,
@@ -47,8 +48,14 @@ import { HttpClientModule } from '@angular/common/http';
     PortalModule,
     DragDropModule,
     HttpClientModule,
+    ReactiveComponentModule,
+    StoreModule.forRoot(reducers), // , { metaReducers }
+    StoreDevtoolsModule.instrument({
+      maxAge: 25,
+      logOnly: environment.production,
+    }),
+    EffectsModule.forRoot([Effects]),
   ],
->>>>>>> 904e9fe5fcdb5cea1416cf3fef045ee23a7754f4
   providers: [],
   bootstrap: [AppComponent],
 })

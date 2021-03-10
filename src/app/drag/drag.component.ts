@@ -21,12 +21,8 @@ export class DragComponent {
   // constructor(private DragDropModule) {}
 
   todo = ['Go home', 'Fall asleep'];
-  // todo2 = [this.qqq2, this.qqq];
 
   done = ['Get up', 'Brush teeth', 'Take a shower', 'Check e-mail', 'Walk dog'];
-  // dd = DragDrop.createDrag();
-
-  // done2 = [this.qqq3];
 
   drop(event: CdkDragDrop<any[]>): void {
     console.log(event);
