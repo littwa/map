@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 // import { Component } from '@angular/core';
 
 // @Component({
@@ -10,6 +11,9 @@
 // }
 
 import { Component } from '@angular/core';
+=======
+import { Component, DoCheck, ElementRef, ViewChild } from '@angular/core';
+>>>>>>> 904e9fe5fcdb5cea1416cf3fef045ee23a7754f4
 
 class Item {
   purchase: string;
@@ -25,6 +29,7 @@ class Item {
 
 @Component({
   selector: 'app-root',
+<<<<<<< HEAD
   templateUrl: './app.component2.html',
 })
 export class AppComponent {
@@ -44,4 +49,25 @@ export class AppComponent {
     if (text == null || text.trim() == '' || price == null) return;
     this.items.push(new Item(text, price));
   }
+=======
+  templateUrl: './app.component.html',
+  styleUrls: ['./app.component.css'],
+})
+export class AppComponent {
+  // constructor() {
+  //   const f = 'title';
+
+  //   console.log(this.posts[0][f]);
+  // }
+  name: any = 'qwe';
+  newDate: any = Date.now();
+  obj: object = { q: 1, w: { d: 3, t: { f: 4 } } };
+  serch: string = '';
+  field: string = 'text';
+  posts: { title: string; text: string }[] = [
+    { title: 'benz', text: 'anytext' },
+    { title: 'oil', text: 'anyqwe' },
+    { title: 'diesel', text: 'wertext' },
+  ];
+>>>>>>> 904e9fe5fcdb5cea1416cf3fef045ee23a7754f4
 }

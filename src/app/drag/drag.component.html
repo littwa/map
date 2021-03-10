@@ -1,0 +1,54 @@
+<div *ngIf="true; then thenBlock; else elseBlock">No Render Element</div>
+<ng-template #thenBlock>Then template</ng-template> 
+<ng-template #elseBlock>Else template</ng-template>
+<hr />
+<p *ngIf="true; else unset">Any Text</p>
+<ng-template #unset>
+  <p>else Any Text else</p>
+</ng-template>
+<hr />
+<p *ngIf="true">Any Text</p>
+<hr />
+
+<ul>
+  <li *ngFor="let item of [1,2,3,]">{{ item }}</li>
+</ul>
+
+<div [ngSwitch]="1">
+  Rendered Text
+  <ng-template ngSwitchCase="1">{{ "Kiev" }}</ng-template>
+  <ng-template ngSwitchCase="2">{{ "Lviv" }}</ng-template>
+  <ng-template ngSwitchDefault>{{ "Odesa" }}</ng-template>
+</div>
+<!-- cdkDrag -->
+<div class="example-container">
+  <h2>To do</h2>
+
+  <div
+    cdkDropList
+    #todoList="cdkDropList"
+    [cdkDropListData]="todo"
+    [cdkDropListConnectedTo]="[doneList]"
+    class="example-list"
+    (cdkDropListDropped)="drop($event)"
+  >
+    <div class="example-box" *ngFor="let item of todo" cdkDrag>
+      <input type="text" [value]="item" />
+    </div>
+  </div>
+</div>
+
+<div class="example-container">
+  <h2>Done</h2>
+
+  <div
+    cdkDropList
+    #doneList="cdkDropList"
+    [cdkDropListData]="done"
+    [cdkDropListConnectedTo]="[todoList]"
+    class="example-list"
+    (cdkDropListDropped)="drop($event)"
+  >
+    <div class="example-box" *ngFor="let item of done" cdkDrag>{{ item }}</div>
+  </div>
+</div>

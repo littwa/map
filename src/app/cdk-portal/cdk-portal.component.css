@@ -1,0 +1,12 @@
+.margin-left-8 {
+  margin-left: 8px;
+}
+
+.portals-outlet {
+  margin-top: 16px;
+  width: 500px;
+  height: 300px;
+  border: 2px dashed #ccc;
+  position: relative;
+  overflow: auto;
+}

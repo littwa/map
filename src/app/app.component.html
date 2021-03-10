@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <style>
   :host {
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
@@ -971,3 +972,34 @@
 </div>
 
 <router-outlet></router-outlet>
+=======
+<!-- <app-cdk-portal></app-cdk-portal> -->
+<!-- <app-card2></app-card2> -->
+<!-- <app-form></app-form> -->
+<app-http-client></app-http-client>
+<hr />
+<app-drag></app-drag>
+<br />
+<label
+  >On-text<input name="field" value="text" type="radio" [(ngModel)]="field"
+/></label>
+<label
+  >On-title<input name="field" type="radio" value="title" [(ngModel)]="field"
+/></label>
+
+<input [(ngModel)]="serch" />
+<p *ngFor="let p of posts | anypipe: serch:field">
+  {{ p.title }}=={{ p.text }}
+</p>
+
+<!-- <p>AnyPipe {{ 5 | anypipe: 8 }}</p> -->
+
+<p>Pipe date: {{ newDate | date: "medium" }}</p>
+<pre>Pipe json: {{ obj | json }}</pre>
+<!-- <input [(ngModel)]="titleS" /> -->
+
+<!-- <app-card [(userName)]="name"></app-card> -->
+
+<!-- <app-cdk></app-cdk> -->
+<hr />
+>>>>>>> 904e9fe5fcdb5cea1416cf3fef045ee23a7754f4
