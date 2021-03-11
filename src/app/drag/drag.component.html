@@ -1,29 +1,7 @@
-<div *ngIf="true; then thenBlock; else elseBlock">No Render Element</div>
-<ng-template #thenBlock>Then template</ng-template> 
-<ng-template #elseBlock>Else template</ng-template>
-<hr />
-<p *ngIf="true; else unset">Any Text</p>
-<ng-template #unset>
-  <p>else Any Text else</p>
-</ng-template>
-<hr />
-<p *ngIf="true">Any Text</p>
-<hr />
-
-<ul>
-  <li *ngFor="let item of [1,2,3,]">{{ item }}</li>
-</ul>
-
-<div [ngSwitch]="1">
-  Rendered Text
-  <ng-template ngSwitchCase="1">{{ "Kiev" }}</ng-template>
-  <ng-template ngSwitchCase="2">{{ "Lviv" }}</ng-template>
-  <ng-template ngSwitchDefault>{{ "Odesa" }}</ng-template>
-</div>
 <!-- cdkDrag -->
 <div class="example-container">
-  <h2>To do</h2>
-
+  <h5>To do</h5>
+  <ng-template #ref3></ng-template>
   <div
     cdkDropList
     #todoList="cdkDropList"
@@ -39,7 +17,7 @@
 </div>
 
 <div class="example-container">
-  <h2>Done</h2>
+  <h5>Done</h5>
 
   <div
     cdkDropList

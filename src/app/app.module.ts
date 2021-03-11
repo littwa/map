@@ -4,7 +4,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { CardComponent } from './card/card.component';
-import { Card2Component } from './card2/card2.component';
+import { AuthPageComponent } from './auth/auth.component';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { MatSliderModule } from '@angular/material/slider';
 import { CdkComponent } from './cdk/cdk.component';
@@ -30,12 +30,12 @@ import { Effects } from './core/store/effects';
   declarations: [
     AppComponent,
     CardComponent,
-    Card2Component,
+    AuthPageComponent,
     CdkComponent,
     CdkPortalComponent,
-    AnyPippe,
     DragComponent,
     FormComponent,
+    AnyPippe,
     HttClientComponent,
   ],
   imports: [

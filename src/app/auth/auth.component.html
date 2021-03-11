@@ -1,0 +1,9 @@
+<h4>Authoriztion Page</h4>
+<input [(ngModel)]="email" /><input [(ngModel)]="password" /><button
+  (click)="onClick()"
+>
+  Go
+</button>
+<div *ngIf="user$ | ngrxPush as user">
+  Email: {{ user.email }} Password: {{ user.password }}
+</div>

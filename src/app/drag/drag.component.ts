@@ -25,7 +25,6 @@ export class DragComponent {
   done = ['Get up', 'Brush teeth', 'Take a shower', 'Check e-mail', 'Walk dog'];
 
   drop(event: CdkDragDrop<any[]>): void {
-    console.log(event);
     if (event.previousContainer === event.container) {
       moveItemInArray(
         event.container.data,

@@ -1,30 +1,7 @@
-<!-- <app-cdk-portal></app-cdk-portal> -->
-<!-- <app-card2></app-card2> -->
-<!-- <app-form></app-form> -->
+<div class="head">Header</div>
 
-<app-card></app-card>
+<router-outlet></router-outlet>
 
-<app-http-client></app-http-client>
-<hr />
-<app-drag></app-drag>
-<br />
-<label
-  >On-text<input name="field" value="text" type="radio" [(ngModel)]="field"
-/></label>
-<label
-  >On-title<input name="field" type="radio" value="title" [(ngModel)]="field"
-/></label>
+<!-- <app-auth-page></app-auth-page>
 
-<input [(ngModel)]="serch" />
-<p *ngFor="let p of posts | anypipe: serch:field">
-  {{ p.title }}=={{ p.text }}
-</p>
-
-<!-- <p>AnyPipe {{ 5 | anypipe: 8 }}</p> -->
-
-<p>Pipe date: {{ newDate | date: "medium" }}</p>
-<pre>Pipe json: {{ obj | json }}</pre>
-<!-- <input [(ngModel)]="titleS" /> -->
-
-<!-- <app-cdk></app-cdk> -->
-<hr />
+<app-drag></app-drag> -->

@@ -14,10 +14,8 @@ const INIT_STATE: State = {
 export function reducer(state: State = INIT_STATE, action: Actions): State {
   switch (action.type) {
     case ActionTypes.LoginRequest:
-      console.log(state, action.payload);
       return { ...state, user: action.payload, error: null };
     case ActionTypes.LoginSuccess:
-      console.log(state, action.payload);
       return {
         ...state,
         user: action.payload,

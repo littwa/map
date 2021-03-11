@@ -7,21 +7,11 @@ import { LoginAction } from '../core/store/action';
 import { State, getUser } from '../core/store/index';
 import { User } from '../core/interfaces';
 
-import { ofType, Actions, createEffect } from '@ngrx/effects';
-
 @Component({
-  selector: 'app-card',
-  template: ` <h4>CardComponent</h4>
-    <input [(ngModel)]="email" /><input [(ngModel)]="password" /><button
-      (click)="onClick()"
-    >
-      Go
-    </button>
-    <div *ngIf="user$ | ngrxPush as user">
-      Email: {{ user.email }} Password: {{ user.password }}
-    </div>`,
+  selector: 'app-auth-page',
+  templateUrl: './auth.component.html',
 })
-export class CardComponent {
+export class AuthPageComponent {
   email: string = '';
   password: string = '';
   // form: FormGroup;
@@ -40,7 +30,7 @@ export class CardComponent {
     this.user$ = this.store.select(getUser);
     // this.user2$ = this.store.pipe(select(getUser));
     // this.initForm();
-    console.log('user$ ', this.user$);
+    console.log('ngOnInit, user$ ', this.user$);
     // console.log('store ', this.store);
   }
 

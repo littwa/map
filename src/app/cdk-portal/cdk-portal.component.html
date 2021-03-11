@@ -1,8 +1,54 @@
-<p>cdk-portal works!</p>
+<!-- <p #ref1>cdk-portal works!</p>
+<ng-template #ref2>Hello, this is a template portal</ng-template> -->
 <h2>CDK Portal: Basic loading components</h2>
-<button (click)="portalOpenCard()">Open card</button>
-<button (click)="portalCloseCard()" class="margin-left-8">Close card</button>
+<!-- <button (click)="portalOpenCard()">Open card</button>
+<button (click)="portalCloseCard()" class="margin-left-8">Close card</button> -->
+<div>
+  <div class="portals-outlet">
+    <ng-container #virtualContainer cdkPortalOutlet> </ng-container>
+  </div>
 
-<div class="portals-outlet">
-  <ng-container #virtualContainer cdkPortalOutlet> </ng-container>
+  <div class="portals-outlet">
+    <ng-container #virtualContainer2 cdkPortalOutlet> </ng-container>
+  </div>
+
+  <div class="portals-outlet">
+    <ng-container #virtualContainer3 cdkPortalOutlet> </ng-container>
+  </div>
+</div>
+
+<!-- cdkDrag -->
+
+<div #ref3 class="example-container">
+  <h5>Drag section</h5>
+  <ng-template></ng-template>
+  <div
+    cdkDropList
+    #todoList="cdkDropList"
+    [cdkDropListData]="drag"
+    [cdkDropListConnectedTo]="[doneList]"
+    class="example-list"
+    (cdkDropListDropped)="drop($event)"
+  >
+    <div class="example-box" *ngFor="let item of drag" cdkDrag>
+      <input type="text" [value]="item" />
+    </div>
+  </div>
+</div>
+
+<div #ref4 class="example-container">
+  <h5>Drop section</h5>
+
+  <div
+    cdkDropList
+    #doneList="cdkDropList"
+    [cdkDropListData]="droper"
+    [cdkDropListConnectedTo]="[todoList]"
+    class="example-list"
+    (cdkDropListDropped)="drop($event)"
+  >
+    <div class="example-box" *ngFor="let item of droper" cdkDrag>
+      {{ item }}
+    </div>
+  </div>
 </div>
