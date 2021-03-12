@@ -20,6 +20,7 @@ import {
   CdkDragDrop,
   moveItemInArray,
   transferArrayItem,
+  copyArrayItem,
 } from '@angular/cdk/drag-drop';
 
 @Component({
@@ -48,48 +49,14 @@ export class CdkPortalComponent {
     this.virtualPortalOutlet2.attach(this.domPortal);
   }
 
-  //=======================================
-
-  // @ViewChild('cardListContainer', { read: ViewContainerRef })
-  // tepmlListViewContainerRef: ViewContainerRef;
-
-  // @ViewChild('ref1') ref1: ElementRef;
-
-  // @ViewChild('ref2') ref2: TemplateRef<unknown>;
-
-  // portalOpenCard(): void {
-  //   this.detachContainers();
-  //   // console.log(33, this.ref2);
-  //   // this.templatePortal = new TemplatePortal(this.ref2, this._viewContainerRef);
-  //   // this.virtualPortalOutlet.attach(this.templatePortal);
-
-  //   //=======
-  //   // this.domPortal = new DomPortal(this.ref1);
-  //   // this.virtualPortalOutlet2.attach(this.domPortal);
-  //   //======
-  //   const cardComponentPortal = new ComponentPortal<any>(DragComponent);
-
-  //   const ref = this.virtualPortalOutlet.attach(cardComponentPortal);
-
-  //   // console.log(ref);
-  // }
-
-  // portalCloseCard(): void {
-  //   this.detachContainers();
-  // }
-
-  // private detachContainers(): void {
-  //   this.virtualPortalOutlet.detach();
-  //   this.virtualPortalOutlet2.detach();
-  // }
-
   //==========================================================
 
-  drag = ['input', 'texteria', 'select', 'checkbox', 'button'];
+  drag = ['input', 'textarea', 'select', 'checkbox', 'button'];
 
   droper = [];
 
   drop(event: CdkDragDrop<any[]>): void {
+    console.log(event);
     if (event.previousContainer === event.container) {
       moveItemInArray(
         event.container.data,
@@ -97,7 +64,7 @@ export class CdkPortalComponent {
         event.currentIndex
       );
     } else {
-      transferArrayItem(
+      copyArrayItem(
         event.previousContainer.data,
         event.container.data,
         event.previousIndex,

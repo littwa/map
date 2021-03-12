@@ -1,6 +1,7 @@
 <!-- <p #ref1>cdk-portal works!</p>
 <ng-template #ref2>Hello, this is a template portal</ng-template> -->
-<h2>CDK Portal: Basic loading components</h2>
+<h2>CDK Portal</h2>
+
 <!-- <button (click)="portalOpenCard()">Open card</button>
 <button (click)="portalCloseCard()" class="margin-left-8">Close card</button> -->
 <div>
@@ -30,9 +31,19 @@
     class="example-list"
     (cdkDropListDropped)="drop($event)"
   >
+    <!-- <div class="example-box" *ngFor="let item of drag" cdkDrag>
+      <input [type]="item" [value]="item" />
+    </div> -->
     <div class="example-box" *ngFor="let item of drag" cdkDrag>
-      <input type="text" [value]="item" />
+      <div [ngSwitch]="item">
+        <div *ngSwitchCase="'checkbox'"><app-checkbox></app-checkbox></div>
+        <div *ngSwitchCase="'button'"><app-button></app-button></div>
+        <div *ngSwitchCase="'input'"><app-input></app-input></div>
+        <div *ngSwitchCase="'textarea'"><app-textarea></app-textarea></div>
+        <div *ngSwitchCase="'select'"><app-select></app-select></div>
+      </div>
     </div>
+    <!-- ===== -->
   </div>
 </div>
 
@@ -47,8 +58,19 @@
     class="example-list"
     (cdkDropListDropped)="drop($event)"
   >
-    <div class="example-box" *ngFor="let item of droper" cdkDrag>
+    <!-- <div class="example-box" *ngFor="let item of droper" cdkDrag>
       {{ item }}
+    </div> -->
+
+    <div class="example-box" *ngFor="let item of droper" cdkDrag>
+      <div [ngSwitch]="item">
+        <div *ngSwitchCase="'checkbox'"><app-checkbox></app-checkbox></div>
+        <div *ngSwitchCase="'button'"><app-button></app-button></div>
+        <div *ngSwitchCase="'input'"><app-input></app-input></div>
+        <div *ngSwitchCase="'textarea'"><app-textarea></app-textarea></div>
+        <div *ngSwitchCase="'select'"><app-select></app-select></div>
+      </div>
     </div>
+    <!-- ==== -->
   </div>
 </div>
