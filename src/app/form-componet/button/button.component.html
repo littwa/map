@@ -1,1 +1,5 @@
-<button>Button</button>
+<!-- <button mat-raised-button #btn (click)="clickButton($event)">Button</button> -->
+<button [ngStyle]="stylesSheet" #btn (click)="clickButton($event)">
+  Button
+</button>
+<!-- class="btnstyle" -->

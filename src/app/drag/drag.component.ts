@@ -14,6 +14,11 @@ import {
   styleUrls: ['drag.component.css'],
 })
 export class DragComponent {
+  togVal = false;
+  tog() {
+    this.togVal = !this.togVal;
+    console.log(this.togVal);
+  }
   // writeValue(value: any): void {
   //   this._renderer.setProperty(this._elementRef.nativeElement, 'value', value);
   // }

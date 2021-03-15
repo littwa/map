@@ -10,6 +10,9 @@ import { MatSliderModule } from '@angular/material/slider';
 import { CdkComponent } from './cdk/cdk.component';
 import { PortalModule } from '@angular/cdk/portal';
 import { CdkPortalComponent } from './cdk-portal/cdk-portal.component';
+import { MatButtonModule } from '@angular/material/button';
+import { MatExpansionModule } from '@angular/material/expansion';
+
 import { AnyPippe } from './pipe/any-pipe';
 import { DragComponent } from './drag/drag.component';
 import { DragDropModule } from '@angular/cdk/drag-drop';
@@ -30,6 +33,7 @@ import { ButtonComponet } from './form-componet/button/button.component';
 import { InputComponent } from './form-componet/input/input.component';
 import { TextareaComponent } from './form-componet/textarea/textarea.component';
 import { SelectComponent } from './form-componet/select/select.component';
+import { StylePanelComponent } from './style-panel/style-panel.component';
 
 @NgModule({
   declarations: [
@@ -47,6 +51,7 @@ import { SelectComponent } from './form-componet/select/select.component';
     InputComponent,
     TextareaComponent,
     SelectComponent,
+    StylePanelComponent,
   ],
   imports: [
     BrowserModule,
@@ -57,8 +62,10 @@ import { SelectComponent } from './form-componet/select/select.component';
     MatSliderModule,
     PortalModule,
     DragDropModule,
+    MatButtonModule,
+    MatExpansionModule,
     ReactiveComponentModule,
-    StoreModule.forRoot(reducers), // , { metaReducers }
+    StoreModule.forRoot(reducers),
     StoreDevtoolsModule.instrument({
       maxAge: 25,
       logOnly: environment.production,

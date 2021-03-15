@@ -1,7 +1,6 @@
 import {
   Component,
   ElementRef,
-  TemplateRef,
   OnInit,
   ViewChild,
   ViewContainerRef,
@@ -14,14 +13,15 @@ import {
   Portal,
 } from '@angular/cdk/portal';
 
-import { DragComponent } from '../drag/drag.component';
-
 import {
   CdkDragDrop,
   moveItemInArray,
-  transferArrayItem,
   copyArrayItem,
 } from '@angular/cdk/drag-drop';
+
+import { StylePanelComponent } from '../style-panel/style-panel.component';
+import { Store } from '@ngrx/store';
+import { getFields } from '../core/store/fields/fields.reducers';
 
 @Component({
   selector: 'app-cdk-portal',
@@ -29,9 +29,14 @@ import {
   styleUrls: ['./cdk-portal.component.css'],
 })
 export class CdkPortalComponent {
-  constructor(private _viewContainerRef: ViewContainerRef) {}
+  testtttt = null;
+  constructor(
+    private _viewContainerRef: ViewContainerRef,
+    private storeFields: Store
+  ) {}
   domPortal: DomPortal<any>;
   templatePortal: TemplatePortal<any>;
+  componentPortal: ComponentPortal<any>;
 
   @ViewChild('virtualContainer', { read: CdkPortalOutlet })
   virtualPortalOutlet: CdkPortalOutlet;
@@ -42,7 +47,24 @@ export class CdkPortalComponent {
 
   @ViewChild('ref3') ref3: ElementRef;
   @ViewChild('ref4') ref4: ElementRef;
+
+  // ngDoCheck() {
+  //   console.log(33);
+  // }
+
   ngAfterViewInit() {
+    console.log(
+      111,
+      this.storeFields.select(getFields).subscribe((v) => {
+        console.log(v);
+        this.testtttt = v;
+        console.log(222, this.testtttt);
+      })
+    );
+    //======
+    this.componentPortal = new ComponentPortal(StylePanelComponent);
+    // this.virtualPortalOutlet.attach(this.componentPortal);
+    //======
     this.domPortal = new DomPortal(this.ref3);
     this.virtualPortalOutlet3.attach(this.domPortal);
     this.domPortal = new DomPortal(this.ref4);
@@ -70,6 +92,7 @@ export class CdkPortalComponent {
         event.previousIndex,
         event.currentIndex
       );
+      console.log(this.droper);
     }
   }
 }
