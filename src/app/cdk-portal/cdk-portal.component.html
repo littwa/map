@@ -64,11 +64,24 @@
 
     <div class="example-box" *ngFor="let item of droper" cdkDrag>
       <div [ngSwitch]="item">
-        <div *ngSwitchCase="'checkbox'"><app-checkbox></app-checkbox></div>
-        <div *ngSwitchCase="'button'"><app-button></app-button></div>
-        <div *ngSwitchCase="'input'"><app-input></app-input></div>
-        <div *ngSwitchCase="'textarea'"><app-textarea></app-textarea></div>
-        <div *ngSwitchCase="'select'"><app-select></app-select></div>
+        <div *ngSwitchCase="'checkbox'">
+          <app-checkbox [isDrop]="true"></app-checkbox>
+        </div>
+        <div *ngSwitchCase="'button'">
+          <app-button
+            [isDrop]="true"
+            (stylesSheetBtnCH)="ChStylList($event)"
+          ></app-button>
+        </div>
+        <div *ngSwitchCase="'input'">
+          <app-input [isDrop]="true"></app-input>
+        </div>
+        <div *ngSwitchCase="'textarea'">
+          <app-textarea [isDrop]="true"></app-textarea>
+        </div>
+        <div *ngSwitchCase="'select'">
+          <app-select [isDrop]="true"></app-select>
+        </div>
       </div>
     </div>
     <!-- ==== -->

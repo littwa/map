@@ -10,7 +10,6 @@ import {
   ComponentPortal,
   DomPortal,
   TemplatePortal,
-  Portal,
 } from '@angular/cdk/portal';
 
 import {
@@ -22,6 +21,7 @@ import {
 import { StylePanelComponent } from '../style-panel/style-panel.component';
 import { Store } from '@ngrx/store';
 import { getFields } from '../core/store/fields/fields.reducers';
+import { AddFieldsAction } from '../core/store/fields/fields.actions';
 
 @Component({
   selector: 'app-cdk-portal',
@@ -29,6 +29,7 @@ import { getFields } from '../core/store/fields/fields.reducers';
   styleUrls: ['./cdk-portal.component.css'],
 })
 export class CdkPortalComponent {
+  stylesSheetButton = null;
   testtttt = null;
   constructor(
     private _viewContainerRef: ViewContainerRef,
@@ -48,9 +49,13 @@ export class CdkPortalComponent {
   @ViewChild('ref3') ref3: ElementRef;
   @ViewChild('ref4') ref4: ElementRef;
 
-  // ngDoCheck() {
-  //   console.log(33);
-  // }
+  ChStylList(v) {
+    this.stylesSheetButton = v;
+  }
+
+  ngDoCheck() {
+    // console.log(555, this.stylesSheetButton);
+  }
 
   ngAfterViewInit() {
     console.log(
@@ -63,7 +68,8 @@ export class CdkPortalComponent {
     );
     //======
     this.componentPortal = new ComponentPortal(StylePanelComponent);
-    // this.virtualPortalOutlet.attach(this.componentPortal);
+    // console.log(11111111, this.componentPortal);
+    this.virtualPortalOutlet.attach(this.componentPortal);
     //======
     this.domPortal = new DomPortal(this.ref3);
     this.virtualPortalOutlet3.attach(this.domPortal);
@@ -78,7 +84,6 @@ export class CdkPortalComponent {
   droper = [];
 
   drop(event: CdkDragDrop<any[]>): void {
-    console.log(event);
     if (event.previousContainer === event.container) {
       moveItemInArray(
         event.container.data,
@@ -92,7 +97,9 @@ export class CdkPortalComponent {
         event.previousIndex,
         event.currentIndex
       );
-      console.log(this.droper);
+      // console.log(
+      // );
+      this.storeFields.dispatch(new AddFieldsAction([...event.container.data]));
     }
   }
 }

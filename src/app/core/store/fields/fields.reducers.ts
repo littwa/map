@@ -10,18 +10,11 @@ export const reducerFields = (
 ): any => {
   switch (action.type) {
     case ActionTypesFields.AddFields:
-      return { ...state, fields: action.payload };
+      console.log('ActionTypesFields.AddFields');
+      return { fields: action.payload };
     default:
       return state;
   }
 };
 
 export const getFields = (state) => state.fields;
-
-// styleRender: {
-//   input: null,
-//   textarea: null,
-//   select: null,
-//   checkbox: null,
-//   button: null,
-// },
