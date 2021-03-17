@@ -1,6 +1,13 @@
 export interface User {
   email: string;
   password: string;
+  // agree: boolean;
+}
+
+export interface UserRegister {
+  email: string;
+  password: string;
+  agree: boolean;
 }
 
 export interface Error {

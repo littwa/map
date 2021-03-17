@@ -5,11 +5,13 @@
         routerLinkActive="activelink"
         [routerLinkActiveOptions]="{ exact: true }"
         routerLink="/"
-        >Home</a
+        >LogIn</a
       >
     </li>
     <li><a routerLinkActive="activelink" [routerLink]="['/sdk']">SDK</a></li>
-    <li><a routerLinkActive="activelink" routerLink="/drag">Drag</a></li>
+    <li>
+      <a routerLinkActive="activelink" routerLink="/register">Register</a>
+    </li>
     <li>
       <a routerLinkActive="activelink" routerLink="/http-client">Http-client</a>
     </li>

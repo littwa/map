@@ -34,6 +34,7 @@ import { InputComponent } from './form-componet/input/input.component';
 import { TextareaComponent } from './form-componet/textarea/textarea.component';
 import { SelectComponent } from './form-componet/select/select.component';
 import { StylePanelComponent } from './style-panel/style-panel.component';
+import { RegisterComponent } from './register/register-component';
 
 @NgModule({
   declarations: [
@@ -52,6 +53,7 @@ import { StylePanelComponent } from './style-panel/style-panel.component';
     TextareaComponent,
     SelectComponent,
     StylePanelComponent,
+    RegisterComponent,
   ],
   imports: [
     BrowserModule,

@@ -16,14 +16,12 @@ export class StylePanelComponent implements AfterViewInit {
 
   // arrForRender = [];
 
-  entObj() {
-    return [[1, 2]];
-    // this.arrForRender = Object.entries(this.arrStyleEntreis);
-  }
+  // entObj() {
+  //   return [[1, 2]];
+  //   // this.arrForRender = Object.entries(this.arrStyleEntreis);
+  // }
 
   ngDoCheck() {
-    // this.entObj();
-    // // this.arrStyleEntreis = Object.entries(this.StyleServices.allStyle);
     console.log(667788, this.arrStyleEntreis[0]);
   }
 
@@ -35,7 +33,6 @@ export class StylePanelComponent implements AfterViewInit {
     });
 
     this.StyleServices.getAllStyles().subscribe((v) => {
-      console.log(112233, v);
       this.arrStyleEntreis = v;
     });
   }

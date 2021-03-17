@@ -1,0 +1,43 @@
+{
+  "users": [
+    {
+      "id": 1,
+      "email": "tst@mail.q",
+      "password": "1111"
+    },
+    {
+      "id": 2,
+      "email": "tst2@mail.q",
+      "password": "1111"
+    },
+    {
+      "id": 3,
+      "email": "tst3@mail.q",
+      "password": "1111"
+    },
+    {
+      "email": "tst4@mail.q",
+      "password": "1111",
+      "id": 4
+    },
+    {
+      "email": "eee",
+      "password": "eee",
+      "agree": true,
+      "id": 5
+    },
+    {
+      "email": "eee",
+      "password": "eee",
+      "agree": false,
+      "id": 6
+    },
+    {
+      "email": "qwq",
+      "password": "qwqwq",
+      "agree": false,
+      "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InF3cSIsInBhc3N3b3JkIjoicXdxd3EiLCJhZ3JlZSI6ZmFsc2V9.6cFUfa92qhpzYSIL3YDcxsbpRVfe7sJsB-AEX9S8pxU",
+      "id": 7
+    }
+  ]
+}

@@ -29,3 +29,22 @@ export function reducer(state: State = INIT_STATE, action: Actions): State {
 }
 
 export const getUser = (state: State) => state.user;
+
+//=================RGISTER===========
+const INIT_STATE_RGISTER = {
+  register: null,
+  error: null,
+};
+
+export function reducerRegister(state = INIT_STATE_RGISTER, action: Actions) {
+  switch (action.type) {
+    case ActionTypes.RegisterSuccess:
+      return { ...state, register: action.payload };
+    case ActionTypes.RegisterFailed:
+      return { ...state, register: false };
+    default:
+      return state;
+  }
+}
+
+export const getRegister = (state) => state.register;
