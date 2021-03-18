@@ -16,6 +16,7 @@ export function reducer(state: State = INIT_STATE, action: Actions): State {
     case ActionTypes.LoginRequest:
       return { ...state, user: action.payload, error: null };
     case ActionTypes.LoginSuccess:
+      console.log(55, action.payload);
       return {
         ...state,
         user: action.payload,

@@ -2,7 +2,7 @@
 <!-- <input [(ngModel)]="email" /><br />
 <input [(ngModel)]="password" /><br />
 <button (click)="onClick()">Go</button> -->
-
+<h3 *ngIf="iRegisterNow">Register successful! Now authorise</h3>
 <form [formGroup]="form" (ngSubmit)="sub()">
   <input placeholder="email" formControlName="email" /><br />
   <input placeholder="password" formControlName="password" /><br />

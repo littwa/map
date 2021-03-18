@@ -1,4 +1,6 @@
 export interface User {
+  // user: object;
+  token: string;
   email: string;
   password: string;
   // agree: boolean;

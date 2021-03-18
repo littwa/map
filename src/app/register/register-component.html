@@ -6,7 +6,5 @@
   <label> Agree<input type="checkbox" formControlName="agree" /></label><br />
   <button type="submit">Send</button>
 </form>
-<!-- <hr />
-<div *ngIf="user$ | ngrxPush as user">
-  Email: {{ user.email }} Password: {{ user.password }}
-</div> -->
+
+<div class="inv" *ngIf="isInvalid">Invalid data</div>

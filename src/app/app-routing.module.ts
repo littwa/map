@@ -4,12 +4,13 @@ import { AuthPageComponent } from './auth/auth.component';
 import { DragComponent } from './drag/drag.component';
 import { RegisterComponent } from './register/register-component';
 import { CdkPortalComponent } from './cdk-portal/cdk-portal.component';
+import { AuthGuard } from './auth.guard';
 // import { HttClientComponent } from './http-client/http-client.component';
 
 const routes: Routes = [
   { path: '', component: AuthPageComponent },
   { path: 'register', component: RegisterComponent },
-  { path: 'sdk', component: CdkPortalComponent },
+  { path: 'sdk', component: CdkPortalComponent, canActivate: [AuthGuard] },
   // { path: 'http-client', component: HttClientComponent },
 ];
 
