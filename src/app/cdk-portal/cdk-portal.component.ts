@@ -21,7 +21,11 @@ import {
 import { StylePanelComponent } from '../style-panel/style-panel.component';
 import { Store } from '@ngrx/store';
 import { getFields } from '../core/store/fields/fields.reducers';
+import { getStyle } from '../core/store/index';
 import { AddFieldsAction } from '../core/store/fields/fields.actions';
+import { AddStyleAction } from '../core/store/styles-fields/styleFields.actions';
+import { FormControl, FormGroup } from '@angular/forms';
+import { TextareaComponent } from '../form-componet/textarea/textarea.component';
 
 @Component({
   selector: 'app-cdk-portal',
@@ -29,8 +33,30 @@ import { AddFieldsAction } from '../core/store/fields/fields.actions';
   styleUrls: ['./cdk-portal.component.css'],
 })
 export class CdkPortalComponent {
-  stylesSheetButton = null;
-  testtttt = null;
+  stylesSheet_Textarea = {
+    border: '5.5px solid #888',
+    borderRadius: '20px',
+    fontSize: '12px',
+    padding: '5px 10px',
+    backgroundColor: '#fff',
+  };
+  // stylesSheet_Textarea;
+
+  superValue = 'place-holder-text';
+
+  onNameChange(v) {
+    console.log(v);
+    console.log(this.superValue);
+  }
+  //============
+  placehold = 'any-text';
+  form: FormGroup;
+  getForm() {
+    console.log(this.form.value);
+    console.log(this.test);
+  }
+
+  test = null;
   constructor(
     private _viewContainerRef: ViewContainerRef,
     private storeFields: Store
@@ -49,26 +75,25 @@ export class CdkPortalComponent {
   @ViewChild('ref3') ref3: ElementRef;
   @ViewChild('ref4') ref4: ElementRef;
 
-  ChStylList(v) {
-    this.stylesSheetButton = v;
-  }
+  ngOnInit() {
+    // let str$ = this.storeFields.select(getStyle);
+    // str$.subscribe((v) => {
+    //   this.stylesSheet_Textarea = v.textarea;
+    //   this.test = v;
+    //   console.log(131, this.stylesSheet_Textarea);
+    // });
 
-  ngDoCheck() {
-    // console.log(555, this.stylesSheetButton);
+    this.form = new FormGroup({
+      name1: new FormControl(''),
+      name2: new FormControl(''),
+      name3: new FormControl(''),
+    });
   }
 
   ngAfterViewInit() {
-    console.log(
-      111,
-      this.storeFields.select(getFields).subscribe((v) => {
-        console.log(v);
-        this.testtttt = v;
-        console.log(222, this.testtttt);
-      })
-    );
     //======
     this.componentPortal = new ComponentPortal(StylePanelComponent);
-    // console.log(11111111, this.componentPortal);
+
     this.virtualPortalOutlet.attach(this.componentPortal);
     //======
     this.domPortal = new DomPortal(this.ref3);
@@ -97,9 +122,24 @@ export class CdkPortalComponent {
         event.previousIndex,
         event.currentIndex
       );
-      // console.log(
-      // );
-      this.storeFields.dispatch(new AddFieldsAction([...event.container.data]));
+      console.log(
+        55,
+        // (this.droper = this.droper.map((el) => el + 1)),
+        event,
+        event.container.data,
+        event.previousIndex,
+        event.currentIndex
+      );
+      // console.log(66, this.droper);
+      // stylesSheet_Textarea
+      this.storeFields.dispatch(new AddFieldsAction([...this.droper])); // [...event.container.data]
+      this.storeFields.dispatch(
+        new AddStyleAction([
+          event.container.data[event.currentIndex] +
+            event.container.data.length,
+          this.stylesSheet_Textarea,
+        ])
+      );
     }
   }
 }

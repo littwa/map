@@ -6,8 +6,8 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
   template: `<textarea
     rows="10"
     cols="30"
-    [placeholder]="placeholder"
-    [ngStyle]="styleExp"
+    [placeholder]="styleArray"
+    [ngStyle]="styleAny"
     [(ngModel)]="value"
   ></textarea>`,
   // styleUrls: ['./textarea.component.scss'],
@@ -19,12 +19,12 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
     },
   ],
 })
-export class TextareaCVAComponent implements OnInit, ControlValueAccessor {
-  @Input() styleArray: any;
-  styleExp = {};
-  placeholder = '';
+export class TextareaCVAComponent implements ControlValueAccessor {
+  styleAny = { color: 'red' };
 
   _value: any = '';
+
+  @Input() styleArray: any;
 
   @Input()
   set value(value: any) {
@@ -36,13 +36,7 @@ export class TextareaCVAComponent implements OnInit, ControlValueAccessor {
     return this._value;
   }
 
-  constructor() {}
-
-  ngOnInit(): void {}
-
   onChange = (value) => {};
-
-  onTouched = () => {};
 
   writeValue(value): void {
     this.onChange(value);
@@ -52,7 +46,5 @@ export class TextareaCVAComponent implements OnInit, ControlValueAccessor {
     this.onChange = fn;
   }
 
-  registerOnTouched(fn: () => void): void {
-    this.onTouched = fn;
-  }
+  registerOnTouched(fn: () => void): void {}
 }

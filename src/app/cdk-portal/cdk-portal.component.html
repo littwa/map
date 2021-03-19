@@ -1,6 +1,7 @@
 <!-- <p #ref1>cdk-portal works!</p>
 <ng-template #ref2>Hello, this is a template portal</ng-template> -->
 <h2>CDK Portal</h2>
+<input [(ngModel)]="superValue" (ngModelChange)="onNameChange($event)" />
 
 <!-- <button (click)="portalOpenCard()">Open card</button>
 <button (click)="portalCloseCard()" class="margin-left-8">Close card</button> -->
@@ -39,7 +40,9 @@
         <div *ngSwitchCase="'checkbox'"><app-checkbox></app-checkbox></div>
         <div *ngSwitchCase="'button'"><app-button></app-button></div>
         <div *ngSwitchCase="'input'"><app-input></app-input></div>
-        <div *ngSwitchCase="'textarea'"><app-textarea></app-textarea></div>
+        <div *ngSwitchCase="'textarea'">
+          <app-textarea></app-textarea>
+        </div>
         <div *ngSwitchCase="'select'"><app-select></app-select></div>
       </div>
     </div>
@@ -47,8 +50,14 @@
   </div>
 </div>
 
-<div #ref4 class="example-container">
+<div [formGroup]="form" #ref4 class="example-container">
   <h5>Drop section</h5>
+  <!-- <input formControlName="name2" /> -->
+
+  <!-- <input-cva-component
+    [styleArray]="placehold"
+    formControlName="name1"
+  ></input-cva-component> -->
 
   <div
     cdkDropList
@@ -68,16 +77,18 @@
           <app-checkbox [isDrop]="true"></app-checkbox>
         </div>
         <div *ngSwitchCase="'button'">
-          <app-button
-            [isDrop]="true"
-            (stylesSheetBtnCH)="ChStylList($event)"
-          ></app-button>
+          <app-button [isDrop]="true"></app-button>
         </div>
         <div *ngSwitchCase="'input'">
           <app-input [isDrop]="true"></app-input>
         </div>
         <div *ngSwitchCase="'textarea'">
-          <app-textarea [isDrop]="true"></app-textarea>
+          <app-textarea
+            [stylesSheet_Textarea]="stylesSheet_Textarea"
+            [superValue]="superValue"
+            formControlName="name3"
+            [isDrop]="true"
+          ></app-textarea>
         </div>
         <div *ngSwitchCase="'select'">
           <app-select [isDrop]="true"></app-select>
@@ -86,4 +97,5 @@
     </div>
     <!-- ==== -->
   </div>
+  <button (click)="getForm()">GET!</button>
 </div>

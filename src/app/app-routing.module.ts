@@ -10,7 +10,8 @@ import { AuthGuard } from './auth.guard';
 const routes: Routes = [
   { path: '', component: AuthPageComponent },
   { path: 'register', component: RegisterComponent },
-  { path: 'sdk', component: CdkPortalComponent, canActivate: [AuthGuard] },
+  { path: 'sdk', component: CdkPortalComponent },
+  // { path: 'sdk', component: CdkPortalComponent, canActivate: [AuthGuard] },
   // { path: 'http-client', component: HttClientComponent },
 ];
 

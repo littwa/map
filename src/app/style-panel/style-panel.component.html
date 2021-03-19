@@ -11,20 +11,41 @@
     <p>This is the primary content of the panel.</p>
   </mat-expansion-panel>
 
-  <ng-container *ngFor="let a of arrStyleEntreis[0]">
-    <div *ngIf="a[1]">
+  <!-- ---------------------- -->
+
+  <!-- <ng-container *ngFor="let styles of arrStyleEntreis[0]">
+    <div *ngIf="styles[1]">
       <mat-expansion-panel
         (opened)="panelOpenState = true"
         (closed)="panelOpenState = false"
       >
         <mat-expansion-panel-header>
-          <mat-panel-title>Style {{ a[0] }}</mat-panel-title>
+          <mat-panel-title>Style {{ styles[0] }}</mat-panel-title>
         </mat-expansion-panel-header>
-        <p>{{ a[1] | json }}</p>
+
+        <p>
+          {{ styles[1] | json }}<textarea [(ngModel)]="styles[1]"> </textarea>
+        </p>
+      </mat-expansion-panel>
+    </div>
+  </ng-container> -->
+
+  <!-- ---------------------- -->
+  <ng-container *ngFor="let styles of fieldsIsRenered; let i = index">
+    <div>
+      <mat-expansion-panel
+        (opened)="panelOpenState = true"
+        (closed)="panelOpenState = false"
+      >
+        <mat-expansion-panel-header>
+          <mat-panel-title>Style {{ i + 1 }}-{{ styles }}</mat-panel-title>
+        </mat-expansion-panel-header>
+
+        <p>{{ styles }}</p>
       </mat-expansion-panel>
     </div>
   </ng-container>
-
+  <!-- ===----------------------------------------========= -->
   <!-- <mat-expansion-panel
     (opened)="panelOpenState = true"
     (closed)="panelOpenState = false"
