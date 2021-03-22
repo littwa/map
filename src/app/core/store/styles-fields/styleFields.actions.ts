@@ -5,6 +5,7 @@ export enum ActionStyleField {
   GetStyle = '[Style] get',
   RemoveStyle = '[Style] remove',
   ClearStyle = '[Style] clear',
+  ChangeStyle = '[Style] change',
 }
 
 export class AddStyleAction implements Action {
@@ -14,21 +15,27 @@ export class AddStyleAction implements Action {
 
 export class GetStyleAction implements Action {
   readonly type = ActionStyleField.GetStyle;
-  constructor(public payloa: any) {}
+  constructor(public payload: any) {}
 }
 
 export class RemoveStyleAction implements Action {
   readonly type = ActionStyleField.RemoveStyle;
-  constructor(public payloa: any) {}
+  constructor(public payload: any) {}
 }
 
 export class ClearStyleAction implements Action {
   readonly type = ActionStyleField.ClearStyle;
-  constructor(public payloa: any) {}
+  constructor(public payload: any) {}
+}
+
+export class ChangeStyleAction implements Action {
+  readonly type = ActionStyleField.ChangeStyle;
+  constructor(public payload: any) {}
 }
 
 export type ActionStyle =
   | AddStyleAction
   | GetStyleAction
   | RemoveStyleAction
-  | ClearStyleAction;
+  | ClearStyleAction
+  | ChangeStyleAction;

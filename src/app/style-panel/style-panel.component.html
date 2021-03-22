@@ -29,23 +29,32 @@
       </mat-expansion-panel>
     </div>
   </ng-container> -->
-
+  <!-- fieldsIsRenered -->
   <!-- ---------------------- -->
-  <ng-container *ngFor="let styles of fieldsIsRenered; let i = index">
+  <ng-container *ngFor="let styles of arrStyleEntreis; let i = index">
     <div>
       <mat-expansion-panel
         (opened)="panelOpenState = true"
         (closed)="panelOpenState = false"
       >
         <mat-expansion-panel-header>
-          <mat-panel-title>Style {{ i + 1 }}-{{ styles }}</mat-panel-title>
+          <mat-panel-title>Style {{ styles[0] }}</mat-panel-title>
         </mat-expansion-panel-header>
-
-        <p>{{ styles }}</p>
+        <form #formnative>
+          <label *ngFor="let property of objectEntriesStyles(styles[1])">
+            {{ property[0] }}: <br /><input
+              name="{{ property[0] }}"
+              [value]="property[1]" /><br /></label
+          ><br />
+          <button (click)="changeProperty($event, styles[0])" type="button">
+            Change!
+          </button>
+        </form>
       </mat-expansion-panel>
     </div>
   </ng-container>
   <!-- ===----------------------------------------========= -->
+  <!-- #propertyForm="ngForm" (ngSubmit)="changeProperty(propertyForm)" -->
   <!-- <mat-expansion-panel
     (opened)="panelOpenState = true"
     (closed)="panelOpenState = false"

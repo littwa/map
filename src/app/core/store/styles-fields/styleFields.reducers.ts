@@ -24,6 +24,21 @@ export const reduserStyle = (
   switch (action.type) {
     case ActionStyleField.AddStyle:
       return [...state, action.payload];
+
+    case ActionStyleField.ChangeStyle:
+      console.log('action.payload---', action.payload);
+      console.log('state---', state);
+      let newState = [...state].map((el) => {
+        if (el[0] === action.payload.nameInput) {
+          console.log(el);
+          // el[1] = action.payload.data;
+          return [el[0], action.payload.data];
+        }
+        return el;
+      });
+      console.log('newState--', newState);
+
+      return newState;
     default:
       return state;
   }

@@ -35,6 +35,7 @@
     <!-- <div class="example-box" *ngFor="let item of drag" cdkDrag>
       <input [type]="item" [value]="item" />
     </div> -->
+    <!-- <div cdkDrag>1212</div> -->
     <div class="example-box" *ngFor="let item of drag" cdkDrag>
       <div [ngSwitch]="item">
         <div *ngSwitchCase="'checkbox'"><app-checkbox></app-checkbox></div>
@@ -72,7 +73,7 @@
     </div> -->
 
     <div class="example-box" *ngFor="let item of droper" cdkDrag>
-      <div [ngSwitch]="item">
+      <div [ngSwitch]="item.split('-')[0]">
         <div *ngSwitchCase="'checkbox'">
           <app-checkbox [isDrop]="true"></app-checkbox>
         </div>
@@ -84,9 +85,9 @@
         </div>
         <div *ngSwitchCase="'textarea'">
           <app-textarea
-            [stylesSheet_Textarea]="stylesSheet_Textarea"
+            [stylesSheet_Textarea]="getActualStyle(item)"
             [superValue]="superValue"
-            formControlName="name3"
+            formControlName="{{ item }}"
             [isDrop]="true"
           ></app-textarea>
         </div>
