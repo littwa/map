@@ -1,24 +1,46 @@
-import { Component, Input } from '@angular/core';
-import { StyleServices } from '../../shared/style.services';
-
+import { Component, forwardRef, Input } from '@angular/core';
+import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
+import { stylesSheet_Input } from '../../shared/style.sheets';
+import { valueDefault } from '../../shared/value.sheets';
 @Component({
   selector: 'app-input',
   templateUrl: './input.component.html',
   styleUrls: ['./input.component.css'],
+  providers: [
+    {
+      provide: NG_VALUE_ACCESSOR,
+      useExisting: forwardRef(() => InputComponent),
+      multi: true,
+    },
+  ],
 })
-export class InputComponent {
-  constructor(private StyleServices: StyleServices) {}
-  stylesSheet_Input = {
-    border: '1.5px solid #888',
-    borderRadius: '20px',
-    fontSize: '12px',
-    padding: '5px 10px',
-    backgroundColor: '#fff',
-  };
-  @Input() isDrop;
-  ngOnInit() {
-    if (this.isDrop) {
-      this.StyleServices.addStyleInput(this.stylesSheet_Input);
-    }
+export class InputComponent implements ControlValueAccessor {
+  @Input() stylesSheet_Input = stylesSheet_Input;
+  @Input() actualValue = { ...valueDefault };
+
+  //===========ControlValueAccessor==============================
+
+  _value: any = '';
+
+  @Input()
+  set value(value: any) {
+    this._value = value;
+    this.writeValue(value);
   }
+
+  get value(): any {
+    return this._value;
+  }
+
+  onChange = (value) => {};
+
+  writeValue(value): void {
+    this.onChange(value);
+  }
+
+  registerOnChange(fn: (value: number) => void): void {
+    this.onChange = fn;
+  }
+
+  registerOnTouched(fn: () => void): void {}
 }

@@ -1,21 +1,47 @@
-import { Component, Input } from '@angular/core';
-import { StyleServices } from '../../shared/style.services';
+import { Component, forwardRef, Input, OnInit } from '@angular/core';
+import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
+// import { StyleServices } from '../../shared/style.services';
+import { stylesSheet_Checkbox } from '../../shared/style.sheets';
+import { valueDefault } from '../../shared/value.sheets';
 
 @Component({
   selector: 'app-checkbox',
   templateUrl: './checkbox.component.html',
   styleUrls: ['./checkbox.component.css'],
+  providers: [
+    {
+      provide: NG_VALUE_ACCESSOR,
+      useExisting: forwardRef(() => CheckboxComponent),
+      multi: true,
+    },
+  ],
 })
-export class CheckboxComponent {
-  constructor(private StyleServices: StyleServices) {}
-  stylesSheet_Checkbox = {
-    width: '15px',
-    height: '15px',
-  };
-  @Input() isDrop;
-  ngOnInit() {
-    if (this.isDrop) {
-      this.StyleServices.addStyleCheckbox(this.stylesSheet_Checkbox);
-    }
+export class CheckboxComponent implements ControlValueAccessor {
+  @Input() stylesSheet_Checkbox = stylesSheet_Checkbox;
+  @Input() actualValue = { ...valueDefault };
+
+  //===========ControlValueAccessor==============================
+  _value: any = '';
+
+  @Input()
+  set value(value: any) {
+    this._value = value;
+    this.writeValue(value);
   }
+
+  get value(): any {
+    return this._value;
+  }
+
+  onChange = (value) => {};
+
+  writeValue(value): void {
+    this.onChange(value);
+  }
+
+  registerOnChange(fn: (value: number) => void): void {
+    this.onChange = fn;
+  }
+
+  registerOnTouched(fn: () => void): void {}
 }

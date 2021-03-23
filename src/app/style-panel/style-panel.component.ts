@@ -1,16 +1,11 @@
-import {
-  Component,
-  OnInit,
-  AfterViewInit,
-  DoCheck,
-  ViewChild,
-} from '@angular/core';
+import { Component, AfterViewInit, ViewChildren } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { getFields } from '../core/store/index';
 import { StyleServices } from '../shared/style.services';
 import { getStyle } from '../core/store/index';
 import { ChangeStyleAction } from '../core/store/styles-fields/styleFields.actions';
+import { valueDefault } from '../shared/value.sheets';
 
 @Component({
   selector: 'app-style-panel',
@@ -24,28 +19,50 @@ export class StylePanelComponent implements AfterViewInit {
   arrStyleEntreis: any = [];
 
   changeProperty(e, nameInput) {
-    console.log('form-changeProperty', e);
-    console.log('name', nameInput);
-    if (this.formnative) {
-      console.log(55555555, this.formnative.nativeElement.dataset.nameinput);
+    console.log('form-event', e.path[1]);
 
-      // console.log(242424242, this.formnative.nativeElement);
-
+    if (e.path[1]) {
       const data = {};
-      let formData = new FormData(this.formnative.nativeElement);
-      // console.log('ff', formData);
+      let currentValue: any = { ...valueDefault };
+
+      let formData = new FormData(e.path[1]);
+
+      let arrForSelect = [];
 
       formData.forEach((value, name) => {
-        data[name] = value;
+        if (
+          name !== 'placeholder' &&
+          name !== 'required' &&
+          name !== 'selectvalue' &&
+          name !== 'selectname'
+        ) {
+          data[name] = value;
+        }
+        if (name === 'placeholder' || name === 'required') {
+          currentValue[name] = value;
+        }
+        if (name === 'selectvalue' || name === 'selectname') {
+          arrForSelect.push(value);
+          console.log(55);
+        }
       });
 
-      // console.log(data);
+      if (nameInput.split('-')[0] === 'select') {
+        currentValue.select = arrForSelect;
+      }
 
-      this.store.dispatch(new ChangeStyleAction({ data, nameInput }));
+      // currentValue.select
+
+      console.log(data);
+
+      this.store.dispatch(
+        new ChangeStyleAction({ data, nameInput, currentValue })
+      );
     }
   }
-  @ViewChild('formnative') formnative;
-  //form: NgForm
+
+  @ViewChildren('formnative') formnative;
+
   objectEntriesStyles(v) {
     return Object.entries(v);
   }
@@ -57,9 +74,6 @@ export class StylePanelComponent implements AfterViewInit {
   }
 
   ngAfterViewInit() {
-    // this.fields.select(getFields).subscribe((v) => {
-    //   this.fieldsIsRenered = v;
-    // });
     this.store.select(getStyle).subscribe((v) => {
       this.arrStyleEntreis = v;
     });

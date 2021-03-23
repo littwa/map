@@ -1,24 +1,53 @@
-import { Component, Input, OnInit } from '@angular/core';
-import { StyleServices } from '../../shared/style.services';
+import { Component, forwardRef, Input, OnInit } from '@angular/core';
+import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
+
+import { stylesSheet_Select } from '../../shared/style.sheets';
+import { valueDefault } from '../../shared/value.sheets';
 
 @Component({
   selector: 'app-select',
   templateUrl: './select.component.html',
   styleUrls: ['./select.component.css'],
+  providers: [
+    {
+      provide: NG_VALUE_ACCESSOR,
+      useExisting: forwardRef(() => SelectComponent),
+      multi: true,
+    },
+  ],
 })
-export class SelectComponent implements OnInit {
-  constructor(private StyleServices: StyleServices) {}
-  stylesSheet_Select = {
-    border: '1.5px solid #888',
-    borderRadius: '20px',
-    fontSize: '12px',
-    padding: '5px 18px',
-    backgroundColor: '#fff',
+export class SelectComponent implements ControlValueAccessor {
+  @Input() stylesSheet_Select = stylesSheet_Select;
+  @Input() actualValue = {
+    ...valueDefault,
+    select: [
+      ['value1', 'Value1'],
+      ['value2', 'Value2'],
+    ],
   };
-  @Input() isDrop;
-  ngOnInit() {
-    if (this.isDrop) {
-      this.StyleServices.addStyleSelect(this.stylesSheet_Select);
-    }
+
+  //===========ControlValueAccessor==============================
+  _value: any = this.actualValue.placeholder;
+
+  @Input()
+  set value(value: any) {
+    this._value = value;
+    this.writeValue(value);
   }
+
+  get value(): any {
+    return this._value;
+  }
+
+  onChange = (value) => {};
+
+  writeValue(value): void {
+    this.onChange(value);
+  }
+
+  registerOnChange(fn: (value: number) => void): void {
+    this.onChange = fn;
+  }
+
+  registerOnTouched(fn: () => void): void {}
 }

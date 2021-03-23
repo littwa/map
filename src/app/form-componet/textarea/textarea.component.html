@@ -2,6 +2,7 @@
   [ngStyle]="stylesSheet_Textarea"
   rows="8"
   cols="36"
-  [placeholder]="superValue"
+  [placeholder]="actualValue.placeholder"
+  [required]="actualValue.required"
   [(ngModel)]="value"
 ></textarea>

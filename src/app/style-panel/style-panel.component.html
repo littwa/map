@@ -11,26 +11,6 @@
     <p>This is the primary content of the panel.</p>
   </mat-expansion-panel>
 
-  <!-- ---------------------- -->
-
-  <!-- <ng-container *ngFor="let styles of arrStyleEntreis[0]">
-    <div *ngIf="styles[1]">
-      <mat-expansion-panel
-        (opened)="panelOpenState = true"
-        (closed)="panelOpenState = false"
-      >
-        <mat-expansion-panel-header>
-          <mat-panel-title>Style {{ styles[0] }}</mat-panel-title>
-        </mat-expansion-panel-header>
-
-        <p>
-          {{ styles[1] | json }}<textarea [(ngModel)]="styles[1]"> </textarea>
-        </p>
-      </mat-expansion-panel>
-    </div>
-  </ng-container> -->
-  <!-- fieldsIsRenered -->
-  <!-- ---------------------- -->
   <ng-container *ngFor="let styles of arrStyleEntreis; let i = index">
     <div>
       <mat-expansion-panel
@@ -41,6 +21,21 @@
           <mat-panel-title>Style {{ styles[0] }}</mat-panel-title>
         </mat-expansion-panel-header>
         <form #formnative>
+          <div *ngIf="styles[0].split('-')[0] === 'select'">
+            <input name="selectname" /><input name="selectvalue" />
+          </div>
+          <div *ngIf="styles[0].split('-')[0] !== 'button'">
+            <label
+              >placeholder text: <br /><input
+                name="placeholder"
+                [value]="styles[2].placeholder"
+            /></label>
+            <br />
+            <label
+              >required input? <br />
+              <input name="required" [value]="styles[2].required"
+            /></label>
+          </div>
           <label *ngFor="let property of objectEntriesStyles(styles[1])">
             {{ property[0] }}: <br /><input
               name="{{ property[0] }}"
@@ -53,17 +48,4 @@
       </mat-expansion-panel>
     </div>
   </ng-container>
-  <!-- ===----------------------------------------========= -->
-  <!-- #propertyForm="ngForm" (ngSubmit)="changeProperty(propertyForm)" -->
-  <!-- <mat-expansion-panel
-    (opened)="panelOpenState = true"
-    (closed)="panelOpenState = false"
-  >
-    <mat-expansion-panel-header>
-      <mat-panel-title> Any Style </mat-panel-title>
-    </mat-expansion-panel-header>
-    <p>I'm visible because I am open</p>
-  </mat-expansion-panel> -->
 </mat-accordion>
-<!-- -------------- -->
-<!-- [ngForOf]='entObj()' -->

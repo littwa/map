@@ -1,3 +1,8 @@
 <label
-  >any label <br /><input [ngStyle]="stylesSheet_Input" type="text"
+  >{{ actualValue.placeholder }} <br /><input
+    [ngStyle]="stylesSheet_Input"
+    type="text"
+    [placeholder]="actualValue.placeholder"
+    [required]="actualValue.required"
+    [(ngModel)]="value"
 /></label>

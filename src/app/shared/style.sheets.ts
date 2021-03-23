@@ -1,5 +1,5 @@
 export const stylesSheet_Textarea = {
-  border: '5.5px solid #888',
+  border: '1.5px solid #888',
   borderRadius: '20px',
   fontSize: '12px',
   padding: '5px 10px',

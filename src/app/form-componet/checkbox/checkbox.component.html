@@ -1,3 +1,8 @@
 <label
-  >Checkbox<input [ngStyle]="stylesSheet_Checkbox" type="checkbox"
+  >{{ actualValue.placeholder }}
+  <input
+    [ngStyle]="stylesSheet_Checkbox"
+    type="checkbox"
+    [required]="actualValue.required"
+    [(ngModel)]="value"
 /></label>

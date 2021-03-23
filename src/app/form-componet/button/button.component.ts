@@ -1,6 +1,5 @@
 import {
   Component,
-  ContentChild,
   ElementRef,
   Output,
   ViewChild,
@@ -9,7 +8,8 @@ import {
   Input,
 } from '@angular/core';
 
-import { StyleServices } from '../../shared/style.services';
+// import { StyleServices } from '../../shared/style.services';
+import { stylesSheet_Btn } from '../../shared/style.sheets';
 
 @Component({
   selector: 'app-button',
@@ -17,30 +17,19 @@ import { StyleServices } from '../../shared/style.services';
   styleUrls: ['./button.component.css'],
 })
 export class ButtonComponet implements OnInit {
-  constructor(private StyleServices: StyleServices) {}
-  stylesSheet_Btn = {
-    border: '1.5px solid #888',
-    borderRadius: '20px',
-    fontSize: '12px',
-    padding: '5px 10px',
-    backgroundColor: '#fff',
-  };
-
   @ViewChild('btn') btnRef: ElementRef<HTMLButtonElement>;
   @Input() isDrop;
   @Input() stylesSheetBtn;
   @Output() stylesSheetBtnCH = new EventEmitter();
+  @Input() stylesSheet_Btn = stylesSheet_Btn;
+  @Input() getValueForm;
+  // @Input() actualValue = { placeholder: 'placeholder-text', required: true };
 
   ngOnInit() {
-    if (this.isDrop) {
-      this.StyleServices.addStyleBtn(this.stylesSheet_Btn);
-    }
-
-    // console.log(666, this.isDrop);
     this.stylesSheetBtnCH.emit(this.stylesSheet_Btn);
   }
 
   clickButton(e) {
-    const value = getComputedStyle(this.btnRef.nativeElement);
+    this.getValueForm();
   }
 }

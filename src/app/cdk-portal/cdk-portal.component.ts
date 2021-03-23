@@ -30,6 +30,7 @@ import { getStyle } from '../core/store/index';
 import { AddFieldsAction } from '../core/store/fields/fields.actions';
 import { AddStyleAction } from '../core/store/styles-fields/styleFields.actions';
 import { FormControl, FormGroup } from '@angular/forms';
+import { valueDefault } from '../shared/value.sheets';
 
 @Component({
   selector: 'app-cdk-portal',
@@ -43,26 +44,32 @@ export class CdkPortalComponent {
   stylesSheet_Select = stylesSheet_Select;
   stylesSheet_Input = stylesSheet_Input;
 
-  superValue = 'place-holder-text';
+  gottenValuFromForm;
 
   currentControlItem;
 
   onNameChange(v) {
     console.log(v);
-    console.log(this.superValue);
+    // console.log(this.superValue);
   }
   //============
-  placehold = 'any-text';
+  // placehold = 'any-text';
   form: FormGroup;
-  getForm() {
-    console.log(this.form.value);
-    console.log('form--', this.form);
-  }
+  getForm = () => {
+    // console.log(this.form.value);
+    this.gottenValuFromForm = this.form.value;
+    // console.log('form--', this.form);
+  };
 
   getActualStyle(item) {
     let styleList = this.currentControlItem.find((el) => el[0] === item)[1];
-    // console.log(styleList);
+    // console.log('styleList----', styleList);
     return styleList;
+  }
+  getActualValue(item) {
+    let valueInp = this.currentControlItem.find((el) => el[0] === item)[2];
+    // console.log('styleList----', valueInp);
+    return valueInp;
   }
 
   test = null;
@@ -122,6 +129,8 @@ export class CdkPortalComponent {
 
       this.store.dispatch(new AddFieldsAction([...this.droper]));
 
+      let valueInput: any = { ...valueDefault };
+
       let matchStyle;
       switch (event.container.data[event.currentIndex].split('-')[0]) {
         case 'input':
@@ -132,6 +141,10 @@ export class CdkPortalComponent {
           break;
         case 'select':
           matchStyle = stylesSheet_Select;
+          valueInput.select = [
+            ['value1', 'Value1'],
+            ['value2', 'Value2'],
+          ];
           break;
         case 'textarea':
           matchStyle = stylesSheet_Textarea;
@@ -150,16 +163,16 @@ export class CdkPortalComponent {
         new AddStyleAction([
           event.container.data[event.currentIndex],
           matchStyle,
+          valueInput,
         ])
       );
 
       //===================================
 
-      // let currentControlItem;
       this.store.select(getStyle).subscribe((v) => {
         this.currentControlItem = v;
       });
-      // console.log(484848484848484, this.currentControlItem);
+
       this.currentControlItem.forEach((el) => {
         let typeInput = el[0].split('-')[0];
 

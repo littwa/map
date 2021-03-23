@@ -26,17 +26,36 @@ export const reduserStyle = (
       return [...state, action.payload];
 
     case ActionStyleField.ChangeStyle:
-      console.log('action.payload---', action.payload);
-      console.log('state---', state);
+      // console.log('action.payload---', action.payload);
+      // console.log('state---', state);
       let newState = [...state].map((el) => {
         if (el[0] === action.payload.nameInput) {
-          console.log(el);
-          // el[1] = action.payload.data;
-          return [el[0], action.payload.data];
+          if (action.payload.nameInput.split('-')[0] === 'select') {
+            let newVal = { ...action.payload.currentValue };
+
+            let sel = [...el[2].select];
+
+            if (!action.payload.currentValue.select[0]) {
+              newVal.select = sel;
+              return [el[0], action.payload.data, newVal];
+            }
+
+            sel.push(action.payload.currentValue.select);
+
+            // console.log(777, sel);
+
+            if (action.payload.currentValue.select[0]) {
+              newVal.select = sel;
+            }
+
+            return [el[0], action.payload.data, newVal];
+          }
+
+          return [el[0], action.payload.data, action.payload.currentValue];
         }
         return el;
       });
-      console.log('newState--', newState);
+      // console.log('newState--', newState);
 
       return newState;
     default:

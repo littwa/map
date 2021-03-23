@@ -1,7 +1,7 @@
 <!-- <p #ref1>cdk-portal works!</p>
 <ng-template #ref2>Hello, this is a template portal</ng-template> -->
 <h2>CDK Portal</h2>
-<input [(ngModel)]="superValue" (ngModelChange)="onNameChange($event)" />
+<!-- <input [(ngModel)]="superValue" (ngModelChange)="onNameChange($event)" /> -->
 
 <!-- <button (click)="portalOpenCard()">Open card</button>
 <button (click)="portalCloseCard()" class="margin-left-8">Close card</button> -->
@@ -75,28 +75,44 @@
     <div class="example-box" *ngFor="let item of droper" cdkDrag>
       <div [ngSwitch]="item.split('-')[0]">
         <div *ngSwitchCase="'checkbox'">
-          <app-checkbox [isDrop]="true"></app-checkbox>
+          <app-checkbox
+            [stylesSheet_Checkbox]="getActualStyle(item)"
+            [actualValue]="getActualValue(item)"
+            formControlName="{{ item }}"
+          ></app-checkbox>
         </div>
         <div *ngSwitchCase="'button'">
-          <app-button [isDrop]="true"></app-button>
+          <app-button
+            [stylesSheet_Btn]="getActualStyle(item)"
+            [isDrop]="true"
+            [getValueForm]="getForm"
+          ></app-button>
         </div>
         <div *ngSwitchCase="'input'">
-          <app-input [isDrop]="true"></app-input>
+          <app-input
+            [stylesSheet_Input]="getActualStyle(item)"
+            [actualValue]="getActualValue(item)"
+            formControlName="{{ item }}"
+          ></app-input>
         </div>
         <div *ngSwitchCase="'textarea'">
           <app-textarea
             [stylesSheet_Textarea]="getActualStyle(item)"
-            [superValue]="superValue"
+            [actualValue]="getActualValue(item)"
             formControlName="{{ item }}"
-            [isDrop]="true"
           ></app-textarea>
         </div>
         <div *ngSwitchCase="'select'">
-          <app-select [isDrop]="true"></app-select>
+          <app-select
+            [stylesSheet_Select]="getActualStyle(item)"
+            [actualValue]="getActualValue(item)"
+            formControlName="{{ item }}"
+          ></app-select>
         </div>
       </div>
     </div>
     <!-- ==== -->
   </div>
-  <button (click)="getForm()">GET!</button>
+  <!-- <button (click)="getForm()">GET!</button> -->
 </div>
+<p *ngIf="gottenValuFromForm">{{ gottenValuFromForm | json }}</p>

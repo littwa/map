@@ -1,6 +1,8 @@
 import { Component, forwardRef, Input, OnInit } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
-import { StyleServices } from '../../shared/style.services';
+// import { StyleServices } from '../../shared/style.services';
+import { stylesSheet_Textarea } from '../../shared/style.sheets';
+import { valueDefault } from '../../shared/value.sheets';
 
 @Component({
   selector: 'app-textarea',
@@ -15,29 +17,17 @@ import { StyleServices } from '../../shared/style.services';
   ],
 })
 export class TextareaComponent implements ControlValueAccessor {
-  constructor(private StyleServices: StyleServices) {}
-  // stylesSheet_Textarea = {
-  //   border: '1.5px solid #888',
-  //   borderRadius: '20px',
-  //   fontSize: '12px',
-  //   padding: '5px 10px',
-  //   backgroundColor: '#fff',
-  // };
+  // constructor(private StyleServices: StyleServices) {}
 
-  @Input() stylesSheet_Textarea = {
-    border: '1.5px solid #888',
-    borderRadius: '20px',
-    fontSize: '12px',
-    padding: '5px 10px',
-    backgroundColor: '#fff',
-  };
-  @Input() superValue = 'place-holder-text';
-  @Input() isDrop;
-  ngOnInit() {
-    if (this.isDrop) {
-      this.StyleServices.addStyleTextarea(this.stylesSheet_Textarea);
-    }
-  }
+  @Input() stylesSheet_Textarea = stylesSheet_Textarea;
+  @Input() actualValue = { ...valueDefault };
+  // @Input() placeholderText = 'placeholder-text-default';
+  // @Input() isDrop;
+  // ngOnInit() {
+  //   // if (this.isDrop) {
+  //   //   this.StyleServices.addStyleTextarea(this.stylesSheet_Textarea);
+  //   // }
+  // }
   //===========ControlValueAccessor==============================
   _value: any = '';
 
