@@ -6,7 +6,7 @@
   display: inline-block;
   margin-top: 16px;
   width: 32%;
-  height: 440px;
+  height: 500px;
   border: 2px solid #ccc;
   position: relative;
   overflow: auto;
@@ -66,3 +66,13 @@
 .example-list.cdk-drop-list-dragging .example-box:not(.cdk-drag-placeholder) {
   transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
 }
+
+/* .general {
+  background-color: #bcf8f8;
+  height: 300px;
+  width: 100%;
+  border: 3px solid #911;
+}
+.general-2 {
+  background-color: #bcf8f8;
+} */

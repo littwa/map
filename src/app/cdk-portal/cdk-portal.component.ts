@@ -1,6 +1,7 @@
 import {
   Component,
   ElementRef,
+  OnInit,
   ViewChild,
   ViewContainerRef,
 } from '@angular/core';
@@ -26,7 +27,7 @@ import {
 import { StylePanelComponent } from '../style-panel/style-panel.component';
 import { Store } from '@ngrx/store';
 import { getFields } from '../core/store/fields/fields.reducers';
-import { getStyle } from '../core/store/index';
+import { getStyle, getGeneralStyle } from '../core/store/index';
 import { AddFieldsAction } from '../core/store/fields/fields.actions';
 import { AddStyleAction } from '../core/store/styles-fields/styleFields.actions';
 import { FormControl, FormGroup } from '@angular/forms';
@@ -37,7 +38,7 @@ import { valueDefault } from '../shared/value.sheets';
   templateUrl: './cdk-portal.component.html',
   styleUrls: ['./cdk-portal.component.css'],
 })
-export class CdkPortalComponent {
+export class CdkPortalComponent implements OnInit {
   stylesSheet_Textarea = stylesSheet_Textarea;
   stylesSheet_Checkbox = stylesSheet_Checkbox;
   stylesSheet_Btn = stylesSheet_Btn;
@@ -48,20 +49,27 @@ export class CdkPortalComponent {
 
   currentControlItem;
 
-  onNameChange(v) {
-    console.log(v);
-    // console.log(this.superValue);
+  stylesGeneral: object;
+  stylesGeneralInner: object;
+
+  testttttt() {
+    // console.log(
+    //   'currentControlItem',
+    // );
+    // console.log(1111, { ...this.form });
+    // let list = this.currentControlItem.map((el) => el[0]);
+    // this.form.removeControl(list[0]);
+    // console.log(2222, this.form);
   }
-  //============
-  // placehold = 'any-text';
+
   form: FormGroup;
   getForm = () => {
-    // console.log(this.form.value);
     this.gottenValuFromForm = this.form.value;
-    // console.log('form--', this.form);
+    console.log('form--==-', this.form);
   };
 
   getActualStyle(item) {
+    // console.log(' this.currentControlItem==', this.currentControlItem);
     let styleList = this.currentControlItem.find((el) => el[0] === item)[1];
     // console.log('styleList----', styleList);
     return styleList;
@@ -72,7 +80,7 @@ export class CdkPortalComponent {
     return valueInp;
   }
 
-  test = null;
+  // test = null;
   constructor(
     private _viewContainerRef: ViewContainerRef,
     private store: Store
@@ -92,6 +100,23 @@ export class CdkPortalComponent {
   @ViewChild('ref4') ref4: ElementRef;
 
   ngOnInit() {
+    //===========================================================
+    this.store.select(getStyle).subscribe((v) => {
+      this.currentControlItem = v;
+      // console.log(
+      //   'currentControlItem=',
+      //   v.map((el) => el[0])
+      // );
+      this.droper = v.map((el) => el[0]);
+      // console.log(this.droper);
+    });
+    //=======================================================
+    this.store.select(getGeneralStyle).subscribe((v) => {
+      this.stylesGeneral = v.stylesGeneral;
+      this.stylesGeneralInner = v.stylesGeneralInner;
+    });
+    // console.log(this.stylesGeneral);
+
     this.form = new FormGroup({});
   }
 
@@ -99,6 +124,11 @@ export class CdkPortalComponent {
     this.componentPortal = new ComponentPortal(StylePanelComponent);
     this.virtualPortalOutlet.attach(this.componentPortal); // ERROR Error: NG0100 in console
     //=================
+
+    // if (!!this.componentPortal) {
+    //   this.virtualPortalOutlet.attach(this.componentPortal);
+    // }
+
     this.domPortal = new DomPortal(this.ref3);
     this.virtualPortalOutlet3.attach(this.domPortal);
     this.domPortal = new DomPortal(this.ref4);
@@ -127,7 +157,10 @@ export class CdkPortalComponent {
       this.droper[event.currentIndex] =
         this.droper[event.currentIndex] + '-' + this.droper.length;
 
-      this.store.dispatch(new AddFieldsAction([...this.droper]));
+      // console.log('this.droper ==', this.droper);
+      // console.log('currentControlItem====', this.currentControlItem);
+
+      // this.store.dispatch(new AddFieldsAction([...this.droper]));
 
       let valueInput: any = { ...valueDefault };
 
@@ -157,8 +190,6 @@ export class CdkPortalComponent {
           return console.log('Invalid type controll');
       }
 
-      // console.log('matchStyle ', matchStyle);
-
       this.store.dispatch(
         new AddStyleAction([
           event.container.data[event.currentIndex],
@@ -169,10 +200,15 @@ export class CdkPortalComponent {
 
       //===================================
 
-      this.store.select(getStyle).subscribe((v) => {
-        this.currentControlItem = v;
-      });
-
+      // this.store.select(getStyle).subscribe((v) => {
+      //   this.currentControlItem = v;
+      //   console.log(
+      //     'currentControlItem=',
+      //     v.map((el) => el[0])
+      //   );
+      //   // this.droper
+      // });
+      //=============================================
       this.currentControlItem.forEach((el) => {
         let typeInput = el[0].split('-')[0];
 

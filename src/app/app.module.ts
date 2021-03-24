@@ -26,6 +26,7 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { environment } from '../environments/environment';
 import { EffectsModule } from '@ngrx/effects';
 import { Effects } from './core/store/effects';
+import { EffectsSteleFields } from './core/store/styles-fields/effects';
 import { HttpClientCompModule } from './http-client/http-clien.module';
 import { SharedModule } from './shared/shared.module';
 import { CheckboxComponent } from './form-componet/checkbox/checkbox.component';
@@ -36,6 +37,7 @@ import { SelectComponent } from './form-componet/select/select.component';
 import { StylePanelComponent } from './style-panel/style-panel.component';
 import { RegisterComponent } from './register/register-component';
 import { TextareaCVAComponent } from './form-componet/textarea-cva/textarea-cva-component';
+import { GeneralStyleComponent } from './general-style/general-style.component';
 
 @NgModule({
   declarations: [
@@ -56,6 +58,7 @@ import { TextareaCVAComponent } from './form-componet/textarea-cva/textarea-cva-
     StylePanelComponent,
     RegisterComponent,
     TextareaCVAComponent,
+    GeneralStyleComponent,
   ],
   imports: [
     BrowserModule,
@@ -74,7 +77,7 @@ import { TextareaCVAComponent } from './form-componet/textarea-cva/textarea-cva-
       maxAge: 25,
       logOnly: environment.production,
     }),
-    EffectsModule.forRoot([Effects]),
+    EffectsModule.forRoot([Effects, EffectsSteleFields]),
     // HttpClientModule,
     HttpClientCompModule,
     SharedModule,

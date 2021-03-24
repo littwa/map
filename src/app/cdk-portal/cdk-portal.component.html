@@ -1,7 +1,6 @@
 <!-- <p #ref1>cdk-portal works!</p>
 <ng-template #ref2>Hello, this is a template portal</ng-template> -->
-<h2>CDK Portal</h2>
-<!-- <input [(ngModel)]="superValue" (ngModelChange)="onNameChange($event)" /> -->
+<h3 (click)="testttttt()" [ngStyle]="{ margin: '5px' }">CDK Portal</h3>
 
 <!-- <button (click)="portalOpenCard()">Open card</button>
 <button (click)="portalCloseCard()" class="margin-left-8">Close card</button> -->
@@ -51,14 +50,10 @@
   </div>
 </div>
 
+<!-- [ngStyle]="stylesGeneralInner" -->
+
 <div [formGroup]="form" #ref4 class="example-container">
   <h5>Drop section</h5>
-  <!-- <input formControlName="name2" /> -->
-
-  <!-- <input-cva-component
-    [styleArray]="placehold"
-    formControlName="name1"
-  ></input-cva-component> -->
 
   <div
     cdkDropList
@@ -67,12 +62,14 @@
     [cdkDropListConnectedTo]="[todoList]"
     class="example-list"
     (cdkDropListDropped)="drop($event)"
+    [ngStyle]="stylesGeneral"
   >
-    <!-- <div class="example-box" *ngFor="let item of droper" cdkDrag>
-      {{ item }}
-    </div> -->
-
-    <div class="example-box" *ngFor="let item of droper" cdkDrag>
+    <div
+      class="example-box"
+      [ngStyle]="stylesGeneralInner"
+      *ngFor="let item of droper"
+      cdkDrag
+    >
       <div [ngSwitch]="item.split('-')[0]">
         <div *ngSwitchCase="'checkbox'">
           <app-checkbox
@@ -111,8 +108,8 @@
         </div>
       </div>
     </div>
-    <!-- ==== -->
   </div>
-  <!-- <button (click)="getForm()">GET!</button> -->
 </div>
-<p *ngIf="gottenValuFromForm">{{ gottenValuFromForm | json }}</p>
+<p *ngIf="gottenValuFromForm">
+  {{ gottenValuFromForm | json }}
+</p>

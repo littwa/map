@@ -4,12 +4,6 @@ import { map, switchMap, mergeMap, filter, tap } from 'rxjs/operators';
 import { of, from } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { AuthServices } from '../../shared/auth.srevices';
-// let jwt = require('jsonwebtoken');
-// import { encode } from 'jwt-encode';
-// import { sign, verify } from 'jsonwebtoken';
-// let f = encode('payload', 'secret');
-
-// import * as jwtEncode from 'jwt-encode';
 
 import { User } from '../interfaces';
 import {

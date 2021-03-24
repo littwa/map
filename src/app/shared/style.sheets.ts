@@ -33,3 +33,14 @@ export const stylesSheet_Btn = {
   padding: '5px 10px',
   backgroundColor: '#fff',
 };
+
+export const stylesGeneral = {
+  backgroundColor: '#bcf8f8',
+  height: '400px',
+  width: '100%',
+  border: '3px solid #911',
+};
+
+export const stylesGeneralInner = {
+  backgroundColor: '#bcf8f8',
+};

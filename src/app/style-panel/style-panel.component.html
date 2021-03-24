@@ -8,7 +8,47 @@
     <mat-expansion-panel-header>
       <mat-panel-title> General Style </mat-panel-title>
     </mat-expansion-panel-header>
-    <p>This is the primary content of the panel.</p>
+    <!-- <p>This is the primary content of the panel.</p> -->
+
+    <form [formGroup]="formGeneralStyle" (ngSubmit)="submitFormGeneralStyle()">
+      <div class="container_input" formGroupName="stylesGeneral">
+        <label
+          >background: <br /><input formControlName="backgroundColor"
+        /></label>
+        <label>border: <br /><input formControlName="border" /></label>
+        <label>height: <br /><input formControlName="height" /></label>
+        <label>width: <br /><input formControlName="width" /></label>
+      </div>
+      <div formGroupName="stylesGeneralInner">
+        <label
+          >background inner: <br /><input formControlName="backgroundColor"
+        /></label>
+      </div>
+      <button type="submit">Change styles</button>
+    </form>
+
+    <!-- <p>general-style-component</p> -->
+    <!-- <form>
+      <div formGroupName="address">
+        <general-style-component
+          *ngFor="let i of ['name11', 'name22', 'name33']"
+          [nameProp]="'name-Prop'"
+          [prop]="i"
+          [forControlAcc]="i"
+        ></general-style-component>
+      </div>
+      <div formGroupName="address2">
+        <general-style-component
+          [nameProp]="'name44'"
+          [prop]="'name44'"
+          [forControlAcc]="'name44'"
+        ></general-style-component>
+      </div>
+
+      <button>Change styles</button>
+    </form> -->
+
+    <!-- <p>general-style-component</p> -->
   </mat-expansion-panel>
 
   <ng-container *ngFor="let styles of arrStyleEntreis; let i = index">
@@ -22,7 +62,11 @@
         </mat-expansion-panel-header>
         <form #formnative>
           <div *ngIf="styles[0].split('-')[0] === 'select'">
-            <input name="selectname" /><input name="selectvalue" />
+            add option:<br />
+            <input placeholder="select name" name="selectname" /><br /><input
+              placeholder="select value"
+              name="selectvalue"
+            />
           </div>
           <div *ngIf="styles[0].split('-')[0] !== 'button'">
             <label
@@ -43,6 +87,9 @@
           ><br />
           <button (click)="changeProperty($event, styles[0])" type="button">
             Change!
+          </button>
+          <button (click)="delProperty($event, styles[0])" type="button">
+            Delete
           </button>
         </form>
       </mat-expansion-panel>
