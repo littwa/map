@@ -7,7 +7,7 @@ import { HeaderComponent } from './header/header.component';
 import { AuthPageComponent } from './auth/auth.component';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { MatSliderModule } from '@angular/material/slider';
-import { CdkComponent } from './cdk/cdk.component';
+// import { CdkComponent } from './cdk/cdk.component';
 
 // import { CdkPortalComponent } from './cdk-portal/cdk-portal.component';
 import { MatButtonModule } from '@angular/material/button';
@@ -48,7 +48,7 @@ import { CdkPortalModule } from '../app/cdk-portal/cdk-portal.module'
     AppComponent,
     HeaderComponent,
     AuthPageComponent,
-    CdkComponent,
+    // CdkComponent,
     // CdkPortalComponent,
     // DragComponent,
     // FormComponent,
