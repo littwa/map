@@ -52,15 +52,6 @@ export class CdkPortalComponent implements OnInit {
   stylesGeneral: object;
   stylesGeneralInner: object;
 
-  testttttt() {
-    // console.log(
-    //   'currentControlItem',
-    // );
-    // console.log(1111, { ...this.form });
-    // let list = this.currentControlItem.map((el) => el[0]);
-    // this.form.removeControl(list[0]);
-    // console.log(2222, this.form);
-  }
 
   form: FormGroup;
   getForm = () => {
@@ -100,17 +91,12 @@ export class CdkPortalComponent implements OnInit {
   @ViewChild('ref4') ref4: ElementRef;
 
   ngOnInit() {
-    //===========================================================
+
     this.store.select(getStyle).subscribe((v) => {
       this.currentControlItem = v;
-      // console.log(
-      //   'currentControlItem=',
-      //   v.map((el) => el[0])
-      // );
       this.droper = v.map((el) => el[0]);
-      // console.log(this.droper);
     });
-    //=======================================================
+
     this.store.select(getGeneralStyle).subscribe((v) => {
       this.stylesGeneral = v.stylesGeneral;
       this.stylesGeneralInner = v.stylesGeneralInner;
