@@ -22,16 +22,16 @@ import {
   stylesSheet_Btn,
   stylesSheet_Select,
   stylesSheet_Input,
-} from '../shared/style.sheets';
+} from '../../shared/style.sheets';
 
-import { StylePanelComponent } from '../style-panel/style-panel.component';
+import { StylePanelComponent } from '../../style-panel/style-panel.component';
 import { Store } from '@ngrx/store';
-import { getFields } from '../core/store/fields/fields.reducers';
-import { getStyle, getGeneralStyle } from '../core/store/index';
-import { AddFieldsAction } from '../core/store/fields/fields.actions';
-import { AddStyleAction } from '../core/store/styles-fields/styleFields.actions';
+import { getFields } from '../../core/store/fields/fields.reducers';
+import { getStyle, getGeneralStyle } from '../../core/store/index';
+import { AddFieldsAction } from '../../core/store/fields/fields.actions';
+import { AddStyleAction } from '../../core/store/styles-fields/styleFields.actions';
 import { FormControl, FormGroup } from '@angular/forms';
-import { valueDefault } from '../shared/value.sheets';
+import { valueDefault } from '../../shared/value.sheets';
 
 @Component({
   selector: 'app-cdk-portal',

@@ -3,9 +3,9 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { Router } from '@angular/router';
-import { RegisterAction } from '../core/store/action';
-import { State, getUser, getReg } from '../core/store/index';
-import { User } from '../core/interfaces';
+import { RegisterAction } from '../../core/store/action';
+import { State, getUser, getReg } from '../../core/store/index';
+import { User } from '../../core/interfaces';
 
 @Component({
   selector: 'app-register',

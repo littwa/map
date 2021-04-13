@@ -6,103 +6,10 @@
       "password": "1111"
     },
     {
-      "id": 2,
-      "email": "tst2@mail.q",
-      "password": "1111"
-    },
-    {
-      "id": 3,
-      "email": "tst3@mail.q",
-      "password": "1111"
-    },
-    {
-      "email": "tst4@mail.q",
-      "password": "1111",
-      "id": 4
-    },
-    {
-      "email": "eee",
-      "password": "eee",
-      "agree": true,
-      "id": 5
-    },
-    {
-      "email": "eee",
-      "password": "eee",
-      "agree": false,
-      "id": 6
-    },
-    {
-      "email": "x@x.x",
-      "password": "x",
-      "agree": true,
-      "id": 7
-    },
-    {
-      "email": "q@q.q",
-      "password": "11",
-      "agree": true,
-      "id": 8
-    },
-    {
-      "email": "w@w.q",
-      "password": "qq",
-      "agree": true,
-      "id": 9
-    },
-    {
-      "email": "s@s.ss",
-      "password": "11",
-      "agree": true,
-      "id": 10
-    },
-    {
-      "email": "ww@qq.qq",
-      "password": "ww",
-      "agree": true,
-      "id": 11
-    },
-    {
-      "email": "qqqq@ee.oo",
+      "email": "qq@q.q",
       "password": "1111",
       "agree": true,
-      "id": 12
-    },
-    {
-      "email": "aa@a.aa",
-      "password": "1111",
-      "agree": true,
-      "id": 13
-    },
-    {
-      "email": "d@q.q",
-      "password": "1111",
-      "agree": true,
-      "id": 14
-    },
-    {
-      "email": "xx@ww.d",
-      "password": "1111",
-      "agree": true,
-      "id": 15
-    },
-    {
-      "email": "xx@q.r",
-      "password": "1qq",
-      "agree": true,
-      "id": 16
-    },
-    {
-      "email": "q@q.q",
-      "password": "1111",
-      "agree": true,
-      "id": 17
-    },
-    {
-      "email": "w@w.w",
-      "password": "1111",
-      "agree": true,
-      "id": 18
+      "id": 2
     }
   ]
 }
