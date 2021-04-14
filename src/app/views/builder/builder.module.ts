@@ -2,13 +2,13 @@ import { NgModule } from '@angular/core';
 import { SharedModule } from "../../shared/shared.module"
 import { PortalModule } from '@angular/cdk/portal';
 import { DragDropModule } from '@angular/cdk/drag-drop';
-import { DragComponent } from '../../drag/drag.component';
+// import { DragComponent } from '../../drag/drag.component';
 import { CheckboxComponent } from '../../form-componet/checkbox/checkbox.component';
 import { ButtonComponet } from '../../form-componet/button/button.component';
 import { InputComponent } from '../../form-componet/input/input.component';
 import { TextareaComponent } from '../../form-componet/textarea/textarea.component';
 import { SelectComponent } from '../../form-componet/select/select.component';
-import { CdkPortalComponent } from './cdk-portal.component'
+import { CdkPortalComponent } from './builder.component'
 import { RouterModule, Routes } from '@angular/router';
 
 
@@ -24,8 +24,7 @@ const routes: Routes = [{
     ButtonComponet,
     InputComponent,
     TextareaComponent,
-    SelectComponent,
-    DragComponent ],
+    SelectComponent],
   imports: [
     SharedModule,
     DragDropModule,

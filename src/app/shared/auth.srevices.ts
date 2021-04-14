@@ -23,7 +23,7 @@ export class AuthServices {
         localStorage.setItem('token', JSON.stringify(token));
 
         const sendObj = { email: user.email, password: user.password, token };
-        console.log(77, sendObj);
+
         return sendObj;
       })
     );

@@ -8,8 +8,8 @@ import { HttClientComponent } from './views/http-client/http-client.component'
 const routes: Routes = [
   { path: '', component: AuthPageComponent },
   { path: 'register', component: RegisterComponent },
-  // { path: 'sdk', canActivate: [AuthGuard], loadChildren: ()=> import('./cdk-portal/cdk-portal.module').then(m=>m.CdkPortalModule) },
-  { path: 'sdk', loadChildren: ()=> import('./views/cdk-portal/cdk-portal.module').then(m=>m.CdkPortalModule) },
+  // { path: 'sdk', canActivate: [AuthGuard], loadChildren: ()=> import('./builder/builder.module').then(m=>m.CdkPortalModule) },
+  { path: 'sdk', loadChildren: () => import('./views/builder/builder.module').then(m => m.CdkPortalModule) },
   { path: 'http-client', component: HttClientComponent },
 ];
 

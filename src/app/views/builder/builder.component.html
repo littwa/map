@@ -1,9 +1,6 @@
-<!-- <p #ref1>cdk-portal works!</p>
-<ng-template #ref2>Hello, this is a template portal</ng-template> -->
-<h3 [ngStyle]="{ margin: '5px' }">CDK Portal</h3>
 
-<!-- <button (click)="portalOpenCard()">Open card</button>
-<button (click)="portalCloseCard()" class="margin-left-8">Close card</button> -->
+<h3 [ngStyle]="{ margin: '5px' }">Builder</h3>
+
 <div>
   <div class="portals-outlet">
     <ng-container #virtualContainer cdkPortalOutlet> </ng-container>
@@ -31,10 +28,6 @@
     class="example-list"
     (cdkDropListDropped)="drop($event)"
   >
-    <!-- <div class="example-box" *ngFor="let item of drag" cdkDrag>
-      <input [type]="item" [value]="item" />
-    </div> -->
-    <!-- <div cdkDrag>1212</div> -->
     <div class="example-box" *ngFor="let item of drag" cdkDrag>
       <div [ngSwitch]="item">
         <div *ngSwitchCase="'checkbox'"><app-checkbox></app-checkbox></div>
@@ -46,11 +39,8 @@
         <div *ngSwitchCase="'select'"><app-select></app-select></div>
       </div>
     </div>
-    <!-- ===== -->
   </div>
 </div>
-
-<!-- [ngStyle]="stylesGeneralInner" -->
 
 <div [formGroup]="form" #ref4 class="example-container">
   <h5>Drop section</h5>

@@ -35,8 +35,8 @@ import { valueDefault } from '../../shared/value.sheets';
 
 @Component({
   selector: 'app-cdk-portal',
-  templateUrl: './cdk-portal.component.html',
-  styleUrls: ['./cdk-portal.component.css'],
+  templateUrl: './builder.component.html',
+  styleUrls: ['./builder.component.css'],
 })
 export class CdkPortalComponent implements OnInit {
   stylesSheet_Textarea = stylesSheet_Textarea;
@@ -45,9 +45,8 @@ export class CdkPortalComponent implements OnInit {
   stylesSheet_Select = stylesSheet_Select;
   stylesSheet_Input = stylesSheet_Input;
 
-  gottenValuFromForm;
-
-  currentControlItem;
+  gottenValuFromForm: object;
+  currentControlItem: Array<any>;
 
   stylesGeneral: object;
   stylesGeneralInner: object;
@@ -56,26 +55,25 @@ export class CdkPortalComponent implements OnInit {
   form: FormGroup;
   getForm = () => {
     this.gottenValuFromForm = this.form.value;
-    console.log('form--==-', this.form);
+    console.log('form:', this.form.value);
   };
 
   getActualStyle(item) {
-    // console.log(' this.currentControlItem==', this.currentControlItem);
+
     let styleList = this.currentControlItem.find((el) => el[0] === item)[1];
-    // console.log('styleList----', styleList);
+
     return styleList;
   }
   getActualValue(item) {
     let valueInp = this.currentControlItem.find((el) => el[0] === item)[2];
-    // console.log('styleList----', valueInp);
+
     return valueInp;
   }
 
-  // test = null;
   constructor(
     private _viewContainerRef: ViewContainerRef,
     private store: Store
-  ) {}
+  ) { }
   domPortal: DomPortal<any>;
   templatePortal: TemplatePortal<any>;
   componentPortal: ComponentPortal<any>;
@@ -101,7 +99,7 @@ export class CdkPortalComponent implements OnInit {
       this.stylesGeneral = v.stylesGeneral;
       this.stylesGeneralInner = v.stylesGeneralInner;
     });
-    // console.log(this.stylesGeneral);
+
 
     this.form = new FormGroup({});
   }
@@ -109,11 +107,7 @@ export class CdkPortalComponent implements OnInit {
   ngAfterViewInit() {
     this.componentPortal = new ComponentPortal(StylePanelComponent);
     this.virtualPortalOutlet.attach(this.componentPortal); // ERROR Error: NG0100 in console
-    //=================
 
-    // if (!!this.componentPortal) {
-    //   this.virtualPortalOutlet.attach(this.componentPortal);
-    // }
 
     this.domPortal = new DomPortal(this.ref3);
     this.virtualPortalOutlet3.attach(this.domPortal);
@@ -143,10 +137,6 @@ export class CdkPortalComponent implements OnInit {
       this.droper[event.currentIndex] =
         this.droper[event.currentIndex] + '-' + this.droper.length;
 
-      // console.log('this.droper ==', this.droper);
-      // console.log('currentControlItem====', this.currentControlItem);
-
-      // this.store.dispatch(new AddFieldsAction([...this.droper]));
 
       let valueInput: any = { ...valueDefault };
 
@@ -184,17 +174,7 @@ export class CdkPortalComponent implements OnInit {
         ])
       );
 
-      //===================================
 
-      // this.store.select(getStyle).subscribe((v) => {
-      //   this.currentControlItem = v;
-      //   console.log(
-      //     'currentControlItem=',
-      //     v.map((el) => el[0])
-      //   );
-      //   // this.droper
-      // });
-      //=============================================
       this.currentControlItem.forEach((el) => {
         let typeInput = el[0].split('-')[0];
 
