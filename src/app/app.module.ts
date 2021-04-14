@@ -10,24 +10,23 @@
 // import { TextareaComponent } from './form-componet/textarea/textarea.component';
 // import { SelectComponent } from './form-componet/select/select.component';
 // import { CdkPortalModule } from '../app/cdk-portal/cdk-portal.module'
-// import {NewModuleModule} from "./new-module/new-module.module"
+// import { NewModuleModule} from "./new-module/new-module.module"
 // import { CdkComponent } from './cdk/cdk.component';
 // import { CdkPortalComponent } from './cdk-portal/cdk-portal.component';
 // import { BrowserModule } from '@angular/platform-browser';
 // import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 // import { RegisterComponent } from './register/register-component';
+// import { AuthPageComponent } from './auth/auth.component';
 import { NgModule } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './header/header.component';
-// import { AuthPageComponent } from './auth/auth.component';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { MatSliderModule } from '@angular/material/slider';
 import { MatButtonModule } from '@angular/material/button';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { AnyPippe } from './pipe/any-pipe';
 import { StoreModule } from '@ngrx/store';
-
 import { reducers } from './core/store/index'; //metaReducers
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { environment } from '../environments/environment';
