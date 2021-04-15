@@ -16,8 +16,6 @@ export class RegisterComponent {
   isInvalid: boolean = false;
   formRegister: FormGroup;
 
-  // user$: Observable<User>;
-
   constructor(private store: Store<State>, private router: Router) {}
 
   ngOnInit(): void {
@@ -26,12 +24,9 @@ export class RegisterComponent {
       password: new FormControl(''),
       agree: new FormControl(false, Validators.requiredTrue),
     });
-    //=================================
-    // this.user$ = this.store.select(getUser);
   }
 
   sub() {
-    // console.log(this.formRegister.get('agree').invalid);
     this.isInvalid = false;
 
     if (this.formRegister.valid) {

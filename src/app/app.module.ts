@@ -9,7 +9,7 @@
 // import { InputComponent } from './form-componet/input/input.component';
 // import { TextareaComponent } from './form-componet/textarea/textarea.component';
 // import { SelectComponent } from './form-componet/select/select.component';
-// import { CdkPortalModule } from '../app/cdk-portal/cdk-portal.module'
+
 // import { NewModuleModule} from "./new-module/new-module.module"
 // import { CdkComponent } from './cdk/cdk.component';
 // import { CdkPortalComponent } from './cdk-portal/cdk-portal.component';
@@ -53,43 +53,37 @@ import { RegisterModule } from './views/register/register.module'
     // DragComponent,
     // FormComponent,
     // HttClientComponent,
-    // CheckboxComponent,
-    // ButtonComponet,
-    // InputComponent,
-    // TextareaComponent,
-    // SelectComponent,
     AnyPippe,
-
     StylePanelComponent,
-    // RegisterComponent,
     TextareaCVAComponent,
     GeneralStyleComponent,
   ],
   imports: [
     // BrowserModule,
-    AppRoutingModule,
     // FormsModule,
     // ReactiveFormsModule,
-    NoopAnimationsModule,
-    MatSliderModule,
     // PortalModule,
     // DragDropModule,
-    MatButtonModule,
-    MatExpansionModule,
     // ReactiveComponentModule,
+    // HttpClientModule,
+    // NewModuleModule,
+
     StoreModule.forRoot(reducers),
     StoreDevtoolsModule.instrument({
       maxAge: 25,
       logOnly: environment.production,
     }),
     EffectsModule.forRoot([Effects, EffectsSteleFields]),
-    // HttpClientModule,
+    AppRoutingModule,
+    NoopAnimationsModule,
+    MatSliderModule,
+    MatButtonModule,
+    MatExpansionModule,
     HttpClientCompModule,
     SharedModule,
     AuthModule,
     RegisterModule
-    // NewModuleModule,
-    // CdkPortalModule
+
   ],
   providers: [],
   bootstrap: [AppComponent],

@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Todos, HttpClientService } from './http-client.services';
+import { from, of, Observable } from 'rxjs';
+
 
 @Component({
   selector: 'app-http-client',
@@ -13,7 +15,9 @@ export class HttClientComponent implements OnInit {
   constructor(
     private http: HttpClient,
     private httpClientServ: HttpClientService
-  ) {}
+  ) {
+
+  }
 
   ngOnInit(): void {
     this.fetchTodo();
@@ -21,9 +25,9 @@ export class HttClientComponent implements OnInit {
 
   fetchTodo() {
     this.httpClientServ.fetchTodo().subscribe((response) => {
-      console.log(response);
+
       this.todos = response;
-      // console.log(1111, this.todos);
+
     });
   }
 
@@ -34,9 +38,9 @@ export class HttClientComponent implements OnInit {
     };
 
     this.httpClientServ.addTodo(todo).subscribe((response) => {
-      console.log(response);
+
       this.todos.push(response);
-      console.log(this.todos);
+
       this.todoTitle = '';
     });
   }

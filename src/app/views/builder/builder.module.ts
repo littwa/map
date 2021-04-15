@@ -2,7 +2,6 @@ import { NgModule } from '@angular/core';
 import { SharedModule } from "../../shared/shared.module"
 import { PortalModule } from '@angular/cdk/portal';
 import { DragDropModule } from '@angular/cdk/drag-drop';
-// import { DragComponent } from '../../drag/drag.component';
 import { CheckboxComponent } from '../../form-componet/checkbox/checkbox.component';
 import { ButtonComponet } from '../../form-componet/button/button.component';
 import { InputComponent } from '../../form-componet/input/input.component';
@@ -33,4 +32,4 @@ const routes: Routes = [{
 
   ],
 })
-export class CdkPortalModule { }
+export class BuilderModule { }
