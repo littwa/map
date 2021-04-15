@@ -13,6 +13,13 @@ import { valueDefault } from '../shared/value.sheets';
 import { FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Observable, Observer } from 'rxjs';
 
+enum Attribute {
+  Placeholder = 'placeholder',
+  Required = 'required',
+  SelectValue = 'selectvalue',
+  SelectName = 'selectname'
+}
+
 @Component({
   selector: 'app-style-panel',
   templateUrl: './style-panel.component.html',
@@ -65,41 +72,32 @@ export class StylePanelComponent implements AfterViewInit {
     this.store.dispatch(new RemoveStyleAction(prop));
   }
 
-  changeProperty(e, nameInput) {
-    if (e.path[1]) {
-      const data = {};
-      let currentValue: any = { ...valueDefault };
-
-      let formData = new FormData(e.path[1]);
-
-      let arrForSelect = [];
+  changeProperty(e, nameInput, formElement) {
+    const data: object = {};
+    let currentValue: any = { ...valueDefault };
+    let formData = new FormData(formElement);
+    let arrForSelect: Array<any> = [];
 
       formData.forEach((value, name) => {
-        if (
-          name !== 'placeholder' &&
-          name !== 'required' &&
-          name !== 'selectvalue' &&
-          name !== 'selectname'
-        ) {
-          data[name] = value;
-        }
-        if (name === 'placeholder' || name === 'required') {
-          currentValue[name] = value;
-        }
-        if (name === 'selectvalue' || name === 'selectname') {
-          arrForSelect.push(value);
-          // console.log(55);
+        switch (name) {
+          case Attribute.Required:
+          case Attribute.Placeholder:
+            currentValue[name] = value;
+            return
+          case Attribute.SelectValue:
+          case Attribute.SelectName:
+            arrForSelect.push(value);
+            currentValue.select = arrForSelect;
+            return
+          default:
+            data[name] = value;
         }
       });
-
-      if (nameInput.split('-')[0] === 'select') {
-        currentValue.select = arrForSelect;
-      }
 
       this.store.dispatch(
         new ChangeStyleAction({ data, nameInput, currentValue })
       );
-    }
+
   }
 
   @ViewChildren('formnative') formnative;
