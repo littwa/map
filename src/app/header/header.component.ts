@@ -6,12 +6,11 @@ import { Observable } from 'rxjs';
 import { LoginAction } from '../core/store/action';
 import { State, getUser } from '../core/store/index';
 import { User } from '../core/interfaces';
-
 import { ofType, Actions, createEffect } from '@ngrx/effects';
 
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
-  styleUrls: ['./header.component.css'],
+  styleUrls: ['./header.component.scss'],
 })
 export class HeaderComponent {}

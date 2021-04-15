@@ -1,22 +1,4 @@
-// import { DragComponent } from './drag/drag.component';
-// import { PortalModule } from '@angular/cdk/portal';
-// import { DragDropModule } from '@angular/cdk/drag-drop';
-// import { FormComponent } from './form/form.component';
-// import { HttClientComponent } from './http-client/http-client.component';
-// import { HttpClientModule } from '@angular/common/http';
-// import { CheckboxComponent } from './form-componet/checkbox/checkbox.component';
-// import { ButtonComponet } from './form-componet/button/button.component';
-// import { InputComponent } from './form-componet/input/input.component';
-// import { TextareaComponent } from './form-componet/textarea/textarea.component';
-// import { SelectComponent } from './form-componet/select/select.component';
 
-// import { NewModuleModule} from "./new-module/new-module.module"
-// import { CdkComponent } from './cdk/cdk.component';
-// import { CdkPortalComponent } from './cdk-portal/cdk-portal.component';
-// import { BrowserModule } from '@angular/platform-browser';
-// import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-// import { RegisterComponent } from './register/register-component';
-// import { AuthPageComponent } from './auth/auth.component';
 import { NgModule } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -47,27 +29,12 @@ import { RegisterModule } from './views/register/register.module'
   declarations: [
     AppComponent,
     HeaderComponent,
-    // AuthPageComponent,
-    // CdkComponent,
-    // CdkPortalComponent,
-    // DragComponent,
-    // FormComponent,
-    // HttClientComponent,
     AnyPippe,
     StylePanelComponent,
     TextareaCVAComponent,
     GeneralStyleComponent,
   ],
   imports: [
-    // BrowserModule,
-    // FormsModule,
-    // ReactiveFormsModule,
-    // PortalModule,
-    // DragDropModule,
-    // ReactiveComponentModule,
-    // HttpClientModule,
-    // NewModuleModule,
-
     StoreModule.forRoot(reducers),
     StoreDevtoolsModule.instrument({
       maxAge: 25,

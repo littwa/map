@@ -11,35 +11,35 @@ import {
 import { ChangeStyleGeneralAction } from '../core/store/styles-general/general-style.actions';
 import { valueDefault } from '../shared/value.sheets';
 import { FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
+import { Observable, Observer } from 'rxjs';
 
 @Component({
   selector: 'app-style-panel',
   templateUrl: './style-panel.component.html',
-  styleUrls: ['./style-panel.component.css'],
+  styleUrls: ['./style-panel.component.scss'],
 })
 export class StylePanelComponent implements AfterViewInit {
   panelOpenState = false;
   fieldsIsRenered: string[];
   constructor(private store: Store, private StyleServices: StyleServices) {}
   arrStyleEntreis: any = [];
-  generalStyle;
+  generalStyle: any;
+  subGenStyle;
+  subStyle;
 
-  //==========================================================
   formGeneralStyle: FormGroup;
   submitFormGeneralStyle(): void {
-    // console.log(this.formGeneralStyle.value);
+
     this.store.dispatch(
       new ChangeStyleGeneralAction(this.formGeneralStyle.value)
     );
-    // this.formGeneralStyle.reset();
+
   }
 
   ngOnInit() {
-    this.store.select(getGeneralStyle).subscribe((v) => {
+    this.subGenStyle = this.store.select(getGeneralStyle).subscribe((v) => {
       this.generalStyle = v;
     });
-
-    // console.log(111, this.generalStyle);
 
     const {
       stylesGeneral: { backgroundColor, height, width, border },
@@ -58,11 +58,10 @@ export class StylePanelComponent implements AfterViewInit {
       }),
     });
   }
-  //==========================================================
+
 
   delProperty(e, prop) {
-    // console.log('e--', e);
-    // console.log('prop--', prop);
+
     this.store.dispatch(new RemoveStyleAction(prop));
   }
 
@@ -111,13 +110,20 @@ export class StylePanelComponent implements AfterViewInit {
 
   ngDoCheck() {
     if (this.arrStyleEntreis.length > 0) {
-      // console.log(22, this.arrStyleEntreis);
+
     }
   }
 
   ngAfterViewInit() {
-    this.store.select(getStyle).subscribe((v) => {
+    this.subStyle = this.store.select(getStyle).subscribe((v) => {
       this.arrStyleEntreis = v;
     });
+
+
   }
+  ngOnDestroy() {
+    this.subGenStyle.unsubscribe()
+    this.subStyle.unsubscribe()
+  }
+
 }

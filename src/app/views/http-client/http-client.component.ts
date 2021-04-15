@@ -7,7 +7,7 @@ import { from, of, Observable } from 'rxjs';
 @Component({
   selector: 'app-http-client',
   templateUrl: './http-client.component.html',
-  styleUrls: ['./http-client.component.css'],
+  styleUrls: ['./http-client.component.scss'],
 })
 export class HttClientComponent implements OnInit {
   todos: Todos[] = [];

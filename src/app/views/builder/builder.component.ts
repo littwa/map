@@ -2,6 +2,7 @@ import {
   Component,
   ElementRef,
   OnInit,
+  OnDestroy,
   ViewChild,
   ViewContainerRef,
 } from '@angular/core';
@@ -26,9 +27,7 @@ import {
 
 import { StylePanelComponent } from '../../style-panel/style-panel.component';
 import { Store } from '@ngrx/store';
-import { getFields } from '../../core/store/fields/fields.reducers';
 import { getStyle, getGeneralStyle } from '../../core/store/index';
-import { AddFieldsAction } from '../../core/store/fields/fields.actions';
 import { AddStyleAction } from '../../core/store/styles-fields/styleFields.actions';
 import { FormControl, FormGroup } from '@angular/forms';
 import { valueDefault } from '../../shared/value.sheets';
@@ -36,9 +35,9 @@ import { valueDefault } from '../../shared/value.sheets';
 @Component({
   selector: 'app-cdk-portal',
   templateUrl: './builder.component.html',
-  styleUrls: ['./builder.component.css'],
+  styleUrls: ['./builder.component.scss'],
 })
-export class CdkPortalComponent implements OnInit {
+export class CdkPortalComponent implements OnInit, OnDestroy {
   stylesSheet_Textarea = stylesSheet_Textarea;
   stylesSheet_Checkbox = stylesSheet_Checkbox;
   stylesSheet_Btn = stylesSheet_Btn;
@@ -47,6 +46,9 @@ export class CdkPortalComponent implements OnInit {
 
   gottenValuFromForm: object;
   currentControlItem: Array<any>;
+
+  subStyleGeneral: any;
+  subStyle: any;
 
   stylesGeneral: object;
   stylesGeneralInner: object;
@@ -90,12 +92,12 @@ export class CdkPortalComponent implements OnInit {
 
   ngOnInit() {
 
-    this.store.select(getStyle).subscribe((v) => {
+    this.subStyle = this.store.select(getStyle).subscribe((v) => {
       this.currentControlItem = v;
       this.droper = v.map((el) => el[0]);
     });
 
-    this.store.select(getGeneralStyle).subscribe((v) => {
+    this.subStyleGeneral = this.store.select(getGeneralStyle).subscribe((v) => {
       this.stylesGeneral = v.stylesGeneral;
       this.stylesGeneralInner = v.stylesGeneralInner;
     });
@@ -190,5 +192,10 @@ export class CdkPortalComponent implements OnInit {
         this.form.addControl(el[0], new FormControl(valueControl));
       });
     }
+  }
+
+  ngOnDestroy() {
+    this.subStyle.unsubscribe();
+    this.subStyleGeneral.unsubscribe();
   }
 }
