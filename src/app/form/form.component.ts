@@ -30,11 +30,4 @@ export class FormComponent implements OnInit {
     const key = this.form.get('address').get('country').value;
     this.form.patchValue({ address: { city: mapCity[key] } });
   }
-  // addSkills(): void {
-  //   const control = new FormControl('');
-  //   const arrSkills = this.form.get('skills');
-  //   // (<FormArray>arrSkills).push(control);
-  //   (arrSkills as FormArray).push(control);
-  //   console.log(this.form.get('skills').value);
-  // }
 }

@@ -1,7 +1,5 @@
 import { Component, forwardRef, Input } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
-// import { stylesSheet_Input } from '../../shared/style.sheets';
-// import { valueDefault } from '../../shared/value.sheets';
 
 @Component({
   selector: 'general-style-component',
@@ -23,7 +21,7 @@ export class GeneralStyleComponent {
     this._value = this.prop;
   }
 
-  //===========ControlValueAccessor==============================
+
   _value: any = '';
 
   @Input()

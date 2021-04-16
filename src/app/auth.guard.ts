@@ -27,7 +27,7 @@ export class AuthGuard implements CanActivate {
       isUser = v;
     });
 
-    // console.log(7, !!isUser);
+
 
     return !!isUser;
   }
