@@ -1,7 +1,8 @@
 import { Action } from '@ngrx/store';
+
 import { User, Error } from '../interfaces';
 
-export enum ActionTypes {
+export enum AuthActionTypes {
   LoginRequest = '[App] Login request',
   LoginSuccess = '[App] Login success',
   LoginFailed = '[App] Login failed',
@@ -11,35 +12,35 @@ export enum ActionTypes {
 }
 
 export class LoginAction implements Action {
-  readonly type = ActionTypes.LoginRequest;
+  readonly type = AuthActionTypes.LoginRequest;
   constructor(public payload: User) {}
 }
 
 export class LoginSuccessAction implements Action {
-  readonly type = ActionTypes.LoginSuccess;
+  readonly type = AuthActionTypes.LoginSuccess;
 
   constructor(public payload: User) {}
 }
 
 export class LoginFailedAction implements Action {
-  readonly type = ActionTypes.LoginFailed;
+  readonly type = AuthActionTypes.LoginFailed;
   constructor(public payload: Error) {}
 }
 
 //==========================Register=====
 
 export class RegisterAction implements Action {
-  readonly type = ActionTypes.RegisterRequest;
+  readonly type = AuthActionTypes.RegisterRequest;
   constructor(public payload) {}
 }
 
 export class RegisterSuccessAction implements Action {
-  readonly type = ActionTypes.RegisterSuccess;
+  readonly type = AuthActionTypes.RegisterSuccess;
   constructor(public payload) {}
 }
 
 export class RegisterFailedAction implements Action {
-  readonly type = ActionTypes.RegisterFailed;
+  readonly type = AuthActionTypes.RegisterFailed;
   constructor(public payload) {}
 }
 

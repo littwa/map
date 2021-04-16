@@ -32,4 +32,10 @@ export class AuthServices {
   createToken(obj) {
     return jwtEncode(obj, 'sekret');
   }
+
+  registerUserRequest(credentials) {
+    return this.http.post('http://localhost:3000/users', credentials);
+  }
+
+
 }

@@ -6,10 +6,11 @@ import {
   Router,
   RouterStateSnapshot,
 } from '@angular/router';
-
+import { first, map, tap } from 'rxjs/operators';
 import { Store } from '@ngrx/store';
+
 import { getUser } from './core/store/index';
-import { first, tap } from 'rxjs/operators';
+
 
 @Injectable({ providedIn: 'root' })
 export class AuthGuard implements CanActivate {
@@ -19,16 +20,8 @@ export class AuthGuard implements CanActivate {
     router: ActivatedRouteSnapshot,
     state: RouterStateSnapshot
   ): Observable<boolean> | Promise<boolean> | boolean {
-    let f$ = this.store.select(getUser);
-    // console.log(f$);
-    let isUser;
 
-    f$.subscribe((v) => {
-      isUser = v;
-    });
+    return this.store.select(getUser).pipe(map(user => !!user));
 
-    // console.log(7, !!isUser);
-
-    return !!isUser;
   }
 }

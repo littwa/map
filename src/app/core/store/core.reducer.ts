@@ -1,5 +1,5 @@
 import { User, Error } from '../interfaces';
-import { Actions, ActionTypes } from './action';
+import { Actions, AuthActionTypes } from './action';
 
 export interface State {
   user: User;
@@ -13,16 +13,15 @@ const INIT_STATE: State = {
 
 export function reducer(state: State = INIT_STATE, action: Actions): State {
   switch (action.type) {
-    case ActionTypes.LoginRequest:
+    case AuthActionTypes.LoginRequest:
       return { ...state, user: action.payload, error: null };
-    case ActionTypes.LoginSuccess:
-      console.log(55, action.payload);
+    case AuthActionTypes.LoginSuccess:
       return {
         ...state,
         user: action.payload,
         error: null,
       };
-    case ActionTypes.LoginFailed:
+    case AuthActionTypes.LoginFailed:
       return { ...state, error: action.payload, user: null };
     default:
       return state;
@@ -39,9 +38,9 @@ const INIT_STATE_RGISTER = {
 
 export function reducerRegister(state = INIT_STATE_RGISTER, action: Actions) {
   switch (action.type) {
-    case ActionTypes.RegisterSuccess:
+    case AuthActionTypes.RegisterSuccess:
       return { ...state, register: action.payload };
-    case ActionTypes.RegisterFailed:
+    case AuthActionTypes.RegisterFailed:
       return { ...state, register: false };
     default:
       return state;

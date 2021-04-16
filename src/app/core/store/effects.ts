@@ -3,11 +3,11 @@ import { ofType, Actions, createEffect } from '@ngrx/effects';
 import { map, switchMap, mergeMap, filter, tap } from 'rxjs/operators';
 import { of, from } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
-import { AuthServices } from '../../shared/auth.srevices';
 
+import { AuthServices } from '../../shared/auth.srevices';
 import { User } from '../interfaces';
 import {
-  ActionTypes,
+  AuthActionTypes,
   LoginAction,
   LoginSuccessAction,
   LoginFailedAction,
@@ -24,7 +24,7 @@ export class Effects {
 
   onLogin$ = createEffect(() =>
     this.actions$.pipe(
-      ofType(ActionTypes.LoginRequest),
+      ofType(AuthActionTypes.LoginRequest),
       map((action: any) => action.payload),
       switchMap((action: any) => {
         return this.auth.getUser(action);
@@ -45,13 +45,13 @@ export class Effects {
 
   $onRegister = createEffect(() =>
     this.actions$.pipe(
-      ofType(ActionTypes.RegisterRequest),
+      ofType(AuthActionTypes.RegisterRequest),
       map((action: any) => action.payload),
-      switchMap((s$) => {
-        return this.http.post('http://localhost:3000/users', s$);
+      switchMap((credentials) => {
+        return this.auth.registerUserRequest(credentials)
       }),
-      mergeMap((s$) => {
-        return of(new RegisterSuccessAction(s$));
+      mergeMap((user) => {
+        return of(new RegisterSuccessAction(user));
       })
     )
   );
