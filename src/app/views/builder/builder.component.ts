@@ -1,80 +1,57 @@
-import {
-  Component,
-  ElementRef,
-  OnInit,
-  OnDestroy,
-  ViewChild,
-  ViewContainerRef,
-} from '@angular/core';
-import {
-  CdkPortalOutlet,
-  ComponentPortal,
-  DomPortal,
-  TemplatePortal,
-} from '@angular/cdk/portal';
-import {
-  CdkDragDrop,
-  moveItemInArray,
-  copyArrayItem,
-} from '@angular/cdk/drag-drop';
-import {
-  stylesSheet_Textarea,
-  stylesSheet_Checkbox,
-  stylesSheet_Btn,
-  stylesSheet_Select,
-  stylesSheet_Input,
-} from '../../shared/style.sheets';
-
-import { StylePanelComponent } from '../../style-panel/style-panel.component';
-import { Store } from '@ngrx/store';
-import { getStyle, getGeneralStyle } from '../../core/store/index';
-import { AddStyleAction } from '../../core/store/styles-fields/styleFields.actions';
+import { Component, ElementRef, OnInit, OnDestroy, ViewChild, ViewContainerRef } from '@angular/core';
+import { CdkPortalOutlet, ComponentPortal, DomPortal, TemplatePortal } from '@angular/cdk/portal';
+import { CdkDragDrop, copyArrayItem, moveItemInArray } from '@angular/cdk/drag-drop';
 import { FormControl, FormGroup } from '@angular/forms';
+import { Store } from '@ngrx/store';
+
+import { stylesSheetBtn, stylesSheetCheckbox, stylesSheetInput, stylesSheetTextarea, stylesSheetSelect } from '../../shared/style.sheets';
+import { StylePanelComponent } from '../../style-panel/style-panel.component';
+import { getGeneralStyle, getStyle } from '../../core/store/index';
+import { AddStyleAction } from '../../core/store/styles-fields/styleFields.actions';
 import { valueDefault } from '../../shared/value.sheets';
+import { MatchStyle, ValueInput } from 'src/app/core/interfaces';
+import { StyleServices } from './../../shared/style.services';
+import { Subscription } from 'rxjs';
 
 @Component({
-  selector: 'app-cdk-portal',
+  selector: 'app-builder',
   templateUrl: './builder.component.html',
   styleUrls: ['./builder.component.scss'],
 })
 export class CdkPortalComponent implements OnInit, OnDestroy {
-  stylesSheet_Textarea = stylesSheet_Textarea;
-  stylesSheet_Checkbox = stylesSheet_Checkbox;
-  stylesSheet_Btn = stylesSheet_Btn;
-  stylesSheet_Select = stylesSheet_Select;
-  stylesSheet_Input = stylesSheet_Input;
+  stylesSheetTextarea = stylesSheetTextarea;
+  stylesSheetCheckbox = stylesSheetCheckbox;
+  stylesSheetBtn = stylesSheetBtn;
+  stylesSheetSelect = stylesSheetSelect;
+  stylesSheetInput = stylesSheetInput;
 
   gottenValuFromForm: object;
   currentControlItem: Array<any>;
 
-  subStyleGeneral: any;
-  subStyle: any;
+  subStyleGeneral: Subscription;
+  subStyle: Subscription;
 
   stylesGeneral: object;
   stylesGeneralInner: object;
-
-
   form: FormGroup;
+
   getForm = () => {
     this.gottenValuFromForm = this.form.value;
     console.log('form:', this.form.value);
   };
 
   getActualStyle(item) {
-
-    let styleList = this.currentControlItem.find((el) => el[0] === item)[1];
-
-    return styleList;
+    return this.currentControlItem.find((el) => el[0] === item)[1];
   }
-  getActualValue(item) {
-    let valueInp = this.currentControlItem.find((el) => el[0] === item)[2];
 
-    return valueInp;
+  getActualValue(item) {
+    return this.currentControlItem.find((el) => el[0] === item)[2];
   }
 
   constructor(
     private _viewContainerRef: ViewContainerRef,
-    private store: Store
+    private store: Store,
+    private styleServices: StyleServices
   ) { }
   domPortal: DomPortal<any>;
   templatePortal: TemplatePortal<any>;
@@ -90,6 +67,8 @@ export class CdkPortalComponent implements OnInit, OnDestroy {
   @ViewChild('ref3') ref3: ElementRef;
   @ViewChild('ref4') ref4: ElementRef;
 
+
+
   ngOnInit() {
 
     this.subStyle = this.store.select(getStyle).subscribe((v) => {
@@ -104,6 +83,8 @@ export class CdkPortalComponent implements OnInit, OnDestroy {
 
 
     this.form = new FormGroup({});
+
+    this.styleServices.removedControl.subscribe(control => this.form.removeControl(control));
   }
 
   ngAfterViewInit() {
@@ -139,60 +120,76 @@ export class CdkPortalComponent implements OnInit, OnDestroy {
       this.droper[event.currentIndex] =
         this.droper[event.currentIndex] + '-' + this.droper.length;
 
+      const changedElement = event.container.data[event.currentIndex];
 
-      let valueInput: any = { ...valueDefault };
-
-      let matchStyle;
-      switch (event.container.data[event.currentIndex].split('-')[0]) {
-        case 'input':
-          matchStyle = stylesSheet_Input;
-          break;
-        case 'checkbox':
-          matchStyle = stylesSheet_Checkbox;
-          break;
-        case 'select':
-          matchStyle = stylesSheet_Select;
-          valueInput.select = [
-            ['value1', 'Value1'],
-            ['value2', 'Value2'],
-          ];
-          break;
-        case 'textarea':
-          matchStyle = stylesSheet_Textarea;
-          break;
-        case 'button':
-          matchStyle = stylesSheet_Btn;
-          break;
-
-        default:
-          return console.log('Invalid type controll');
-      }
+      let { matchStyle, valueInput } = this.generateChangedValue(changedElement);
 
       this.store.dispatch(
         new AddStyleAction([
-          event.container.data[event.currentIndex],
+          changedElement,
           matchStyle,
           valueInput,
         ])
       );
 
+      this.addControlInForm()
 
-      this.currentControlItem.forEach((el) => {
-        let typeInput = el[0].split('-')[0];
-
-        let valueControl: any = '';
-
-        if (typeInput === 'button') {
-          return;
-        }
-        if (typeInput === 'checkbox') {
-          valueControl = false;
-        }
-
-        this.form.addControl(el[0], new FormControl(valueControl));
-      });
     }
   }
+
+  addControlInForm() {
+
+    this.currentControlItem.forEach((el) => {
+      let typeInput = el[0].split('-')[0];
+      let valueControl: string | boolean = '';
+
+      if (typeInput === 'button') {
+        return;
+      }
+      if (typeInput === 'checkbox') {
+        valueControl = false;
+      }
+
+      this.form.addControl(el[0], new FormControl(valueControl));
+    });
+
+  }
+
+  generateChangedValue(changedElement): { valueInput, matchStyle } {
+    const typeChangedElement = changedElement.split('-')[0];
+    let valueInput: ValueInput = { ...valueDefault };
+    let matchStyle: MatchStyle;
+
+    if (typeChangedElement === 'select') {
+      valueInput.select = [
+        ['value1', 'Value1'],
+        ['value2', 'Value2'],
+      ];
+    }
+
+    switch (typeChangedElement) {
+      case 'input':
+        matchStyle = stylesSheetInput;
+        break;
+      case 'checkbox':
+        matchStyle = stylesSheetCheckbox;
+        break;
+      case 'select':
+        matchStyle = stylesSheetSelect;
+        break;
+      case 'textarea':
+        matchStyle = stylesSheetTextarea;
+        break;
+      case 'button':
+        matchStyle = stylesSheetBtn;
+        break;
+      default:
+        console.log('Invalid type controll');
+    }
+
+    return { valueInput, matchStyle }
+
+   }
 
   ngOnDestroy() {
     this.subStyle.unsubscribe();

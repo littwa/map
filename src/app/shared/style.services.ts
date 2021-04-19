@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
-import { of } from 'rxjs';
+import { Observable, of, Subject } from 'rxjs';
+import { observeOn } from 'rxjs/operators';
 
 @Injectable({ providedIn: 'root' })
 export class StyleServices {
@@ -11,38 +12,44 @@ export class StyleServices {
     checkbox: null,
   };
 
-  ent = [];
+  arrAllStyle = [];
 
-  addStyleBtn(styleItem) {
+  addStyleBtn(styleItem): void {
     this.allStyle.button = styleItem;
-    let entMiddl = Object.entries(this.allStyle);
-    this.ent[0] = entMiddl;
+    const entMiddl = Object.entries(this.allStyle);
+    this.arrAllStyle[0] = entMiddl;
     // this.ent = entMiddl; not work???
   }
-  addStyleCheckbox(styleItem) {
+  addStyleCheckbox(styleItem): void {
     this.allStyle.checkbox = styleItem;
-    let entMiddl = Object.entries(this.allStyle);
-    this.ent[0] = entMiddl;
+    const entMiddl = Object.entries(this.allStyle);
+    this.arrAllStyle[0] = entMiddl;
   }
 
-  addStyleInput(styleItem) {
+  addStyleInput(styleItem): void {
     this.allStyle.input = styleItem;
-    let entMiddl = Object.entries(this.allStyle);
-    this.ent[0] = entMiddl;
+    const entMiddl = Object.entries(this.allStyle);
+    this.arrAllStyle[0] = entMiddl;
   }
 
-  addStyleSelect(styleItem) {
+  addStyleSelect(styleItem): void {
     this.allStyle.select = styleItem;
-    let entMiddl = Object.entries(this.allStyle);
-    this.ent[0] = entMiddl;
+    const entMiddl = Object.entries(this.allStyle);
+    this.arrAllStyle[0] = entMiddl;
   }
-  addStyleTextarea(styleItem) {
+  addStyleTextarea(styleItem): void {
     this.allStyle.textarea = styleItem;
-    let entMiddl = Object.entries(this.allStyle);
-    this.ent[0] = entMiddl;
+    const entMiddl = Object.entries(this.allStyle);
+    this.arrAllStyle[0] = entMiddl;
   }
 
-  getAllStyles() {
-    return of(this.ent);
+  getAllStyles(): Observable<any> {
+    return of(this.arrAllStyle);
   }
+
+  removedControl = new Subject<string>();
+  isRemovedControlService(control): void {
+    this.removedControl.next(control)
+  }
+
 }

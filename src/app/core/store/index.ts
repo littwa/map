@@ -1,4 +1,3 @@
-// import { Params } from '@angular/router';
 import { ActionReducerMap, createSelector } from '@ngrx/store';
 import * as fromCore from './core.reducer';
 import * as fromFields from './fields/fields.reducers';

@@ -1,4 +1,4 @@
-<h3 [ngStyle]="{ margin: '15px' }">Builder</h3>
+<h3 class="title">Builder</h3>
 <div>
   <div class="portals-outlet">
     <ng-container #virtualContainer cdkPortalOutlet> </ng-container>
@@ -61,35 +61,35 @@
       <div [ngSwitch]="item.split('-')[0]">
         <div *ngSwitchCase="'checkbox'">
           <app-checkbox
-            [stylesSheet_Checkbox]="getActualStyle(item)"
+            [stylesSheetCheckbox]="getActualStyle(item)"
             [actualValue]="getActualValue(item)"
             formControlName="{{ item }}"
           ></app-checkbox>
         </div>
         <div *ngSwitchCase="'button'">
           <app-button
-            [stylesSheet_Btn]="getActualStyle(item)"
+            [stylesSheetBtn]="getActualStyle(item)"
             [isDrop]="true"
             [getValueForm]="getForm"
           ></app-button>
         </div>
         <div *ngSwitchCase="'input'">
           <app-input
-            [stylesSheet_Input]="getActualStyle(item)"
+            [stylesSheetInput]="getActualStyle(item)"
             [actualValue]="getActualValue(item)"
             formControlName="{{ item }}"
           ></app-input>
         </div>
         <div *ngSwitchCase="'textarea'">
           <app-textarea
-            [stylesSheet_Textarea]="getActualStyle(item)"
+            [stylesSheetTextarea]="getActualStyle(item)"
             [actualValue]="getActualValue(item)"
             formControlName="{{ item }}"
           ></app-textarea>
         </div>
         <div *ngSwitchCase="'select'">
           <app-select
-            [stylesSheet_Select]="getActualStyle(item)"
+            [stylesSheetSelect]="getActualStyle(item)"
             [actualValue]="getActualValue(item)"
             formControlName="{{ item }}"
           ></app-select>

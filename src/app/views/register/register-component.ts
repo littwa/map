@@ -6,6 +6,7 @@ import { Router } from '@angular/router';
 import { RegisterAction } from '../../core/store/action';
 import { State, getUser, getReg } from '../../core/store/index';
 import { User } from '../../core/interfaces';
+import { filter, map, take, tap } from 'rxjs/operators';
 
 @Component({
   selector: 'app-register',
@@ -26,21 +27,21 @@ export class RegisterComponent {
     });
   }
 
-  sub() {
+  handleSubmit(): void {
     this.isInvalid = false;
 
-    if (this.formRegister.valid) {
-      this.store.dispatch(new RegisterAction(this.formRegister.value));
-      let register$ = this.store.select(getReg);
-
-      register$.subscribe((v) => {
-        if (v) {
-          this.router.navigate([''], { queryParams: { reg: true } });
-        }
-      });
-    }
     if (!this.formRegister.valid) {
       this.isInvalid = true;
+      return
     }
+
+    this.store.dispatch(new RegisterAction(this.formRegister.value));
+    const register$ = this.store.select(getReg);
+
+    register$.pipe(
+      filter(v => !!v),
+      take(1),
+      tap(() => this.router.navigate([''], { queryParams: { reg: true } }))
+    ).subscribe()
   }
 }

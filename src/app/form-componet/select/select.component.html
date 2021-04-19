@@ -1,7 +1,7 @@
 <select
   [required]="actualValue.required"
   [(ngModel)]="value"
-  [ngStyle]="stylesSheet_Select"
+  [ngStyle]="stylesSheetSelect"
 >
   <option selected disabled>{{ actualValue.placeholder }}</option>
   <option *ngFor="let selItem of actualValue.select" [value]="selItem[0]">

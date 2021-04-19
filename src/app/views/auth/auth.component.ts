@@ -1,12 +1,13 @@
 import { Component } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { Store } from '@ngrx/store';
-import { Observable } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
 
 import { LoginAction } from '../../core/store/action';
 import { State, getUser } from '../../core/store/index';
 import { User } from '../../core/interfaces';
 import { Router, ActivatedRoute } from '@angular/router';
+import { filter, map, takeUntil } from 'rxjs/operators';
 
 @Component({
   selector: 'app-auth-page',
@@ -14,36 +15,39 @@ import { Router, ActivatedRoute } from '@angular/router';
 })
 export class AuthPageComponent {
   form: FormGroup;
-  iRegisterNow: boolean;
+  iRegister$: Observable<boolean>;
   user$: Observable<User>;
+  public ngUnsubscribe$ = new Subject<void>()
 
   constructor(
     private store: Store<State>,
     private router: Router,
-    private activRoute: ActivatedRoute
+    private activatedRoute: ActivatedRoute
   ) {}
 
   ngOnInit(): void {
-    let u = this.activRoute.queryParams;
-    u.subscribe((v) => {
-      this.iRegisterNow = !!v.reg;
-    });
+
+    this.iRegister$ = this.activatedRoute.queryParams.pipe(map(params => !!params.reg));
 
     this.form = new FormGroup({
       email: new FormControl(''),
       password: new FormControl(''),
     });
 
-    this.user$ = this.store.select(getUser);
-    this.user$.subscribe((v) => {
-      if (v && v.token) {
-        console.log('Logined!!');
-        this.router.navigate(['sdk']);
-      }
-    });
+    this.store.select(getUser).pipe(
+      takeUntil(this.ngUnsubscribe$),
+      filter(user => !!user && !!user.token)
+    ).subscribe((user) => this.router.navigate(['sdk']));
   }
 
-  sub() {
+  handleSubmitForm() {
     this.store.dispatch(new LoginAction(this.form.value));
   }
+
+  ngOnDestroy() {
+    this.ngUnsubscribe$.next(null);
+    this.ngUnsubscribe$.complete();
+  }
 }
+
+

@@ -1,13 +1,13 @@
 import { Component, forwardRef, Input, OnInit } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 // import { StyleServices } from '../../shared/style.services';
-import { stylesSheet_Checkbox } from '../../shared/style.sheets';
+import { stylesSheetCheckbox } from '../../shared/style.sheets';
 import { valueDefault } from '../../shared/value.sheets';
 
 @Component({
   selector: 'app-checkbox',
   templateUrl: './checkbox.component.html',
-  styleUrls: ['./checkbox.component.css'],
+  styleUrls: ['./checkbox.component.scss'],
   providers: [
     {
       provide: NG_VALUE_ACCESSOR,
@@ -17,7 +17,7 @@ import { valueDefault } from '../../shared/value.sheets';
   ],
 })
 export class CheckboxComponent implements ControlValueAccessor {
-  @Input() stylesSheet_Checkbox = stylesSheet_Checkbox;
+  @Input() stylesSheetCheckbox = stylesSheetCheckbox;
   @Input() actualValue = { ...valueDefault };
 
   //===========ControlValueAccessor==============================

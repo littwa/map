@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { ofType, Actions, createEffect } from '@ngrx/effects';
 import { map, switchMap, mergeMap, filter, tap } from 'rxjs/operators';
 import { of, from } from 'rxjs';
+
 import {
   ActionStyleField,
   ActionStyle,
@@ -10,15 +11,5 @@ import {
 
 @Injectable()
 export class EffectsSteleFields {
-  constructor(private actions$: Actions) {}
-
-  // $onDelInput = createEffect(() =>
-  //   this.actions$.pipe(
-  //     ofType(ActionStyleField.RemoveStyle),
-  //     switchMap((v) => {
-  //       console.log('-------', v);
-  //       return of(new RemoveStyleAction(v));
-  //     })
-  //   )
-  // );
+  constructor(private actions$: Actions) { }
 }

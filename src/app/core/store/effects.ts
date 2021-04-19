@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { ofType, Actions, createEffect } from '@ngrx/effects';
 import { map, switchMap, mergeMap, filter, tap } from 'rxjs/operators';
-import { of, from } from 'rxjs';
+import { of, from, Observable, iif } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 
 import { AuthServices } from '../../shared/auth.srevices';
@@ -22,25 +22,23 @@ export class Effects {
     private auth: AuthServices
   ) {}
 
-  onLogin$ = createEffect(() =>
-    this.actions$.pipe(
-      ofType(AuthActionTypes.LoginRequest),
-      map((action: any) => action.payload),
-      switchMap((action: any) => {
-        return this.auth.getUser(action);
-      }),
-      mergeMap((current: any) => {
-        if (!current.email) {
-          return of(
-            new LoginFailedAction({
-              code: 404,
-              message: 'Invalid login',
-            })
-          );
-        }
-        return of(new LoginSuccessAction(current));
+  loginFail(): Observable<LoginFailedAction> {
+    return of(
+      new LoginFailedAction({
+        code: 404,
+        message: 'Invalid login',
       })
     )
+  }
+
+  onLogin$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(AuthActionTypes.LoginRequest),
+      map((action: any) => action.payload),
+      switchMap((action: any) => this.auth.getUser(action)),
+      mergeMap((current: any) => iif(() => current.email, of(new LoginSuccessAction(current)), this.loginFail()))
+    )
+  }
   );
 
   $onRegister = createEffect(() =>

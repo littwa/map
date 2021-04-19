@@ -10,7 +10,6 @@ export const reducerFields = (
 ): any => {
   switch (action.type) {
     case ActionTypesFields.AddFields:
-      console.log('ActionTypesFields.AddFields');
       return { fields: action.payload };
     default:
       return state;

@@ -1,4 +1,4 @@
-export const stylesSheet_Textarea = {
+export const stylesSheetTextarea = {
   border: '1.5px solid #888',
   borderRadius: '20px',
   fontSize: '12px',
@@ -6,7 +6,7 @@ export const stylesSheet_Textarea = {
   backgroundColor: '#fff',
 };
 
-export const stylesSheet_Select = {
+export const stylesSheetSelect = {
   border: '1.5px solid #888',
   borderRadius: '20px',
   fontSize: '12px',
@@ -14,19 +14,19 @@ export const stylesSheet_Select = {
   backgroundColor: '#fff',
 };
 
-export const stylesSheet_Input = {
+export const stylesSheetInput = {
   border: '1.5px solid #888',
   borderRadius: '20px',
   fontSize: '12px',
   padding: '5px 10px',
   backgroundColor: '#fff',
 };
-export const stylesSheet_Checkbox = {
+export const stylesSheetCheckbox = {
   width: '15px',
   height: '15px',
 };
 
-export const stylesSheet_Btn = {
+export const stylesSheetBtn = {
   border: '1.5px solid #888',
   borderRadius: '20px',
   fontSize: '12px',
@@ -44,3 +44,4 @@ export const stylesGeneral = {
 export const stylesGeneralInner = {
   backgroundColor: '#bcf8f8',
 };
+

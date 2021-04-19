@@ -1,8 +1,8 @@
 
-<h3 [ngStyle]="{ margin: '15px' }">Authoriztion Page</h3>
+<h3 class="title">Authoriztion Page</h3>
 
-<h3 *ngIf="iRegisterNow">Register successful! Now authorise</h3>
-<form [formGroup]="form" (ngSubmit)="sub()">
+<h3 *ngIf="iRegister$ | async">Register successful! Now authorise</h3>
+<form [formGroup]="form" (ngSubmit)="handleSubmitForm()">
   <input placeholder="email" formControlName="email" /><br />
   <input placeholder="password" formControlName="password" /><br />
   <!-- <label> Agree<input type="checkbox" formControlName="agree" /></label><br /> -->

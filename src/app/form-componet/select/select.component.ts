@@ -1,13 +1,13 @@
 import { Component, forwardRef, Input, OnInit } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 
-import { stylesSheet_Select } from '../../shared/style.sheets';
+import { stylesSheetSelect } from '../../shared/style.sheets';
 import { valueDefault } from '../../shared/value.sheets';
 
 @Component({
   selector: 'app-select',
   templateUrl: './select.component.html',
-  styleUrls: ['./select.component.css'],
+  styleUrls: ['./select.component.scss'],
   providers: [
     {
       provide: NG_VALUE_ACCESSOR,
@@ -17,7 +17,7 @@ import { valueDefault } from '../../shared/value.sheets';
   ],
 })
 export class SelectComponent implements ControlValueAccessor {
-  @Input() stylesSheet_Select = stylesSheet_Select;
+  @Input() stylesSheetSelect = stylesSheetSelect;
   @Input() actualValue = {
     ...valueDefault,
     select: [
