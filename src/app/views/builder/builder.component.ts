@@ -19,6 +19,13 @@ import { Subscription } from 'rxjs';
   styleUrls: ['./builder.component.scss'],
 })
 export class CdkPortalComponent implements OnInit, OnDestroy {
+
+  constructor(private store: Store, private styleServices: StyleServices) { }
+
+  domPortal: DomPortal<any>;
+  templatePortal: TemplatePortal<any>;
+  componentPortal: ComponentPortal<any>;
+
   stylesSheetTextarea = stylesSheetTextarea;
   stylesSheetCheckbox = stylesSheetCheckbox;
   stylesSheetBtn = stylesSheetBtn;
@@ -27,17 +34,26 @@ export class CdkPortalComponent implements OnInit, OnDestroy {
 
   gottenValuFromForm: object;
   currentControlItem: Array<any>;
-
   subStyleGeneral: Subscription;
   subStyle: Subscription;
-
   stylesGeneral: object;
   stylesGeneralInner: object;
   form: FormGroup;
 
-  getForm = () => {
+  drag: Array<string> = ['input', 'textarea', 'select', 'checkbox', 'button'];
+  droper: Array<string> = [];
+
+  @ViewChild('StylePanelContainer', { read: CdkPortalOutlet })
+  StylePanelPortalOutlet: CdkPortalOutlet;
+  @ViewChild('DropBuilderContainer', { read: CdkPortalOutlet })
+  DropBuilderPortalOutlet: CdkPortalOutlet;
+  @ViewChild('DragBuilderContainer', { read: CdkPortalOutlet })
+  DragBuilderPortalOutlet: CdkPortalOutlet;
+  @ViewChild('DragSection') DragSectionRef: ElementRef;
+  @ViewChild('DropSection') DropSectionRef: ElementRef;
+
+  getForm = (): void => {
     this.gottenValuFromForm = this.form.value;
-    console.log('form:', this.form.value);
   };
 
   getActualStyle(item) {
@@ -48,39 +64,17 @@ export class CdkPortalComponent implements OnInit, OnDestroy {
     return this.currentControlItem.find((el) => el[0] === item)[2];
   }
 
-  constructor(
-    private _viewContainerRef: ViewContainerRef,
-    private store: Store,
-    private styleServices: StyleServices
-  ) { }
-  domPortal: DomPortal<any>;
-  templatePortal: TemplatePortal<any>;
-  componentPortal: ComponentPortal<any>;
-
-  @ViewChild('virtualContainer', { read: CdkPortalOutlet })
-  virtualPortalOutlet: CdkPortalOutlet;
-  @ViewChild('virtualContainer2', { read: CdkPortalOutlet })
-  virtualPortalOutlet2: CdkPortalOutlet;
-  @ViewChild('virtualContainer3', { read: CdkPortalOutlet })
-  virtualPortalOutlet3: CdkPortalOutlet;
-
-  @ViewChild('ref3') ref3: ElementRef;
-  @ViewChild('ref4') ref4: ElementRef;
-
-
-
   ngOnInit() {
 
-    this.subStyle = this.store.select(getStyle).subscribe((v) => {
-      this.currentControlItem = v;
-      this.droper = v.map((el) => el[0]);
+    this.subStyle = this.store.select(getStyle).subscribe((styles) => {
+      this.currentControlItem = styles;
+      this.droper = styles.map((el) => el[0]);
     });
 
-    this.subStyleGeneral = this.store.select(getGeneralStyle).subscribe((v) => {
-      this.stylesGeneral = v.stylesGeneral;
-      this.stylesGeneralInner = v.stylesGeneralInner;
+    this.subStyleGeneral = this.store.select(getGeneralStyle).subscribe((styles) => {
+      this.stylesGeneral = styles.stylesGeneral;
+      this.stylesGeneralInner = styles.stylesGeneralInner;
     });
-
 
     this.form = new FormGroup({});
 
@@ -89,18 +83,14 @@ export class CdkPortalComponent implements OnInit, OnDestroy {
 
   ngAfterViewInit() {
     this.componentPortal = new ComponentPortal(StylePanelComponent);
-    this.virtualPortalOutlet.attach(this.componentPortal); // ERROR Error: NG0100 in console
+    this.StylePanelPortalOutlet.attach(this.componentPortal); // ERROR Error: NG0100 in console
 
+    this.domPortal = new DomPortal(this.DragSectionRef);
+    this.DragBuilderPortalOutlet.attach(this.domPortal);
 
-    this.domPortal = new DomPortal(this.ref3);
-    this.virtualPortalOutlet3.attach(this.domPortal);
-    this.domPortal = new DomPortal(this.ref4);
-    this.virtualPortalOutlet2.attach(this.domPortal);
+    this.domPortal = new DomPortal(this.DropSectionRef);
+    this.DropBuilderPortalOutlet.attach(this.domPortal);
   }
-
-  drag = ['input', 'textarea', 'select', 'checkbox', 'button'];
-
-  droper = [];
 
   drop(event: CdkDragDrop<any[]>): void {
     if (event.previousContainer === event.container) {
@@ -117,12 +107,12 @@ export class CdkPortalComponent implements OnInit, OnDestroy {
         event.currentIndex
       );
 
-      this.droper[event.currentIndex] =
-        this.droper[event.currentIndex] + '-' + this.droper.length;
+      this.droper[event.currentIndex] = this.droper[event.currentIndex] + '-' + this.droper.length;
 
       const changedElement = event.container.data[event.currentIndex];
 
-      let { matchStyle, valueInput } = this.generateChangedValue(changedElement);
+      const matchStyle = this.generateChangedValue(changedElement);
+      const valueInput = this.generateChangedValueSelect(changedElement);
 
       this.store.dispatch(
         new AddStyleAction([
@@ -137,7 +127,7 @@ export class CdkPortalComponent implements OnInit, OnDestroy {
     }
   }
 
-  addControlInForm() {
+  addControlInForm(): void {
 
     this.currentControlItem.forEach((el) => {
       let typeInput = el[0].split('-')[0];
@@ -155,17 +145,21 @@ export class CdkPortalComponent implements OnInit, OnDestroy {
 
   }
 
-  generateChangedValue(changedElement): { valueInput, matchStyle } {
+  generateChangedValueSelect(changedElement): object {
     const typeChangedElement = changedElement.split('-')[0];
-    let valueInput: ValueInput = { ...valueDefault };
-    let matchStyle: MatchStyle;
-
+    const valueInput: ValueInput = { ...valueDefault };
     if (typeChangedElement === 'select') {
       valueInput.select = [
         ['value1', 'Value1'],
         ['value2', 'Value2'],
       ];
     }
+    return valueInput
+  }
+
+  generateChangedValue(changedElement): object {
+    const typeChangedElement = changedElement.split('-')[0];
+    let matchStyle: MatchStyle;
 
     switch (typeChangedElement) {
       case 'input':
@@ -187,7 +181,7 @@ export class CdkPortalComponent implements OnInit, OnDestroy {
         console.log('Invalid type controll');
     }
 
-    return { valueInput, matchStyle }
+    return matchStyle
 
    }
 

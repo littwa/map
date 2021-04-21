@@ -1,24 +1,15 @@
 import { Injectable } from '@angular/core';
 import { ofType, Actions, createEffect } from '@ngrx/effects';
-import { map, switchMap, mergeMap, filter, tap } from 'rxjs/operators';
-import { of, from, Observable, iif } from 'rxjs';
-import { HttpClient } from '@angular/common/http';
+import { map, switchMap, mergeMap } from 'rxjs/operators';
+import { of, Observable, iif } from 'rxjs';
 
 import { AuthServices } from '../../shared/auth.srevices';
-import { User } from '../interfaces';
-import {
-  AuthActionTypes,
-  LoginAction,
-  LoginSuccessAction,
-  LoginFailedAction,
-  RegisterSuccessAction,
-} from '../store/action';
+import { AuthActionTypes, LoginSuccessAction, LoginFailedAction, RegisterSuccessAction } from '../store/action';
 
 @Injectable()
 export class Effects {
   constructor(
     private actions$: Actions,
-    private http: HttpClient,
     private auth: AuthServices
   ) {}
 

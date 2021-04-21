@@ -1,12 +1,4 @@
 import { Pipe, PipeTransform } from '@angular/core';
-// import {};
-// interface IkeyIt {
-//   title: string;
-//   text: string;
-// }
-
-// field: keyof IkeyIt = 'text'
-// field: string = 'text'
 
 @Pipe({ name: 'anypipe' })
 export class AnyPippe implements PipeTransform {

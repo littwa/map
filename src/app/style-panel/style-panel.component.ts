@@ -1,10 +1,9 @@
 import { Component, AfterViewInit, ViewChildren } from '@angular/core';
-import { NgForm } from '@angular/forms';
 import { Store } from '@ngrx/store';
-import { FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
-import { Observable, Observer, Subscriber, Subscription } from 'rxjs';
+import { FormControl, FormGroup } from '@angular/forms';
+import { Observable, Subscription } from 'rxjs';
 
-import { getFields, getGeneralStyle } from '../core/store/index';
+import { getGeneralStyle } from '../core/store/index';
 import { StyleServices } from '../shared/style.services';
 import { getStyle } from '../core/store/index';
 import { ChangeStyleAction, RemoveStyleAction } from '../core/store/styles-fields/styleFields.actions';
@@ -25,47 +24,43 @@ enum EAttribute {
   styleUrls: ['./style-panel.component.scss'],
 })
 export class StylePanelComponent implements AfterViewInit {
+
+  constructor(private store: Store, private styleServices: StyleServices) { }
+
   panelOpenState: boolean;
   fieldsIsRenered: string[];
-  constructor(private store: Store, private styleServices: StyleServices) { }
-  arrStyleEntreis: any[];
-  generalStyle: GeneralStyle;
   subGenStyle: Subscription;
-  subStyle: Subscription;
-
+  arrStyleEntreis$: Observable<Array<object>>;
   formGeneralStyle: FormGroup;
+  generalStyle: GeneralStyle;
+
   submitFormGeneralStyle(): void {
-
-    this.store.dispatch(
-      new ChangeStyleGeneralAction(this.formGeneralStyle.value)
-    );
-
+    this.store.dispatch(new ChangeStyleGeneralAction(this.formGeneralStyle.value));
   }
 
   ngOnInit() {
-    this.subGenStyle = this.store.select(getGeneralStyle).subscribe((v) => {
 
-      this.generalStyle = v;
-    });
+    this.subGenStyle = this.store.select(getGeneralStyle).pipe().subscribe(next.bind(this));
 
-    console.log(999, this.subGenStyle); /////////
+    function next(styles) {
+      this.generalStyle = styles;
+      const {
+        stylesGeneral: { backgroundColor, height, width, border },
+        stylesGeneralInner: { backgroundColor: backgroundColorInner },
+      } = this.generalStyle;
 
-    const {
-      stylesGeneral: { backgroundColor, height, width, border },
-      stylesGeneralInner: { backgroundColor: backgroundColorInner },
-    } = this.generalStyle;
-
-    this.formGeneralStyle = new FormGroup({
-      stylesGeneral: new FormGroup({
-        backgroundColor: new FormControl(backgroundColor),
-        height: new FormControl(height),
-        width: new FormControl(width),
-        border: new FormControl(border),
-      }),
-      stylesGeneralInner: new FormGroup({
-        backgroundColor: new FormControl(backgroundColorInner),
-      }),
-    });
+      this.formGeneralStyle = new FormGroup({
+        stylesGeneral: new FormGroup({
+          backgroundColor: new FormControl(backgroundColor),
+          height: new FormControl(height),
+          width: new FormControl(width),
+          border: new FormControl(border),
+        }),
+        stylesGeneralInner: new FormGroup({
+          backgroundColor: new FormControl(backgroundColorInner),
+        }),
+      });
+    }
   }
 
   delProperty(e, prop) {
@@ -99,7 +94,6 @@ export class StylePanelComponent implements AfterViewInit {
       this.store.dispatch(
         new ChangeStyleAction({ data, nameInput, currentValue })
       );
-
   }
 
   @ViewChildren('formnative') formnative;
@@ -109,14 +103,11 @@ export class StylePanelComponent implements AfterViewInit {
   }
 
   ngAfterViewInit() {
-    this.subStyle = this.store.select(getStyle).subscribe((v) => {
-      this.arrStyleEntreis = v;
-    });
-
+    this.arrStyleEntreis$ = this.store.select(getStyle);
   }
+
   ngOnDestroy() {
-    this.subGenStyle.unsubscribe()
-    this.subStyle.unsubscribe()
+    this.subGenStyle.unsubscribe();
   }
 
 }

@@ -12,10 +12,10 @@
   padding: 5px;
 }
 .activelink {
-  color: red;
+  color: $color-2;
 }
 a {
   text-decoration: none;
-  color: #000;
+  color: $color-1;
   font-weight: 500;
 }

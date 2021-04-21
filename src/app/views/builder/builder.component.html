@@ -1,21 +1,21 @@
 <h3 class="title">Builder</h3>
 <div>
   <div class="portals-outlet">
-    <ng-container #virtualContainer cdkPortalOutlet> </ng-container>
+    <ng-container #StylePanelContainer cdkPortalOutlet> </ng-container>
   </div>
 
   <div class="portals-outlet">
-    <ng-container #virtualContainer2 cdkPortalOutlet> </ng-container>
+    <ng-container #DropBuilderContainer cdkPortalOutlet> </ng-container>
   </div>
 
   <div class="portals-outlet">
-    <ng-container #virtualContainer3 cdkPortalOutlet> </ng-container>
+    <ng-container #DragBuilderContainer cdkPortalOutlet> </ng-container>
   </div>
 </div>
 
 <!-- cdkDrag -->
 
-<div #ref3 class="example-container">
+<div #DragSection class="example-container">
   <h5>Drag section</h5>
   <ng-template></ng-template>
   <div
@@ -40,7 +40,7 @@
   </div>
 </div>
 
-<div [formGroup]="form" #ref4 class="example-container">
+<div [formGroup]="form" #DropSection class="example-container">
   <h5>Drop section</h5>
 
   <div

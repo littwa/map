@@ -11,36 +11,31 @@ export const reduserStyle = (
       return [...state, action.payload];
 
     case ActionStyleField.ChangeStyle:
-      let newState = [...state].map((el) => {
-        if (el[0] === action.payload.nameInput) {
-          if (action.payload.nameInput.split('-')[0] === 'select') {
-            let newVal = { ...action.payload.currentValue };
+      return [...state].map((el) => {
+        const { data, currentValue, nameInput } = action.payload;
+        const newValue = { ...currentValue };
+        const elementNameInput = el[0];
 
-            let sel = [...el[2].select];
-
-            if (!action.payload.currentValue.select[0]) {
-              newVal.select = sel;
-              return [el[0], action.payload.data, newVal];
-            }
-
-            sel.push(action.payload.currentValue.select);
-
-            if (action.payload.currentValue.select[0]) {
-              newVal.select = sel;
-            }
-
-            return [el[0], action.payload.data, newVal];
-          }
-
-          return [el[0], action.payload.data, action.payload.currentValue];
+        if (elementNameInput !== nameInput) {
+          return el;
         }
-        return el;
+
+        if (nameInput.split('-')[0] !== 'select') {
+          return [elementNameInput, data, currentValue];
+        }
+
+        const sel = [...el[2].select];
+        if (!currentValue.select[0]) {
+          newValue.select = sel;
+          return [elementNameInput, data, newValue];
+        }
+
+        sel.push(currentValue.select);
+        newValue.select = sel;
+        return [elementNameInput, data, newValue];
       });
 
-      return newState;
-
     case ActionStyleField.RemoveStyle:
-      // console.log('action.payload--', action.payload);
 
       let withoutFieldState = [...state].filter(
         (el) => el[0] !== action.payload

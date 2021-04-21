@@ -2,12 +2,12 @@ import { Component } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { Observable, Subject } from 'rxjs';
+import { Router, ActivatedRoute } from '@angular/router';
+import { filter, map, takeUntil } from 'rxjs/operators';
 
 import { LoginAction } from '../../core/store/action';
 import { State, getUser } from '../../core/store/index';
 import { User } from '../../core/interfaces';
-import { Router, ActivatedRoute } from '@angular/router';
-import { filter, map, takeUntil } from 'rxjs/operators';
 
 @Component({
   selector: 'app-auth-page',
@@ -37,14 +37,14 @@ export class AuthPageComponent {
     this.store.select(getUser).pipe(
       takeUntil(this.ngUnsubscribe$),
       filter(user => !!user && !!user.token)
-    ).subscribe((user) => this.router.navigate(['sdk']));
+    ).subscribe(() => this.router.navigate(['sdk']));
   }
 
-  handleSubmitForm() {
+  handleSubmitForm(): void {
     this.store.dispatch(new LoginAction(this.form.value));
   }
 
-  ngOnDestroy() {
+  ngOnDestroy(): void {
     this.ngUnsubscribe$.next(null);
     this.ngUnsubscribe$.complete();
   }
