@@ -12,7 +12,7 @@ export const reducer = createReducer(
   on(Actions.dataAddSuccess, (s, a) => ({ ...s, a }))
 );
 
-export const reducers: ActionReducerMap<any> = {
+export const reducers: ActionReducerMap<IStateData> = {
   data: reducer,
 };
 
