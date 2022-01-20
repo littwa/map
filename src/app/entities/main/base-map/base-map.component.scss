@@ -1,0 +1,23 @@
+#map {
+  width: 100%;
+  height: 100%;
+}
+
+.container {
+  display: flex;
+
+  .map-wrapper {
+    position: absolute;
+    left: 20%;
+    width: 80%;
+    height: 100%;
+  }
+
+  .side-menu {
+    background-color: #a1e5ff;
+    width: 20%;
+    height: 100vh;
+  }
+}
+
+

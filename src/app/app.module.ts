@@ -7,14 +7,20 @@ import { CoreModule } from 'src/app/core/core.module';
 import { StoreModule } from '@ngrx/store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { EffectsModule } from '@ngrx/effects';
+import { HttpClientModule } from '@angular/common/http';
+import { MainModule } from 'src/app/entities/main/main.module';
+import { InterceptorModule } from 'src/app/interceptors/interceptor.module';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
   ],
   imports: [
     BrowserModule,
+    HttpClientModule,
+    InterceptorModule,
     AppRoutingModule,
+    MainModule,
     CoreModule,
     StoreModule.forRoot({}),
     EffectsModule.forRoot(),

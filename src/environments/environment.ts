@@ -3,7 +3,16 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false
+  production: false,
+  mapbox: {
+    accessToken: 'pk.eyJ1IjoibGl0dHdhIiwiYSI6ImNreW10a3BlMjEzZGEydnVmZ3p3cnJhancifQ.jXQsRUgfbst-ejn2FfJkIA'
+  },
+  mapTiler: {
+    key: 'https://api.maptiler.com/maps/osm-standard/style.json?key=uifytPY8UI4FOElU6qGm' // uifytPY8UI4FOElU6qGm // SoL71Zyf7SmLrVYWC7fQ
+  },
+  map: {
+    style: 'https://api.maptiler.com/maps/eef16200-c4cc-4285-9370-c71ca24bb42d/style.json?key=CH1cYDfxBV9ZBu1lHGqh'
+  }
 };
 
 /*
