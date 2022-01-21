@@ -53,8 +53,6 @@ export class MapService {
         //     this.map.addImage('custom-marker', image);
         //   });
 
-
-
         this.map.addLayer({
           id: 'places1',
           type: 'circle',
