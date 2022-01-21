@@ -1,0 +1,60 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "properties": {
+        "description": "Some discr-1",
+        "icon": "theatre-15"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [30.550, 50.405 ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "description": "Mad Men Season Five Finale Watch Party",
+        "icon": "theatre-15"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [30.550, 50.431]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "description": "Big Backyard Beach Bash and Wine Fest EatBar (2761 Washington Boulevard Arlington VA) is throwing",
+        "icon": "bar-15"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [30.458, 50.404 ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "description": "Ballston Arts & Crafts Market Ballston Arts & Crafts Markettes this summer. Nearly 35 artists and crafters",
+        "icon": "art-gallery-15"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [30.458, 50.477 ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "description": "Seersucker Bike Ride and Social. Feeling dandy? Get fancy, grab your bike, and take part in this year's. After the ride enjoy a lawn party at Hillwood with jazz, cocktails",
+        "icon": "bicycle-15"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [30.488, 50.404 ]
+      }
+    }
+  ]
+}
