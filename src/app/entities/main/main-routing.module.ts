@@ -5,9 +5,17 @@ import { BaseMapComponent } from 'src/app/entities/main/base-map/base-map.compon
 
 const routes: Routes = [
   {
+    path: '',
+    pathMatch: 'full',
+    redirectTo: 'box'
+  },
+  {
     path: '', component: WrapperComponent,
     children: [
-      { path: 'map', component: BaseMapComponent}
+      {
+        path: 'box',
+        component: BaseMapComponent
+      }
     ]
   }
 ];

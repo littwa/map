@@ -10,6 +10,8 @@ import { EffectsModule } from '@ngrx/effects';
 import { HttpClientModule } from '@angular/common/http';
 import { MainModule } from 'src/app/entities/main/main.module';
 import { InterceptorModule } from 'src/app/interceptors/interceptor.module';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { BaseRoutingModule } from './entities/base/base-routing.module';
 
 @NgModule({
   declarations: [
@@ -20,11 +22,13 @@ import { InterceptorModule } from 'src/app/interceptors/interceptor.module';
     HttpClientModule,
     InterceptorModule,
     AppRoutingModule,
-    MainModule,
+    // MainModule,
+    BaseRoutingModule,
     CoreModule,
     StoreModule.forRoot({}),
     EffectsModule.forRoot(),
     StoreDevtoolsModule.instrument(),
+    BrowserAnimationsModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

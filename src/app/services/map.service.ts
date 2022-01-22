@@ -10,28 +10,43 @@ import db from 'src/assets/db';
 export class MapService {
   public map;
   public marker = null;
+  public box;
   constructor() {}
 
-  private getData(): any {
-    console.log(db);
-    // const f = { ...db };
-    // console.log(f);
+  setBound(): any {
+    // const bbox = db.features.map(v => v.geometry.coordinates);
+    const bbox = this.box;
+    this.map.fitBounds(bbox, {
+      // zoom:
+      padding: { top: 50, bottom: 50, left: 50, right: 50 }
+    });
+  }
+
+  private getFitBoundsBox(): any {
+    this.box = db.features.reduce((acc, { geometry: { coordinates} }) => {
+      acc[0][0] = coordinates[0] > acc[0][0] || acc[1][0] == null ? coordinates[0] : acc[0][0];
+      acc[0][1] = coordinates[1] > acc[0][1] || acc[1][0] == null ? coordinates[1] : acc[0][1];
+      acc[1][0] = coordinates[0] < acc[1][0] || acc[1][0] == null ? coordinates[0] : acc[1][0];
+      acc[1][1] = coordinates[1] < acc[1][1] || acc[1][1] == null ? coordinates[1] : acc[1][1];
+      return acc;
+    }, [[ null, null], [ null, null]]);
   }
 
   public initMap(): void {
+    this.getFitBoundsBox();
     this.map = new mapboxgl.Map({
       accessToken: environment.mapbox.accessToken,
       container: 'map',
       style: environment.map.style,
-      center: [30.61623, 50.39548],
-      zoom: 13,
+      // center: [30, 50],
+      zoom: 0,
     });
 
     this.map.addControl(new mapboxgl.NavigationControl());
 
     this.getGeoJson();
 
-    this.getData();
+
 
     // this.map.on('click', (e) => {
     //   console.log(e);
@@ -64,6 +79,16 @@ export class MapService {
             'circle-stroke-color': '#000'
           }
         });
+
+        this.map.fitBounds(this.box, {
+          // zoom:
+          padding: { top: 50, bottom: 50, left: 50, right: 50 }
+        });
+
+        // this.map.flyTo({
+        //   center: this.box,
+        //   zoom: 13,
+        // });
 
         // this.map.addLayer({
         //   id: 'places',
@@ -103,7 +128,7 @@ export class MapService {
 
         this.map.flyTo({
           center: e.features[0].geometry.coordinates,
-          zoom: 13,
+          zoom: 15,
         });
       });
 

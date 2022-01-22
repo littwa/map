@@ -10,7 +10,7 @@ export default {
       },
       geometry: {
         type: 'Point',
-        coordinates: [30.550, 50.405 ]
+        coordinates: [30.462, 50.498 ]
       }
     },
     {
@@ -22,7 +22,7 @@ export default {
       },
       geometry: {
         type: 'Point',
-        coordinates: [30.550, 50.431]
+        coordinates: [30.434, 50.404]
       }
     },
     {
@@ -34,7 +34,7 @@ export default {
       },
       geometry: {
         type: 'Point',
-        coordinates: [30.458, 50.404 ]
+        coordinates: [30.563, 50.426 ]
       }
     },
     {
@@ -46,7 +46,7 @@ export default {
       },
       geometry: {
         type: 'Point',
-        coordinates: [30.458, 50.477 ]
+        coordinates: [30.522, 50.450 ]
       }
     },
     {
@@ -58,7 +58,7 @@ export default {
       },
       geometry: {
         type: 'Point',
-        coordinates: [30.488, 50.404 ]
+        coordinates: [30.560, 50.402 ]
       }
     }
   ]
