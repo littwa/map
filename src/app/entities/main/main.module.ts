@@ -3,21 +3,26 @@ import { CommonModule } from '@angular/common';
 
 import { MainRoutingModule } from './main-routing.module';
 import { WrapperComponent } from './wrapper/wrapper.component';
-import { BaseMapComponent } from './base-map/base-map.component';
+import { MapComponent } from './map/map.component';
 import { SharedModule } from '../../shared/shared.module';
+import { PlacesListComponent } from './places-list/places-list.component';
+import { PlaceComponent } from './place/place.component';
+import { NavHeaderComponent } from './nav-header/nav-header.component';
 
 
 @NgModule({
   declarations: [
     WrapperComponent,
-    BaseMapComponent,
+    MapComponent,
+    PlacesListComponent,
+    PlaceComponent,
+    NavHeaderComponent,
   ],
   imports: [
     SharedModule,
     CommonModule,
     MainRoutingModule
   ],
-  exports: [
-  ]
+  exports: []
 })
 export class MainModule { }

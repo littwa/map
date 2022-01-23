@@ -5,13 +5,23 @@ export default {
       id: 1,
       type: 'Feature',
       properties: {
-        description: 'Some discr-1',
+        description: 'Place',
         icon: 'theatre-15'
+      },
+      state: {
+        name: 'Kurenivskiy Market',
+        description: 'Unfussy retail compound selling animals, fish & pet accessories, plus tools & homewares',
+        images: [ 'https://kyivpastfuture.com.ua/wp-content/uploads/2021/01/kurenevskyj-zhd-most.jpg', 'http://my-obolon.kiev.ua/images/novosti/2019/JD-most-na-Kurenevke.jpg' ],
+        address: 'Petropavlivska Square, 1, Kyiv, 04073',
+        email: 'kurenivskiy@gmail.com',
+        web: 'www.kurenivskiy.com',
+        phone: '+380441234578',
+        rate: 4,
       },
       geometry: {
         type: 'Point',
         coordinates: [30.462, 50.498 ]
-      }
+      },
     },
     {
       id: 2,
@@ -23,7 +33,17 @@ export default {
       geometry: {
         type: 'Point',
         coordinates: [30.434, 50.404]
-      }
+      },
+      state: {
+        name: 'Kyiv International Airport Zhulany (Sikorsky)',
+        description: 'International airport',
+        images: [ 'https://plaso.pro/gimgs/137/680142.jpg', 'https://static.routesonline.com/images/cached/photograph-3652-scaled-620x0.jpg' ],
+        address: 'Vulytsya Medova, 2, Kyiv, 03048',
+        email: 'kurenivskiy@gmail.com',
+        web: 'www.zhulany.com',
+        phone: '+380441004555',
+        rate: 5,
+      },
     },
     {
       id: 3,

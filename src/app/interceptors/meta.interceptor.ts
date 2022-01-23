@@ -6,6 +6,7 @@ import {
   HttpInterceptor
 } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { environment } from '../../environments/environment';
 
 @Injectable()
 export class MetaInterceptor implements HttpInterceptor {
@@ -19,11 +20,9 @@ export class MetaInterceptor implements HttpInterceptor {
       //   key: 'SoL71Zyf7SmLrVYWC7fQ'
       // },
       setParams: {
-        key: 'SoL71Zyf7SmLrVYWC7fQ'
+        key: environment.mapTiler.apiKey
       }
     });
-
-    // console.log(12121212, request);
 
     return next.handle(request);
   }

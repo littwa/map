@@ -8,7 +8,8 @@ export const environment = {
     accessToken: 'pk.eyJ1IjoibGl0dHdhIiwiYSI6ImNreW10a3BlMjEzZGEydnVmZ3p3cnJhancifQ.jXQsRUgfbst-ejn2FfJkIA'
   },
   mapTiler: {
-    key: 'https://api.maptiler.com/maps/osm-standard/style.json?key=uifytPY8UI4FOElU6qGm' // uifytPY8UI4FOElU6qGm // SoL71Zyf7SmLrVYWC7fQ
+    key: 'https://api.maptiler.com/maps/osm-standard/style.json?key=uifytPY8UI4FOElU6qGm',
+    apiKey: 'SoL71Zyf7SmLrVYWC7fQ', // uifytPY8UI4FOElU6qGm
   },
   map: {
     style: 'https://api.maptiler.com/maps/eef16200-c4cc-4285-9370-c71ca24bb42d/style.json?key=CH1cYDfxBV9ZBu1lHGqh'

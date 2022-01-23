@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { WrapperComponent } from 'src/app/entities/main/wrapper/wrapper.component';
-import { BaseMapComponent } from 'src/app/entities/main/base-map/base-map.component';
+import { MapComponent } from 'src/app/entities/main/map/map.component';
 
 const routes: Routes = [
   {
@@ -14,7 +14,7 @@ const routes: Routes = [
     children: [
       {
         path: 'box',
-        component: BaseMapComponent
+        component: MapComponent
       }
     ]
   }

@@ -1,20 +1,30 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import * as mapboxgl from 'mapbox-gl';
 // import * as db from 'src/assets/db.json';
 import db from 'src/assets/db';
+import { MaptilerApiService } from './maptiler-api.service';
+import { timer } from 'rxjs';
 
 @Injectable({ providedIn: 'root' })
 export class MapService {
+
   public map;
   public marker = null;
   public box;
-  constructor() {}
+  constructor(private maptilerApiService: MaptilerApiService) {
+    // timer(35000).subscribe(() => this.getHttpGeo());
+  }
+
+  getHttpGeo(): void {
+    this.maptilerApiService.getFeatures().subscribe(v => {
+      console.log(v);
+      const geojsonSource = this.map.getSource('places');
+      geojsonSource.setData(v);
+    });
+  }
 
   setBound(): any {
-    // const bbox = db.features.map(v => v.geometry.coordinates);
     const bbox = this.box;
     this.map.fitBounds(bbox, {
       // zoom:
@@ -46,8 +56,6 @@ export class MapService {
 
     this.getGeoJson();
 
-
-
     // this.map.on('click', (e) => {
     //   console.log(e);
     // });
@@ -56,17 +64,6 @@ export class MapService {
   getGeoJson(): void {
       this.map.on('load', () => {
         this.map.addSource('places', { type: 'geojson', data: db });
-        //  'https://docs.mapbox.com/mapbox-gl-js/assets/custom_marker.png',
-
-        // this.map.loadImage(
-        //   'https://docs.mapbox.com/mapbox-gl-js/assets/custom_marker.png',
-        //   (error, image) => {
-        //     if (error) {
-        //       throw error;
-        //     }
-        //     console.log(1114, image);
-        //     this.map.addImage('custom-marker', image);
-        //   });
 
         this.map.addLayer({
           id: 'places1',
@@ -84,11 +81,6 @@ export class MapService {
           // zoom:
           padding: { top: 50, bottom: 50, left: 50, right: 50 }
         });
-
-        // this.map.flyTo({
-        //   center: this.box,
-        //   zoom: 13,
-        // });
 
         // this.map.addLayer({
         //   id: 'places',

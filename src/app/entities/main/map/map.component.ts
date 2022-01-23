@@ -5,11 +5,11 @@ import { MapService } from 'src/app/services/map.service';
 import { Router } from '@angular/router';
 
 @Component({
-  selector: 'app-base-map',
-  templateUrl: './base-map.component.html',
-  styleUrls: ['./base-map.component.scss']
+  selector: 'app-map',
+  templateUrl: './map.component.html',
+  styleUrls: ['./map.component.scss']
 })
-export class BaseMapComponent implements OnInit {
+export class MapComponent implements OnInit {
 
   constructor(private mapService: MapService,
               private router: Router) {}
@@ -19,9 +19,8 @@ export class BaseMapComponent implements OnInit {
   }
 
   handle(): void {
-    console.log(110333);
-    this.router.navigate(['g']);
-    // this.mapService.setBound();
+    console.log(110333, this.mapService.map.getSource('places'));
+    this.mapService.setBound();
   }
 
 }
