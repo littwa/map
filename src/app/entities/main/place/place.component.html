@@ -1,2 +1,27 @@
-<app-dashboard></app-dashboard>
-<p>place works!</p>
+<app-dashboard [info]="placeItem"></app-dashboard>
+<div>
+  <div class="place-images">
+    <img *ngFor="let i of placeItem.images" [src]="i">
+  </div>
+  <div class="place-info">
+    <div class="place-item place-item__rate">
+      <mat-icon *ngFor="let i of rating">star</mat-icon>
+    </div>
+    <div class="place-item">
+      <mat-icon>location_city</mat-icon>
+      <span>{{ placeItem.address }}</span>
+    </div>
+    <div class="place-item">
+      <mat-icon>email</mat-icon>
+      <span>{{ placeItem.email }}</span>
+    </div>
+    <div class="place-item">
+      <mat-icon>language</mat-icon>
+      <span>{{ placeItem.web }}</span>
+    </div>
+    <div class="place-item">
+      <mat-icon>smartphone</mat-icon>
+      <span>{{ placeItem.phone }}</span>
+    </div>
+  </div>
+</div>

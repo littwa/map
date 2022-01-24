@@ -8,7 +8,7 @@ import { SharedModule } from '../../shared/shared.module';
 import { PlacesListComponent } from './places-list/places-list.component';
 import { PlaceComponent } from './place/place.component';
 import { NavHeaderComponent } from './nav-header/nav-header.component';
-
+import { PlaceListItemComponent } from './place-list-item/place-list-item.component';
 
 @NgModule({
   declarations: [
@@ -17,6 +17,7 @@ import { NavHeaderComponent } from './nav-header/nav-header.component';
     PlacesListComponent,
     PlaceComponent,
     NavHeaderComponent,
+    PlaceListItemComponent,
   ],
   imports: [
     SharedModule,

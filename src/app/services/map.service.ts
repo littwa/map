@@ -1,39 +1,47 @@
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
 import * as mapboxgl from 'mapbox-gl';
-// import * as db from 'src/assets/db.json';
-import db from 'src/assets/db';
 import { MaptilerApiService } from './maptiler-api.service';
-import { timer } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
+import { customDataGetRequest, dataGetRequest } from 'src/app/core/data/state/data.actions';
+import { Store } from '@ngrx/store';
+
+import { IDataState, IFeatures } from 'src/app/core/interfaces/core.interfaces';
+import { getCustomDataSelector } from 'src/app/core/data/state/data.selectors';
 
 @Injectable({ providedIn: 'root' })
 export class MapService {
-
+  public statePlaceList$ = new BehaviorSubject<boolean>(true);
+  public activePlace$ = new BehaviorSubject<null | IFeatures>(null);
   public map;
   public marker = null;
   public box;
-  constructor(private maptilerApiService: MaptilerApiService) {
-    // timer(35000).subscribe(() => this.getHttpGeo());
-  }
+  constructor(private maptilerApiService: MaptilerApiService, public store: Store) {}
 
-  getHttpGeo(): void {
-    this.maptilerApiService.getFeatures().subscribe(v => {
-      console.log(v);
-      const geojsonSource = this.map.getSource('places');
-      geojsonSource.setData(v);
+
+  private initMapBox(): void {
+    this.map = new mapboxgl.Map({
+      accessToken: environment.mapbox.accessToken,
+      container: 'map',
+      style: environment.map.style,
+      // center: [30, 50],
+      zoom: 0,
+    }).fitBounds(this.box, {
+      padding: { top: 50, bottom: 50, left: 50, right: 50 }
     });
+
+    this.map.addControl(new mapboxgl.NavigationControl());
   }
 
-  setBound(): any {
-    const bbox = this.box;
-    this.map.fitBounds(bbox, {
+  setBound(): void {
+    this.map.fitBounds(this.box, {
       // zoom:
       padding: { top: 50, bottom: 50, left: 50, right: 50 }
     });
   }
 
-  private getFitBoundsBox(): any {
-    this.box = db.features.reduce((acc, { geometry: { coordinates} }) => {
+  private getFitBoundsBox(data: IDataState): any {
+    this.box = data.features.reduce((acc, { geometry: { coordinates} }) => {
       acc[0][0] = coordinates[0] > acc[0][0] || acc[1][0] == null ? coordinates[0] : acc[0][0];
       acc[0][1] = coordinates[1] > acc[0][1] || acc[1][0] == null ? coordinates[1] : acc[0][1];
       acc[1][0] = coordinates[0] < acc[1][0] || acc[1][0] == null ? coordinates[0] : acc[1][0];
@@ -43,27 +51,19 @@ export class MapService {
   }
 
   public initMap(): void {
-    this.getFitBoundsBox();
-    this.map = new mapboxgl.Map({
-      accessToken: environment.mapbox.accessToken,
-      container: 'map',
-      style: environment.map.style,
-      // center: [30, 50],
-      zoom: 0,
+    this.store.dispatch(customDataGetRequest({ payload: null }));
+    this.store.dispatch(dataGetRequest({ payload: null }));
+    this.store.select(getCustomDataSelector).subscribe((data: IDataState) => {
+      this.getFitBoundsBox(data);
+      this.initMapBox();
+      this.getGeoJson(data);
     });
 
-    this.map.addControl(new mapboxgl.NavigationControl());
-
-    this.getGeoJson();
-
-    // this.map.on('click', (e) => {
-    //   console.log(e);
-    // });
   }
 
-  getGeoJson(): void {
+  private getGeoJson(data): void {
       this.map.on('load', () => {
-        this.map.addSource('places', { type: 'geojson', data: db });
+        this.map.addSource('places', { type: 'geojson', data });
 
         this.map.addLayer({
           id: 'places1',
@@ -77,63 +77,69 @@ export class MapService {
           }
         });
 
-        this.map.fitBounds(this.box, {
-          // zoom:
-          padding: { top: 50, bottom: 50, left: 50, right: 50 }
-        });
-
-        // this.map.addLayer({
-        //   id: 'places',
-        //   type: 'symbol',
-        //   source: 'places',
-        //   layout: {
-        //     'icon-image': 'custom-marker',
-        //     // 'text-field': ['get', 'title'],
-        //     // 'text-font': [
-        //     //   'Open Sans Semibold',
-        //     //   'Arial Unicode MS Bold'
-        //     // ],
-        //     // 'text-offset': [0, 1.25],
-        //     // 'text-anchor': 'top'
-        //     // 'icon-image': '{icon}',
-        //     // 'icon-allow-overlap': true
-        //   }
-        // });
-
-// Center the map on the coordinates of any clicked circle from the 'circle' layer.
         this.map.on('click', 'places1', (e) => {
-        console.log(1000007, e, e.features[0]);
-        console.log(1000007, e, e.features[0].geometry.coordinates);
-          // this.marker.remove();
+
+        const { id } = e.features[0];
+
         if (this.marker) {
             this.marker.remove();
           }
+
         this.marker = new mapboxgl.Marker({ color: 'red' })
             .setLngLat(e.features[0].geometry.coordinates)
             .addTo(this.map);
-
-
-        // this.map.setPaintProperty('places1', 'circle-color', '#fa0000')
-        //   .setPaintProperty('places1', 'circle-radius', 12)
-        //   .setPaintProperty('places1', 'circle-stroke-width', 2);
-
 
         this.map.flyTo({
           center: e.features[0].geometry.coordinates,
           zoom: 15,
         });
+
+        this.activePlace$.next(this.defineActivePlace(data, id));
+        this.statePlaceList$.next(false);
       });
 
-// Change the cursor to a pointer when the it enters a feature in the 'circle' layer.
         this.map.on('mouseenter', 'places1', () => {
         this.map.getCanvas().style.cursor = 'pointer';
       });
 
-// Change it back to a pointer when it leaves.
         this.map.on('mouseleave', 'places1', () => {
         this.map.getCanvas().style.cursor = '';
       });
        });
+  }
+
+  public handlerPlaceClick(item): void {
+    if (this.marker) {
+      this.marker.remove();
+    }
+
+    this.marker = new mapboxgl.Marker({ color: 'red' })
+      .setLngLat(item.geometry.coordinates)
+      .addTo(this.map);
+
+    this.map.flyTo({
+      center: item.geometry.coordinates,
+      zoom: 15,
+    });
+
+    this.activePlace$.next(item);
+    this.statePlaceList$.next(false);
+  }
+
+  public removeMarker(): void {
+    this.marker.remove();
+  }
+
+  public defineActivePlace(data: IDataState, id: number): IFeatures | null {
+    return data.features.find(f => f.id === id) || null;
+  }
+
+  public getActivePlace(): Observable<null | IFeatures> {
+    return this.activePlace$.asObservable();
+  }
+
+  public getStatePlaceList(): Observable<boolean> {
+    return this.statePlaceList$.asObservable();
   }
 
 }

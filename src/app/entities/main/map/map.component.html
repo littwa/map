@@ -1,10 +1,10 @@
 <mat-sidenav-container [hasBackdrop]="false" class="nav-container">
   <mat-sidenav class="nav-bar" mode="side" opened>
     <app-nav-header></app-nav-header>
-    <app-place></app-place>
-    <div>
-      <button (click)="handle()">Central</button>
-    </div>
+    <app-places-list *ngIf="isPlaceListShown$ | async; else place"></app-places-list>
+    <ng-template #place>
+      <app-place [itemActivePlace]="itemActivePlace$ | async"></app-place>
+    </ng-template>
   </mat-sidenav>
   <mat-sidenav-content class="map-wrapper">
     <div id="map"></div>

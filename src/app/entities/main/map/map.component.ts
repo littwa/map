@@ -1,8 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import * as mapboxgl from 'mapbox-gl';
-import { environment } from 'src/environments/environment';
 import { MapService } from 'src/app/services/map.service';
-import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-map',
@@ -10,17 +7,18 @@ import { Router } from '@angular/router';
   styleUrls: ['./map.component.scss']
 })
 export class MapComponent implements OnInit {
+  public itemActivePlace$ = this.mapService.getActivePlace();
+  public isPlaceListShown$ = this.mapService.statePlaceList$;
 
-  constructor(private mapService: MapService,
-              private router: Router) {}
+  constructor(private mapService: MapService) {}
 
   ngOnInit(): void {
     this.mapService.initMap();
   }
 
   handle(): void {
-    console.log(110333, this.mapService.map.getSource('places'));
     this.mapService.setBound();
+    this.mapService.statePlaceList$.next(true);
   }
 
 }

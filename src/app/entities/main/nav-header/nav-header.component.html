@@ -1,16 +1,13 @@
-<!--<p>Nav-header</p>-->
 <p class="nav-header__container">
   <mat-toolbar color="primary">
-    <button mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon">
-      <mat-icon>menu</mat-icon>
+    <button *ngIf="!(statePlaceList$ | async)" (click)="handleNavItemClick()" disableRipple mat-icon-button class="nav-header__icon"
+            aria-label="Example icon-button with menu icon">
+      <mat-icon>arrow_back</mat-icon>
+      <span>Back to Place List</span>
     </button>
-    <span>My App</span>
-    <span class="example-spacer"></span>
-    <button mat-icon-button class="example-icon favorite-icon" aria-label="Example icon-button with heart icon">
-      <mat-icon>favorite</mat-icon>
-    </button>
-    <button mat-icon-button class="example-icon" aria-label="Example icon-button with share icon">
-      <mat-icon>share</mat-icon>
+    <span class="nav-header"></span>
+    <button disableRipple mat-icon-button class="nav-header__icon favorite-icon" aria-label="Example icon-button with heart icon">
+      <mat-icon>public</mat-icon>
     </button>
   </mat-toolbar>
 </p>

@@ -1,10 +1,15 @@
 :host {
   width: 100%;
 }
-.example-spacer {
-  flex: 1 1 auto;
-}
 
-.nav-header__container {
-  margin: 0;
+.nav-header {
+  flex: 1 1 auto;
+
+  &__container {
+    margin: 0;
+  }
+
+  &__icon {
+
+  }
 }

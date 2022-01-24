@@ -4,6 +4,7 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
+import { MatCardModule } from '@angular/material/card';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { MainLayoutComponent } from 'src/app/shared/components/main-layout/main-layout.component';
 
@@ -17,7 +18,8 @@ import { MainLayoutComponent } from 'src/app/shared/components/main-layout/main-
     MatSidenavModule,
     MatToolbarModule,
     MatIconModule,
-    MatButtonModule
+    MatButtonModule,
+    MatCardModule
   ],
   exports: [
     MainLayoutComponent,
@@ -25,7 +27,8 @@ import { MainLayoutComponent } from 'src/app/shared/components/main-layout/main-
     MatSidenavModule,
     MatToolbarModule,
     MatIconModule,
-    MatButtonModule
+    MatButtonModule,
+    MatCardModule
   ]
 })
 export class SharedModule { }

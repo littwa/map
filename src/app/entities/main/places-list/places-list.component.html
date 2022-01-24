@@ -1,1 +1,8 @@
-<p>places-list works!</p>
+<p class="container-list">
+  <app-place-list-item
+    *ngFor="let item of placesList | async"
+    [item]="item"
+    (click)="handleItem(item)"
+  ></app-place-list-item>
+</p>
+

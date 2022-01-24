@@ -8,7 +8,6 @@ import { StoreModule } from '@ngrx/store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { EffectsModule } from '@ngrx/effects';
 import { HttpClientModule } from '@angular/common/http';
-import { MainModule } from 'src/app/entities/main/main.module';
 import { InterceptorModule } from 'src/app/interceptors/interceptor.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { BaseRoutingModule } from './entities/base/base-routing.module';
@@ -22,7 +21,6 @@ import { BaseRoutingModule } from './entities/base/base-routing.module';
     HttpClientModule,
     InterceptorModule,
     AppRoutingModule,
-    // MainModule,
     BaseRoutingModule,
     CoreModule,
     StoreModule.forRoot({}),

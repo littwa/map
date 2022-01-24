@@ -1,0 +1,10 @@
+<mat-card class="item-card">
+  <mat-card-title-group>
+    <mat-card-title class="item-card__title">{{ item.properties.state?.name || 'Title' }}</mat-card-title>
+    <mat-card-subtitle class="item-card__subtitle">{{ item.properties.state?.description || 'Description' }}</mat-card-subtitle>
+    <img mat-card-image [src]="item.properties.state?.images[0]" alt="photo">
+  </mat-card-title-group>
+  <mat-card-content>
+    <p>{{ item.properties.state?.address }}</p>
+  </mat-card-content>
+</mat-card>
