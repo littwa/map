@@ -3,7 +3,7 @@ import { Store } from '@ngrx/store';
 import { map } from 'rxjs/operators';
 import { Observable } from 'rxjs';
 import { MapService } from 'src/app/services/map.service';
-import { getCustomDataSelector } from 'src/app/core/data/state/data.selectors';
+import { getCustomDataSelector } from 'src/app/core/data/data.selectors';
 import { IFeatures } from 'src/app/core/interfaces/core.interfaces';
 
 @Component({

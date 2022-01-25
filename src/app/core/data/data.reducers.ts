@@ -1,5 +1,5 @@
 import { ActionReducerMap, createReducer, on } from '@ngrx/store';
-import * as Actions from 'src/app/core/data/state/data.actions';
+import * as Actions from 'src/app/core/data/data.actions';
 import { ICoreState, IDataState } from 'src/app/core/interfaces/core.interfaces';
 
 export const INIT_STATE: IDataState = {

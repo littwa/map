@@ -16,9 +16,6 @@ export class MetaInterceptor implements HttpInterceptor {
   intercept(request: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {
 
     request = request.clone({
-      // setHeaders: {
-      //   key: 'SoL71Zyf7SmLrVYWC7fQ'
-      // },
       setParams: {
         key: environment.mapTiler.apiKey
       }
