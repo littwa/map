@@ -10,11 +10,11 @@ export class MaptilerApiService {
 
   constructor(private http: HttpClient) {}
 
-  public getFeatures(props): Observable<IDataState> {
+  public getFeatures(): Observable<IDataState> {
     return this.http.get<IDataState>(`${BASE_MAPTILER_URL}/${DATA}/${ID}/${FEATURE_JSON}`);
   }
 
-  public getCustomFeatures(props): Observable<IDataState>{
+  public getCustomFeatures(): Observable<IDataState>{
     return of(db);
   }
 

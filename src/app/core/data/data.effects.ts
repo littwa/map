@@ -17,7 +17,7 @@ export class ManagerEffects {
 
   data$ = createEffect(() => this.actions$.pipe(
       ofType(action.DATA_GET_REQUEST),
-      switchMap((props) => this.maptilerApiService.getFeatures(props).pipe(
+      switchMap((props) => this.maptilerApiService.getFeatures().pipe(
         map(data => action.dataGetSuccess({ payload: data })),
         catchError((err: any) => of(action.dataGetError({ err: err.message })))
       ))
@@ -26,7 +26,7 @@ export class ManagerEffects {
 
   customData$ = createEffect(() => this.actions$.pipe(
       ofType(action.CUSTOM_DATA_GET_REQUEST),
-      switchMap((props) => this.maptilerApiService.getCustomFeatures(props).pipe(
+      switchMap((props) => this.maptilerApiService.getCustomFeatures().pipe(
         map(data => action.customDataGetSuccess({ payload: data })),
         catchError((err: any) => of(action.dataGetError({ err: err.message })))
       ))

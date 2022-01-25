@@ -55,8 +55,8 @@ export class MapService {
   }
 
   public initMap(): void {
-    this.store.dispatch(customDataGetRequest({ payload: null }));
-    this.store.dispatch(dataGetRequest({ payload: null }));
+    this.store.dispatch(customDataGetRequest());
+    this.store.dispatch(dataGetRequest());
     this.store.select(getCustomDataSelector).subscribe((data: IDataState) => {
       this.getFitBoundsBox(data);
       this.initMapBox();
