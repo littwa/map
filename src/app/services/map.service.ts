@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
 import * as mapboxgl from 'mapbox-gl';
-import { MaptilerApiService } from './maptiler-api.service';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { customDataGetRequest, dataGetRequest } from 'src/app/core/data/data.actions';
 import { Store } from '@ngrx/store';
@@ -19,8 +18,8 @@ export class MapService {
   public map;
   public box;
 
-  constructor(private maptilerApiService: MaptilerApiService,
-              public store: Store) {}
+  constructor(
+    public store: Store) {}
 
 
   private initMapBox(): void {
