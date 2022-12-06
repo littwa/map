@@ -1,0 +1,22 @@
+.item-card {
+  cursor: pointer;
+  margin-bottom: 10px;
+  max-width: 400px;
+
+  &__title {
+    font-size: 16px;
+    margin-bottom: 10px;
+    width: 60%;
+  }
+
+  &__subtitle {
+    width: 60%;
+  }
+
+  img {
+    width: 40%;
+  }
+}
+
+
+

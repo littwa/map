@@ -1,0 +1,13 @@
+<p class="nav-header__container">
+  <mat-toolbar color="primary">
+    <button *ngIf="!(statePlaceList$ | async)" (click)="handleNavItemClick()" disableRipple mat-icon-button class="nav-header__icon"
+            aria-label="Example icon-button with menu icon">
+      <mat-icon>arrow_back</mat-icon>
+      <span>Back to Place List</span>
+    </button>
+    <span class="nav-header"></span>
+    <button disableRipple mat-icon-button class="nav-header__icon favorite-icon" aria-label="Example icon-button with heart icon">
+      <mat-icon>public</mat-icon>
+    </button>
+  </mat-toolbar>
+</p>

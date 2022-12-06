@@ -1,0 +1,11 @@
+:host {
+  width: 100%;
+}
+
+.nav-header {
+  flex: 1 1 auto;
+
+  &__container {
+    margin: 0;
+  }
+}

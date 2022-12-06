@@ -1,0 +1,36 @@
+.place-images {
+  display: flex;
+  width: inherit;
+
+  img {
+    width: 50%;
+    margin-right: 2px;
+  }
+}
+
+.place-item {
+  display: flex;
+  align-items: end;
+  padding: 10px 0;
+
+  mat-icon {
+    color: #57a4ff;
+    padding-right: 5px;
+  }
+
+  &__rate {
+    align-self: center;
+    width: max-content;
+
+    mat-icon {
+      color: #ffe600;
+    }
+  }
+}
+
+.place-info {
+  display: flex;
+  flex-direction: column;
+  padding-left: 10px;
+  padding-top: 10px;
+}
